@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title | Electronic Device</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="~/wwwroot/img/my-logo/logo-asp.net.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/owl.carousel.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/flaticon.css">
+    <link rel="stylesheet" href="~/wwwroot/css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="~/wwwroot/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- My style -->
+    @*<link rel="stylesheet" href="~/wwwroot/css/my-style-menu.css">
+        <link rel="stylesheet" href="~/wwwroot/css/my-style-list-product.css">
+        <link rel="stylesheet" href="~/wwwroot/css/my-style-home.css">
+        <link rel="stylesheet" href="~/wwwroot/css/my-style.css">*@
+    <link href="~/wwwroot/css/my-style-account.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-cart.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-home.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-list-product.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-menu.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-news.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style-product.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/my-style.css" rel="stylesheet" />
+    @RenderSection("style", required: false)
+</head>
+
+<body>
+    <!--::header part start::-->
+    @{
+        Html.RenderPartial("_Header");
+    }
+    <!-- Header part end-->
+    @RenderBody()
+    <!--::footer_part start::-->
+    @{
+        Html.RenderPartial("_Footer");
+    }
+    @RenderSection("modal", required: false)
+    <!--::footer_part end::-->
+    <!-- jquery plugins here-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    @*<script src="~/wwwroot/js/jquery-1.12.1.min.js"></script>*@
+    <!-- popper js -->
+    <script src="~/wwwroot/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/wwwroot/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="~/wwwroot/js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="~/wwwroot/js/swiper.min.js"></script>
+    <!-- swiper js -->
+    <script src="~/wwwroot/js/masonry.pkgd.js"></script>
+    <!-- particles js -->
+    <script src="~/wwwroot/js/owl.carousel.min.js"></script>
+    <script src="~/wwwroot/js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="~/wwwroot/js/slick.min.js"></script>
+    <script src="~/wwwroot/js/jquery.counterup.min.js"></script>
+    @*<script src="~/wwwroot/js/waypoints.min.js"></script>*@
+    <script src="~/wwwroot/js/contact.js"></script>
+    <script src="~/wwwroot/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/wwwroot/js/jquery.form.js"></script>
+    <script src="~/wwwroot/js/jquery.validate.min.js"></script>
+    <script src="~/wwwroot/js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="~/wwwroot/js/custom.js"></script>
+
+    <script>
+        function detealProduct(url) {
+            window.location = url;
+        }
+    </script>
+    <script src="~/wwwroot/js/custom-header.js"></script>
+    <script>
+        $(document).ready(function () {
+            updateCartIcon();
+        });
+
+        function updateCartIcon() {
+            if ($('#icon-cart-header').attr('data-id-login') == "notLogin") {
+                $('#icon-cart-header').find($('#amount_cart')).text(0);
+            } else {
+                $.ajax({
+                    url: "/cart/countCartById?id_account=" + $('#icon-cart-header').attr('data-id-login'),
+                    type: "get",
+                    data: {},
+                    datatype: "json",
+                    contenttype: "application/json;charset=utf-8",
+                    success: function (result) {
+                        $('#icon-cart-header').find($('#amount_cart')).text(result.data);
+                    }
+                });
+            }
+        }
+    </script>
+    @RenderSection("script", required: false)
+</body>
+
+</html>

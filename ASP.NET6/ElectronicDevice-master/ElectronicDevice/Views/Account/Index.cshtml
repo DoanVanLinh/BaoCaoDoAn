@@ -1,0 +1,595 @@
+﻿@model ElectronicDevice.Models.Account
+@{
+    ViewBag.Title = "Tài khoản";
+    var ImagePath = "~/wwwroot/imageUpload/" + Model.Avatar;
+}
+
+<section class="breadcrumb breadcrumb_bg" id="my_banner">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Tài khoản của bạn</h2>
+                        <p>Trang chủ <span>></span> Tài khoản</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        @if (Model.Avatar != null)
+                        {
+                            <img class="avatar rounded-circle" src="@Url.Content(@ImagePath)" alt="">
+                        }
+                        @if (Model.Avatar == null)
+                        {
+                            <img class="avatar rounded-circle" src="http://m.myclip.vn/images/avatar.gif" alt="">
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- breadcrumb start-->
+<!-- Content -->
+
+<div class="container mt-3 p-4 bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#my-account">
+                        <i class="fas fa-user-alt">
+                            Tài
+                            khoản của tôi
+                        </i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#change-pass">
+                        <i class="fas fa-clipboard-list">
+                            Đổi mật khẩu
+                        </i>
+                    </a>
+                </li>
+                <li class="nav-item" onclick="LoadBills(@Model.ID_Account)">
+                    <a class="nav-link" data-toggle="tab" href="#my-order">
+                        <i class="fas fa-clipboard-list">
+                            Đơn
+                            mua
+                        </i>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="my-account" class="container tab-pane active">
+                    <br>
+                    <h3>Hồ sơ của tôi</h3>
+                    <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                    <br>
+                    <hr>
+                    @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    @if (Model.Avatar != null)
+                                    {
+                                        <img id="output" src="@Url.Content(@ImagePath)" alt="Ảnh" class="rounded-circle" width="100" height="100">
+                                    }
+                                    @if (Model.Avatar == null)
+                                    {
+                                        <img id="output" src="http://m.myclip.vn/images/avatar.gif" alt="Ảnh" class="rounded-circle" width="100" height="100">
+                                    }
+                                </div>
+                                <input type="file" name="ImageFile" class="form-control col-md-9" id="ufile" onchange="loadFile(event)">
+                                @Html.HiddenFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fullname" class="col-md-3">Họ tên</label>
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control col-md-9", @placeholder = "Họ tên" } })
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-3">Email</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-md-9", @placeholder = "Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-3">Số điện thoại</label>
+
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control col-md-9", @placeholder = "Số điện thoại" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group row">
+                                <label for="address" class="col-md-3">Địa chỉ</label>
+
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control col-md-9", @placeholder = "Địa chỉ" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.HiddenFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.HiddenFor(model => model.Password, new { htmlAttributes = new { @type = "password", @class = "form-control col-md-9", @placeholder = "Mật khẩu" } })
+                                @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="submit" class="genric-btn danger circle" value="Lưu">
+
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div id="change-pass" class="container tab-pane">
+                    <br>
+                    <h3>Đổi mật khẩu</h3>
+                    <hr>
+                    @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                        <div class="col-md-12 form-group p_star">
+                            @*<label for="password" class="col-md-3">Mật khẩu hiện tại</label>*@
+                            <input name="OldPassword" id="OldPassword" type="password" class="form-control" placeholder="Mật khẩu hiện tại" />
+                            <span id="error_old_password" class="hide" style="color:red"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @*<label for="password" class="col-md-3">Mật khẩu mới</label>*@
+                            <input name="NewPassword" id="NewPassword" type="password" class="form-control" placeholder="Mật khẩu mới" />
+                            <span id="error_new_password" class="hide" style="color:red"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @*<label for="confirm_password" class="col-md-3">Xác nhận mật khẩu</label>*@
+                            <input name="ConfirmPassword" id="ConfirmPassword" type="password" class="form-control" placeholder="Xác nhận mật khẩu" />
+                            <span id="error_confirm_password" class="hide" style="color:red"></span>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" class="genric-btn danger circle" value="Lưu" onclick="checkPass()">
+                        </div>
+                    }
+                </div>
+                <div id="my-order" class="container tab-pane fade">
+                    <br>
+                    <h3>Đơn hàng của tôi</h3>
+                    <br>
+                    <hr>
+                    <div id="newBill">
+                        @*Bills*@
+                    </div>
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã đơn hàng</th>
+                                    <th scope="col">Ngày mua</th>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="oldBill">
+                                @*Bills_Below*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="Error" value="@ViewBag.ErrorUpdate" />
+<input type="hidden" id="Success" value="@ViewBag.UpdateOk" />
+
+
+<div class="alert hide" id="alert_message">
+    <div id="icon-alert-message"><i class="fas fa-exclamation-circle"></i></div>
+    <span class="msg">Warning: This is a warning alert!</span>
+    <div class="close-btn-alert">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+@section modal{
+    @Html.Partial("~/Views/Bill/BillDetail.cshtml");
+}
+@section script {
+    <script>
+        $(document).ready(function () {
+            $('.close-btn-alert').click(function () {
+                $('.alert').removeClass("show");
+                $('.alert').addClass("hide");
+            });
+        });
+
+
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        //Thông báo
+        var error = document.getElementById("Error").value;
+        if (error != "") {
+            showAlertMessage(error, false);
+        }
+        var success = document.getElementById("Success").value;
+        if (success != "") {
+            showAlertMessage(success, true);
+        }
+
+        function showAlertMessage(message, messageState) {
+            if (messageState) {
+                $('#alert_message').css({ "background": "#C5F3D7", "border-left": "8px solid #2BD971" });
+                $("#icon-alert-message").html('<i class="fas fa-check-circle"></i>');
+                $("#icon-alert-message").find('i').css({ "color": "#2BD971" });
+                $(".msg").css({ "color": "#24AD5F" });
+                $(".close-btn-alert").css({ "background": "#2BD971", "color": "#24AD5F" });
+                $(".close-btn-alert").find('.fas').css({ "color": "#24AD5F" });
+                $(".close-btn-alert").hover(function (e) {
+                    $(this).css("background-color", e.type === "mouseenter" ? "#38F5A3" : "#2BD971")
+                })
+            } else {
+                $('#alert_message').css({ "background": "#FFE1E3", "border-left": "8px solid #FF4456" });
+                $("#icon-alert-message").html('<i class="fas fa-exclamation-circle"></i>');
+                $("#icon-alert-message").find('i').css({ "color": "#FE4950" });
+                $(".msg").css({ "color": "#F694A9" });
+                $(".close-btn-alert").css({ "background": "#FF9CA4", "color": "#FD4653" });
+                $(".close-btn-alert").find('.fas').css({ "color": "#FD4653" });
+                $(".close-btn-alert").hover(function (e) {
+                    $(this).css("background-color", e.type === "mouseenter" ? "#FFBDC2" : "#FF9CA4")
+                })
+            }
+
+            $('.msg').text(message);
+            $('.alert').addClass("show");
+            $('.alert').removeClass("hide");
+            $('.alert').addClass("showAlert");
+            setTimeout(function () {
+                $('.alert').removeClass("show");
+                $('.alert').addClass("hide");
+            }, 3000);
+        };
+        let regexPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#\$%\^&\*_]).{6,}$");
+let checkErrorUpdatePassword = false;
+//-------------------------------------------------------------
+// Bat loi mat khau cu
+const errorOldPassword = () => {
+    if ($('#OldPassword').val() == '') {
+        $('#error_old_password').show();
+        $('#error_old_password').text("Mật khẩu cũ không được bỏ trống");
+        checkErrorUpdatePassword = true;
+    } else {
+        $('#error_old_password').hide();
+        checkErrorUpdatePassword = false;
+    }
+}
+$('#OldPassword').keydown(() => {
+    errorOldPassword();
+});
+$('#OldPassword').keyup(() => {
+    errorOldPassword();
+});
+//------------------------------------------------------------------------
+// Bat lo mat khau moi
+const errorNewPassword = () => {
+    let newPassowrd = $('#NewPassword').val();
+    if (newPassowrd == '') {
+        $('#error_new_password').show();
+        $('#error_new_password').text("Mật khẩu mới không được bỏ trống!");
+        checkErrorUpdatePassword = true;
+    } else if (!regexPassword.test(newPassowrd)) {
+        $('#error_new_password').show();
+        $('#error_new_password').text("Mật khẩu ít nhất 6 ký tự và gồm các chữ cái hoa, thường, chữ số và ký tự đặc biệt!");
+        checkErrorUpdatePassword = true;
+    } else {
+        $('#error_new_password').hide();
+        checkErrorUpdatePassword = false;
+    }
+}
+$('#NewPassword').keydown(() => {
+    errorNewPassword();
+});
+$('#NewPassword').keyup(() => {
+    errorNewPassword();
+});
+//------------------------------------------------------------
+// Bat loi Confirm pasword
+const errorConfirmPassword = () => {
+    let newPassowrd = $('#NewPassword').val();
+    let confirmPassword = $('#ConfirmPassword').val();
+    if (confirmPassword == '') {
+        $('#error_confirm_password').show();
+        $('#error_confirm_password').text("Nhập lại mật khẩu không được bỏ trống!");
+        checkErrorUpdatePassword = true;
+    }else if (newPassowrd != confirmPassword) {
+        $('#error_confirm_password').show();
+        $('#error_confirm_password').text("Nhập lại mật khẩu mới không trùng khớp!");
+        checkErrorUpdatePassword = true;
+    } else {
+        $('#error_confirm_password').hide();
+        checkErrorUpdatePassword = false;
+    }
+}
+
+$('#ConfirmPassword').keydown(() => {
+    errorConfirmPassword();
+});
+$('#ConfirmPassword').keyup(() => {
+    errorConfirmPassword();
+});
+//========== Bat loi mat khau - End ==================
+        const checkPass = () => {
+    event.preventDefault();
+    let newPassowrd = $('#NewPassword').val();
+    let oldPassowrd = $('#OldPassword').val();
+
+    errorOldPassword();
+    errorNewPassword();
+    errorConfirmPassword();
+
+    if (checkErrorUpdatePassword) return;
+
+    $.ajax({
+        url: '/Account/ChangePassword',
+        data: {
+            OldPassword: oldPassowrd,
+            NewPassword: newPassowrd
+        },
+        type: "GET",
+        success: (result) => {
+            if (result) {
+                showAlertMessage('Cập nhật mật khẩu thành công!', true);
+                $('#OldPassword').val("");
+                $('#NewPassword').val("");
+                $('#ConfirmPassword').val("");
+
+            } else {
+                $('#error_old_password').show();
+                $('#error_old_password').text("Mật khẩu cũ không đúng!");
+                $('#error_new_password').hide();
+                $('#error_confirm_password').hide();
+            }
+
+        },
+        error: (error) => {
+            showAlertMessage('Cập nhật mật khẩu thất bại!', false);
+        }
+    });
+}
+
+        //Load Bill detail
+        function LoadBillModal(ID_Bill, Status, FullName, Email, Phone, Address, PayType) {
+            $('#id-orders').text(ID_Bill);
+            $('#status-orders').text(Status);
+            $('#FullRecieverName').text(FullName);
+            $('#RecieverEmail').text(Email);
+            $('#RecieverPhone').text(Phone);
+            $('#RecieverAddress').text(Address);
+            $('#PayType').text(PayType);
+            ID_Bill_Modal = ID_Bill;
+            Load_Product_Bill(ID_Bill, true);
+        };
+        var totalMoney;
+        function Load_Product_Bill(ID_Bill, status) {
+            $.ajax({
+                url: 'Bill/BillDetail',
+                data: { ID_Bill: ID_Bill },
+                type: "GET",
+
+                success: function (result) {
+                    totalMoney = 0.0;
+                    if (status) {
+                        $('.sp').remove();
+                    }
+                    var html1 = '';
+                    var html2 = '';
+                    $.each(result.data, function (i, item) {
+
+                        if (status) {
+                            totalMoney += item.CurrentlyPrice * item.Amount;
+                            html1 += '<div class="sp">';
+                            html1 += '<br>';
+                            html1 += '<div class="d-flex flex-row">';
+                            html1 += '<img class="border" src="/wwwroot/imageUpload/' + item.Image + '" alt="" width="100" height="100">';
+                            html1 += '<div class="ml-2">';
+                            html1 += '<h5>' + item.Name + '</h5>';
+                            html1 += '<p>Giá: ' + item.CurrentlyPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</p>';
+                            html1 += '<p>Số lượng: ' + item.Amount + '</p>';
+                            html1 += '</div>';
+                            html1 += '</div>';
+                            html1 += '</div>';
+                            $('#list-product-detail').html(html1);
+                            $('#SumPrice').text(totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                        }
+                        else {
+                            totalMoney += item.CurrentlyPrice * item.Amount;
+                            html2 += '<div class="sp_bill">';
+                            html2 += '<br>';
+                            html2 += '<div class="d-flex flex-row">';
+                            html2 += '<img class="border" src="/wwwroot/imageUpload/' + item.Image + '" alt="" width="100" height="100">';
+                            html2 += '<div class="ml-2">';
+                            html2 += '<h5>' + item.Name + '</h5>';
+                            html2 += '<p>Giá: ' + item.CurrentlyPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</p>';
+                            html2 += '<p>Số lượng: ' + item.Amount + '</p>';
+                            html2 += '</div>';
+                            html2 += '</div>';
+                            html2 += '</div>';
+                            $('#' + ID_Bill).html(html2);
+                            $('#totalMoney' + ID_Bill).html(totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                        }
+                    });
+                }
+            });
+        }
+        function Load_Product_Bill_Below(ID_Bill) {
+            $.ajax({
+                url: 'Bill/BillDetail',
+                data: { ID_Bill: ID_Bill },
+                type: "GET",
+
+                success: function (result) {
+
+                    var html = "";
+                    var totalMoney = 0.0;
+                    $.each(result.data, function (i, item) {
+                        html += '<span>' + item.Name + '</span>';
+                        html += '<br/>';
+                        html += '<br/>';
+                        totalMoney += item.CurrentlyPrice * item.Amount;
+                        $('#billBelow' + ID_Bill).html(html);
+                    });
+                    html = totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    $('#money' + ID_Bill).html(html);
+                }
+            });
+        }
+        //Load ds Bill
+        function LoadBills(ID_Account) {
+            $.ajax({
+                url: '/Bill/LoadBill',
+                data: { ID_Account: ID_Account },
+                type: "GET",
+                success: function (result) {
+                    var html = '';
+                    var html2 = '';
+                    $.each(result.data, function (index, item) {
+                        if (item.Status == 1 || item.Status == 2 || item.Status==0) {
+                            var status;
+                            if (item.Status == 1)
+                                status = "Đã tiếp nhận";
+                            else if (item.Status == 2)
+                                status = "Giao cho đơn vị vận chuyển";
+                            else if (item.Status == 0)
+                                status = "Đơn hàng mới";
+
+                            html += '<div class="row' + item.ID_Bill + '">';
+                            html += '<div class="col-md-12">';
+                            html += '<div class="card">';
+                            html += '<div class="card-header">';
+                            html += '<ul class="blog-info-link">';
+                            html += '<li><a href="#"><i class="far fa-clock"></i>' + convertDate(item.CreatedDate) + '</a></li>';
+                            html += '<li>';
+                            html += '<a href="#" class="text-success">';
+                            html += '<i class="fas fa-shipping-fast"></i>';
+                            html += '<span>' + status + '</span?';
+                            html += '</a>';
+                            html += '</li>';
+                            html += '</ul>';
+                            html += '</div>';
+                            html += '<div class="card-body">';
+                            html += '<div class=" ">';
+                            html += '<div id="' + item.ID_Bill + '">   </div>'; @* detail product *@
+                            html += '<div class="p-4">';
+                            html += '<h4 class="text-danger float-right">Tổng tiền:<span id="totalMoney' + item.ID_Bill + '"></h4>';
+                            html += '<br>';
+                            html += '<hr>';
+                            html += '<div class=" float-right">';
+                            html += '<div class="checkout_btn_inner float-right">';
+                            html += '<button style="border:unset" type="button" class="btn_1 btn_billAccount" onclick="LoadBillModal(' + item.ID_Bill + ',\'' + status + '\',\'' + item.ReceiverName + '\',\'' + item.ReceiverEmail + '\',\'' + item.ReceiverPhone + '\',\'' + item.ReceiverAddress + '\',\'' + item.PayType + '\')" value="Chi tiết" data-toggle="modal" data-target="#modal-bill-detail">Chi tiết đơn hàng</button>';
+                            html += '<button style="border:unset" type="button" class="btn_1 checkout_btn_1 btn_billAccount" id="btn_pay" onclick="CancelBill(' + item.ID_Bill + ',' + item.ID_Account + ')">Hủy đơn hàng</button>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div >';
+                            html += '</div >';
+                            html += '</div ></br>';
+                            $('#newBill').html(html);
+                            Load_Product_Bill(item.ID_Bill, false);//lấy totalMoney trc khi truyền hàm
+
+                        }
+                    });
+                    $.each(result.data, function (index, item) {
+                        if (item.Status == 3 || item.Status == 4) {
+                            var status = "";
+                            if (item.Status == 3) {
+                                status = "Đã giao thành công";
+                            }
+                            else if (item.Status == 4) {
+                                status = "Đã hủy";
+                            }
+
+                            html2 += '<tr>';
+                            html2 += '<th scope="row">' + item.ID_Bill + '</th>';
+                            html2 += '<td>' + convertDate(item.CreatedDate) + '</td>';
+                            html2 += '<td id = "billBelow' + item.ID_Bill + '">'; /*product*/
+                            html2 += '</td >';/*TotalMoney*/
+                            html2 += '<td id = "money' + item.ID_Bill + '"></td>';
+
+                            if (item.Status == 4)
+                                html2 += '<td id="statusBill" style="color:red">' + status + '</td>';
+                            else if (item.Status == 3)
+                                html2 += '<td id="statusBill" style="color:green">' + status + '</td>';
+                            html2 += '</tr>';
+                            $('#oldBill').html(html2);
+                            if (item.Status == 4)
+                                $('#statusBill' + item.ID_Bill).css("color", "red");
+                            if (item.Status == 3)
+                                $('#statusBill' + item.ID_Bill).css("color", "green");
+                            Load_Product_Bill_Below(item.ID_Bill);
+                        }
+                    });
+                }
+            });
+        }
+        function CancelBill(ID_Bill, ID_Account) {
+            $.ajax({
+                url: '/Bill/CancelBill',
+                //ModifiDate
+                data: { ID_Bill: ID_Bill },
+                type: "POST",
+                success: function (result) {
+                    $('.row' + ID_Bill).remove();
+                    LoadBills(ID_Account);
+                    showAlertMessage("Đã hủy đơn hàng " + ID_Bill,+" thành công",true);
+                },
+                error: (error) => {
+                    alert("Hủy đơn hàng có mã:" + ID_Bill + " thất bại!");
+                    showAlertMessage("Hủy đơn hàng có mã:" + ID_Bill + " thất bại!", false);
+                }
+            });
+        }
+        function convertDate(jsonDate) {
+            var dateString = jsonDate.substr(6);
+            var currentTime = new Date(parseInt(dateString));
+            var month = ("0" + (currentTime.getMonth() + 1)).slice(-2);
+            var day = ("0" + currentTime.getDate()).slice(-2);
+            var year = currentTime.getFullYear();
+            var date = day + '/' + month + '/' + year;
+            return date;
+        }
+
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .col-md-3 {
+        max-width: 20%;
+    }
+
+    .text-danger {
+        margin-left: 227px;
+    }
+</style>
+

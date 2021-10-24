@@ -1,0 +1,97 @@
+﻿@model ElectronicDevice.Models.Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex">
+    <a href="@Url.Action("Index","Product")"><i class="fa fa-arrow-left"></i></a> &nbsp
+    <h3 class="title-5 m-b-35">Chi tiết sản phẩm</h3>
+</div>
+<div style="background-color:#fff !important;">
+    <div class="bg-light p-4">
+        <table class="table table-bordered">
+            <tr>
+                <td style="width:250px;">Danh mục sản phẩm</td>
+                <td> @Html.DisplayFor(model => model.Category.Name)</td>
+            </tr>
+            <tr>
+                <td>Tên sản phẩm</td>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td>Giá</td>
+                <td>@Html.DisplayFor(model => model.Price) VNĐ</td>
+            </tr>
+            <tr>
+                <td>Model</td>
+                <td>@Html.DisplayFor(model => model.Model)</td>
+            </tr>
+            <tr>
+                <td>Lượng có</td>
+                <td>@Html.DisplayFor(model => model.Amount)</td>
+            </tr>
+            <tr>
+                <td>Bảo hành</td>
+                <td> @Html.DisplayFor(model => model.Guarantee) Tháng</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td> @Html.DisplayFor(model => model.Origin)</td>
+            </tr>
+            <tr>
+                <td>Giảm giá</td>
+                <td>@Html.DisplayFor(model => model.Discount) %</td>
+            </tr>
+            <tr>
+                <td>Ảnh sản phẩm</td>
+                <td> <img src="@Url.Content("~/wwwroot/imageUpload/"+Model.Image)" width="300" /></td>
+            </tr>
+            <tr>
+                <td>Ngày tạo</td>
+                <td> @Html.DisplayFor(model => model.CreatedDate)</td>
+            </tr>
+            <tr>
+                <td>Người tạo</td>
+                <td>@Html.DisplayFor(model => model.CreatedBy)</td>
+            </tr>
+            <tr>
+                <td>Ngày sửa</td>
+                <td> @Html.DisplayFor(model => model.ModifiedDate)</td>
+            </tr>
+            <tr>
+                <td>Người sửa</td>
+                <td> @Html.DisplayFor(model => model.ModifiedBy)</td>
+            </tr>
+            <tr>
+                <td>Trạng thái</td>
+                <td>
+                    @{
+                        if (Model.Status)
+                        {
+
+
+                            <p>Hiển thị</p>
+                        }
+                        else
+                        {
+                            <p>Ẩn</p>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Mô tả ngắn</td>
+                <td>@Html.DisplayFor(model => model.ShortDescription)</td>
+            </tr>
+            <tr>
+                <td>Chi tiết sản phẩm</td>
+                <td> @Html.Raw(Model.Detail)</td>
+            </tr>
+        </table>
+      
+    </div>
+</div>
+
+
