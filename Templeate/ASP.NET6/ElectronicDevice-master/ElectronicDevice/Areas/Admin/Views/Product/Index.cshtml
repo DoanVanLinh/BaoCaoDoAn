@@ -1,0 +1,217 @@
+﻿@model PagedList.IPagedList<ElectronicDevice.Models.Product>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="~/Areas/Admin/Assets/ckeditor/ckeditor.js"></script>
+}
+@using System.Globalization;
+@{
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<!-- DATA TABLE -->
+<h3 class="title-5 m-b-35">danh sách sản phẩm</h3>
+<div class="table-data__tool">
+    <div class="table-data__tool-left">
+        <a class="au-btn-filter" style="margin-right: 10px;"
+           href="@Url.Action("Index","Product")">
+            <i class="	fas fa-home"></i>
+        </a>
+        <div class="rs-select2--light rs-select2--md">
+
+            @Html.DropDownList("Category", null, htmlAttributes: new { @class = "js-select2" })
+            <div class="dropDownSelect2"></div>
+        </div>
+        <div class="rs-select2--light rs-select2--md">
+            @if (ViewBag.Status == null)
+            {
+                <select class="js-select2" id="status">
+                    <option selected="selected" value="">Trạng Thái</option>
+                    <option value="true">Hiển Thị</option>
+                    <option value="false">Ẩn</option>
+                </select>
+            }
+            else
+            {
+                <select class="js-select2" id="status">
+                    <option value="">Trạng Thái</option>
+                    <option @(ViewBag.Status.ToString() == "True" ? "selected" : "") value="true">Hiển Thị</option>
+                    <option @(ViewBag.Status.ToString() == "False" ? "selected" : "") value="false">Ẩn</option>
+                </select>
+            }
+
+            <div class="dropDownSelect2"></div>
+        </div>
+        @*<button class="au-btn-filter">
+                <i class="zmdi zmdi-filter-list"></i>Lọc
+            </button>*@
+    </div>
+    <div class="table-data__tool-right">
+        @if (ViewBag.CREATE)
+        {
+            <a class="au-btn au-btn-icon au-btn--green au-btn--small"
+               href="@Url.Action("Edit","Product")">
+                <i class="fas fa-plus"></i>Thêm mới
+            </a>
+        }
+        else
+        {
+            <a class="au-btn au-btn-icon au-btn--green au-btn--small" onclick="clickPer()">
+                <i class="fas fa-plus"></i>Thêm mới
+            </a>
+        }
+
+    </div>
+</div>
+
+
+<div class="table-responsive table-data">
+    <table class="table table-data2">
+        <thead>
+            <tr>
+                @*<th>#</th>
+                    <th>ID</th>*@
+                <th>Danh mục sản phẩm</th>
+                <th>Ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Giảm giá</th>
+                <th>trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var index = 1; }
+            @foreach (var item in Model)
+            {
+                <tr class="tr-shadow" id="@item.ID_Product">
+                    <td>
+                        <span class="block-name">@item.Category.Name</span>
+                    </td>
+                    <td class="block-image">
+                        <img src="@Url.Content("~/wwwroot/imageUpload/" + item.Image)" alt="Image" style="max-width: 100px; max-height: 100px;" />
+                    </td>
+                    <td>
+                        <span class="block-name-product">
+                            @item.Name
+                        </span>
+                    </td>
+                    <td>
+                        <span class="text-primary font-weight-bold"> @String.Format(cul, "{0:N0}", item.Price)&#8363;</span>
+                    </td>
+                    <td>
+                        <span class="text-primary font-weight-bold">@item.Discount&#37;</span>
+                    </td>
+                    <td>
+                        <span class="status--process">
+                            @if (item.Status)
+                            {
+                                <span>Hiển thị</span>
+                            }
+                            else
+                            {
+                                <span>Ẩn</span>
+                            }
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-data-feature">
+                            <a class="item" title="Chi tiết sản phẩm" href="@Url.Action("ProductDetail","Product",new { id=item.ID_Product})">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            @if (ViewBag.EDIT)
+                            {
+                                <a class="item" title="Sửa thông tin sản phẩm" href="@Url.Action("Edit", "Product", new {ProductId=item.ID_Product })">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="item" title="Sửa thông tin sản phẩm" onclick="clickPer()">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            }
+                            @if (ViewBag.DELETE)
+                            {
+                                <button class="item" title="Xóa sản phẩm" onclick="deleteProduct(@item.ID_Product)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="item" title="Xóa sản phẩm" onclick="clickPer()">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            }
+
+
+                        </div>
+                    </td>
+                </tr>
+                <tr class="spacer" id="@item.ID_Product"></tr>
+                index++;
+            }
+        </tbody>
+
+    </table>
+    @if (Model.Count == 0)
+    {
+        <img src="/wwwroot/imageUpload/notFoundProduct.png"
+             style="margin: 100px auto; display: inherit; width: 300px; " />
+    }
+</div>
+
+<!--Notification-->
+<div class="alert hide" id="alert_message">
+    <div id="icon-alert-message"><i class="fas fa-exclamation-circle"></i></div>
+    <span class="msg">Warning: This is a warning alert!</span>
+    <div class="close-btn-alert">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+
+
+
+<br />
+Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        id_category = ViewBag.ID_Category != -1 ? ViewBag.ID_Category : null,
+        status = ViewBag.Status != null ? ViewBag.Status : null,
+        search = ViewBag.Search != null ? ViewBag.Search : null,
+        page
+    }),
+    PagedListRenderOptions.OnlyShowFivePagesAtATime)
+
+
+<input hidden id="status_tmp" value="@(ViewBag.Status != null ? ViewBag.Status : "")" />
+<input hidden id="id_category_tmp" value="@(ViewBag.ID_Category != null ? ViewBag.ID_Category : "")" />
+<input hidden id="search_tmp" value="@(ViewBag.Search != null ? ViewBag.Search : "")" />
+
+@section Script {
+    <script src="~/Areas/Admin/Assets/js/ct-index-product.js"></script>
+    @if (ViewBag.Mess != null)
+    {
+        switch (ViewBag.Mess)
+        {
+            case "create_success":
+
+                <script>
+                    showAlertMessage("Thêm sản phẩm thành công", true);
+                </script>
+
+                break;
+            case "edit_success":
+                <script>
+                    showAlertMessage("Cập nhật sản phẩm thành công", true);
+                </script>
+                break;
+
+        }
+    }
+}
+

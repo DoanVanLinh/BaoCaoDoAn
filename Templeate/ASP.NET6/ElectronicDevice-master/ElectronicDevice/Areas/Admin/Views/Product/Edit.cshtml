@@ -1,0 +1,140 @@
+﻿@model ElectronicDevice.Models.Product
+
+@{
+    ViewBag.Title = ViewBag.MyTitle;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="~/Areas/Admin/Assets/ckeditor/ckeditor.js"></script>
+}
+
+<div class="d-flex">
+    <a href="@Url.Action("Index","Product")"><i class="fa fa-arrow-left"></i></a> &nbsp
+    <h3 class="title-5 m-b-35">@ViewBag.MyTitle</h3>
+</div>
+<div class="">
+    <div class="bg-light p-4">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label>Tên Sản Phẩm</label>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Tủ Lạnh" } })
+                        <span id="error_name" class="text-danger hide"></span>
+                        @*<input class="au-input au-input--full" type="text" name="Name" id="Name" placeholder="Tủ Lạnh">*@
+                    </div>
+                    <div class="form-group">
+                        <label>Danh Mục</label>
+                        @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="form-group ">
+                        @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })*@
+
+                        @{
+                            string Img = "~/wwwroot/img/my-image/no-img.jpg";
+                            if (ViewBag.MyAction == "Update")
+                            {
+                                Img = "~/wwwroot/imageUpload/" + Model.Image;
+                                <input hidden id="imagename" name="imagename" value="@Model.Image" />
+                            }
+
+                        }
+                        <label style="font-size:13px ">Hình Ảnh</label>
+                        <img src="@Url.Content(Img)" id="preview" onclick="$('#inputFile').click()" class="img-thumbnail"
+                             style=" max-width: 180px; max-height: 200px;">
+
+                        <br />
+                        <label for="inputFile" class="au-input au-input--full font-weight-bold text-center"
+                               style="background-color: rgb(41, 167, 248);"><span style="color:white">Chọn Ảnh</span></label>
+                        <input type="file" id="inputFile" path="inputFile"
+                               name="Image" class="form-control" style="display:none" accept="image/*" />
+                        <span id="error_image" class="text-danger hide"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Đơn Giá (VNĐ)</label>
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @Placeholder = "VNĐ", @type = "number" } })
+                        <span id="error_price" class="text-danger hide"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Model</label>
+                        @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", @Placeholder = "A" } })
+                        <span id="error_model" class="text-danger hide"></span>
+                        @*<input class="au-input au-input--full" type="text" name="Model" id="Model" placeholder="A">*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số Lượng</label>
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @Placeholder = "100", @type = "number" } })
+                        <span id="error_amount" class="text-danger hide"></span>
+                        @*<input class="au-input au-input--full" type="text" name="Amount" id="Amount" placeholder="100">*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bảo Hành (Tháng)</label>
+                        @Html.EditorFor(model => model.Guarantee, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Tháng", @type = "number" } })
+                        <span id="error_guarantee" class="text-danger hide"></span>
+                        @*<input class="au-input au-input--full" type="text" name="Guarantee" id="Guarantee" placeholder="12">*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Xuất Xứ</label>
+                        @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Việt Nam" } })
+                        <span id="error_origin" class="text-danger hide"></span>
+                        @*<input class="au-input au-input--full" type="text" name="Origin" id="Origin" placeholder="Việt Nam">*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giảm Giá (%)</label>
+                        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @Placeholder = "%", @type = "number" } })
+                        @*<input class="au-input au-input--full" type="text" name="discount" id="discount" placeholder="0&#37;">*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô Tả Ngắn</label><br />
+                        @Html.TextAreaFor(model => model.ShortDescription,
+                        new { @class = "form-control", @Placeholder = "Mô tả ngắn...", rows = 5 })
+                        @*<textarea name="ShortDescription" id="ShortDescription" rows="3"
+                            placeholder="Mô tả ngắn..." class="form-control"></textarea>*@
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chi Tiết</label>
+                        @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Thông tin chi tiết về sản phẩm...." } })
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng Thái</label>
+                        <input type="radio" id="show" name="Status" checked />
+                        <label for="show">Hiển thị</label>
+                        &ensp;
+                        <input type="radio" id="hide" name="Status" />
+                        <label for="hide"> Ẩn</label>
+                    </div>
+                </form>
+                @Html.EditorFor(model => model.ID_Product, new { htmlAttributes = new { @class = "form-control hide" } })
+
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" href="@Url.Action("Index","Product")">Hủy</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="clickSaveProduct()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Notification-->
+<div class="alert hide" id="alert_message">
+    <div id="icon-alert-message"><i class="fas fa-exclamation-circle"></i></div>
+    <span class="msg">Warning: This is a warning alert!</span>
+    <div class="close-btn-alert">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+
+
+@section Script{
+    <script src="~/Areas/Admin/Assets/js/ct-edit-product.js"></script>
+}
