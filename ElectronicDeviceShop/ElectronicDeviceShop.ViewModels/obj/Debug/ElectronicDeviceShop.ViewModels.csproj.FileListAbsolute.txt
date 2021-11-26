@@ -1,0 +1,15 @@
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.ViewModels.dll.config
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.ViewModels.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.ViewModels.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.Models.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\EntityFramework.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\EntityFramework.SqlServer.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.Models.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\ElectronicDeviceShop.Models.dll.config
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\EntityFramework.xml
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\bin\Debug\EntityFramework.SqlServer.xml
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\obj\Debug\ElectronicDeviceShop.ViewModels.csprojAssemblyReference.cache
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\obj\Debug\ElectronicDeviceShop.ViewModels.csproj.CoreCompileInputs.cache
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\obj\Debug\ElectronicDeviceShop.ViewModels.csproj.CopyComplete
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\obj\Debug\ElectronicDeviceShop.ViewModels.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.ViewModels\obj\Debug\ElectronicDeviceShop.ViewModels.pdb

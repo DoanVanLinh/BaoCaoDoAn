@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicDeviceShop.Models
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicDeviceShop.ViewModels", "ElectronicDeviceShop.ViewModels\ElectronicDeviceShop.ViewModels.csproj", "{BC5E3957-40F4-48FC-BEDA-98F290035C94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicDeviceShop.Services", "ElectronicDeviceShop.Services\ElectronicDeviceShop.Services.csproj", "{25AF1FF8-1C85-4960-AFF0-B94646C795B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicDeviceShop.Web", "ElectronicDeviceShop.Web\ElectronicDeviceShop.Web.csproj", "{2563267F-7F91-445C-B4D5-C61DCF88A87A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{BC5E3957-40F4-48FC-BEDA-98F290035C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC5E3957-40F4-48FC-BEDA-98F290035C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC5E3957-40F4-48FC-BEDA-98F290035C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25AF1FF8-1C85-4960-AFF0-B94646C795B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25AF1FF8-1C85-4960-AFF0-B94646C795B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25AF1FF8-1C85-4960-AFF0-B94646C795B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25AF1FF8-1C85-4960-AFF0-B94646C795B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2563267F-7F91-445C-B4D5-C61DCF88A87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2563267F-7F91-445C-B4D5-C61DCF88A87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2563267F-7F91-445C-B4D5-C61DCF88A87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2563267F-7F91-445C-B4D5-C61DCF88A87A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

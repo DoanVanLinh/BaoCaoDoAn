@@ -1,0 +1,12 @@
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.dll.config
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.xml
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.CoreCompileInputs.cache
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.CopyComplete
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csprojAssemblyReference.cache

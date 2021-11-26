@@ -1,38 +1,43 @@
-﻿using System;
+﻿using ElectronicDeviceShop.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectronicDeviceShop.ViewModels.Accounts
+namespace ElectronicDeviceShop.ViewModels.Bills
 {
-    class BillDetailViewModel
+    public class BillDetailViewModel
     {
+        public int ID_Bill { get; set; }
+
         public int ID_Account { get; set; }
 
-        [Display(Name = "Tên tài khoản")]
-        public string UserName { get; set; }
+        [Display(Name = "Tên người nhận")]
+        public string ReceiverName { get; set; }
 
-        [Display(Name = "Mật khẩu")]
-        public string Password { get; set; }
+        [Display(Name = "Địa chỉ người nhận")]
+        public string ReceiverAddress { get; set; }
 
-        [Display(Name = "Họ và tên")]
-        public string FullName { get; set; }
+        [Display(Name = "Email người nhận")]
+        public string ReceiverEmail { get; set; }
 
-        [Display(Name = "Số điện thoại")]
-        public string Phone { get; set; }
+        [Display(Name = "Số điện thoại người nhận")]
+        public string ReceiverPhone { get; set; }
 
-        [Display(Name = "Địa chỉ")]
-        public string Address { get; set; }
+        [Column(TypeName = "ntext")]
+        [Display(Name = "Ghi chú")]
+        public string Note { get; set; }
 
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Kiểu thanh toán")]
+        public string PayType { get; set; }
 
-        [Display(Name = "Ảnh đại diện")]
-        public string Avatar { get; set; }
+        [Column(TypeName = "date")]
+        [Display(Name = "Ngày mua")]
+        public DateTime BuyDate { get; set; }
 
-        [Display(Name = "Vai trò")]
-        public short Role { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

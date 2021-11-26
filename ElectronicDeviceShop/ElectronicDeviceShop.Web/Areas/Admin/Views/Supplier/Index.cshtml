@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="main-content-container container-fluid px-4">
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4 mt-5">
+                <div class="card-header row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
+                    <h3 class="m-0 col-sm-6 col-md-9 col-lg-9 text-black text-center text-sm-left">Nhà cung cấp</h3>
+                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add"><i class="fas fa-plus "></i></button>
+                </div>
+                <div class="card-body p-0 text-center align-middle table-responsive-lg">
+                    <table class="table mb-0 ">
+                        <thead class="bg-light ">
+                            <tr>
+                                <th class="border-0">#</th>
+                                <th class="border-0">First Name</th>
+                                <th class="border-0">Last Name</th>
+                                <th class="border-0">Country</th>
+                                <th class="border-0">Phone</th>
+                                <th class="border-0">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Ali</td>
+                                <td class="align-middle ">Kerry</td>
+                                <td class="align-middle ">Russian Federation</td>
+                                <td class="align-middle ">Gdańsk</td>
+                                <td class="align-middle d-flex justify-content-center ">
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fas fa-trash-alt "></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Ali</td>
+                                <td class="align-middle ">Kerry</td>
+                                <td class="align-middle ">Russian Federation</td>
+                                <td class="align-middle ">Gdańsk</td>
+                                <td class="align-middle d-flex justify-content-center ">
+                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
+                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
+                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Ali</td>
+                                <td class="align-middle ">Kerry</td>
+                                <td class="align-middle ">Russian Federation</td>
+                                <td class="align-middle ">Gdańsk</td>
+                                <td class="align-middle d-flex justify-content-center ">
+                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
+                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
+                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top">
+                    <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
+                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
+                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
+                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+    <!-- Default Dark Table -->
+    <div class="row ">
+        <div class="col ">
+            <div class="card card-small overflow-hidden mb-4 ">
+                <div class="card-header bg-dark row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
+                    <h3 class="m-0 text-white col-sm-6 col-md-9 col-lg-9 text-center text-sm-left">Nhà cung cấp ẩn</h3>
+                    <div class="col-sm-6 col-md-2 col-lg-1 mb-2 mr-1"></div>
+                </div>
+                <div class="card-body p-0 pb-3 bg-dark text-center ">
+                    <table class="table table-dark mb-0 ">
+                        <thead class="thead-dark ">
+                            <tr>
+                                <th scope="col" class="border-bottom-0 ">#</th>
+                                <th scope="col" class="border-bottom-0 ">First Name</th>
+                                <th scope="col" class="border-bottom-0 ">Last Name</th>
+                                <th scope="col" class="border-bottom-0 ">Country</th>
+                                <th scope="col" class="border-bottom-0 ">City</th>
+                                <th scope="col" class="border-bottom-0 ">Phone</th>
+                                <th scope="col" class="border-bottom-0 ">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Graham</td>
+                                <td class="align-middle ">Brent</td>
+                                <td class="align-middle ">Benin</td>
+                                <td class="align-middle ">Ripabottoni</td>
+                                <td class="align-middle ">1-512-760-9094</td>
+                                <td class="align-middle ">
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Graham</td>
+                                <td class="align-middle ">Brent</td>
+                                <td class="align-middle ">Benin</td>
+                                <td class="align-middle ">Ripabottoni</td>
+                                <td class="align-middle ">1-512-760-9094</td>
+                                <td class="align-middle ">
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Graham</td>
+                                <td class="align-middle ">Brent</td>
+                                <td class="align-middle ">Benin</td>
+                                <td class="align-middle ">Ripabottoni</td>
+                                <td class="align-middle ">1-512-760-9094</td>
+                                <td class="align-middle ">
+                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ">1</td>
+                                <td class="align-middle ">Graham</td>
+                                <td class="align-middle ">Brent</td>
+                                <td class="align-middle ">Benin</td>
+                                <td class="align-middle ">Ripabottoni</td>
+                                <td class="align-middle ">1-512-760-9094</td>
+                                <td class="align-middle ">
+                                    <button type="button" class="mb-2 btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
+                    <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
+                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
+                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
+                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Dark Table -->
+</div>
+<!-- Modal -->
+<!-- modal detail -->
+<div class="modal" id="modal-detail" tabindex="-1 " role="dialog" aria-labelledby="mediumModalLabel " aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <div class="col-10 page-header border-bottom-0 ">
+                    <h3 class="page-title ">Chi tiết Nhà cung cấp</h3>
+                </div>
+                <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body d-flex ">
+                <img src="https://i2.wp.com/www.icon0.com/wp-content/uploads/2021/05/stock-photo-tick-icon-sign-design-13148.jpg?fit=400%2C400&ssl=1 " alt=" " class="col-2 col-lg-2 rounded-circle p-0 ">
+                <div class="d-flex flex-column justify-content-center ml-3 col-8 ">
+                    <span class="fw-bold fs-1 ">James Khan</span>
+                    <small class="text-muted fs-3 ">21 March 2011</small>
+                </div>
+                <div class="col-sm-3 col-lg-2 text-center align-middle row">
+                    <div class="bg-primary rounded text-white text-center fw-bold w-75 h-50 " style="box-shadow: inset 0 0 5px rgba(0,0,0,.2); ">Active</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" btn btn-danger btn-lg me-md-2" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section modal{
+    @Html.Partial("Create")
+    @Html.Partial("Edit")
+    @Html.Partial("Delete")
+
+}

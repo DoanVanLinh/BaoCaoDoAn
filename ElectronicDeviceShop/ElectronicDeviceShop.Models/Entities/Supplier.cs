@@ -7,7 +7,7 @@ using System.Data.Entity.Spatial;
 
 namespace ElectronicDeviceShop.Models
 {
-    public partial class Supplier : BaseEntity
+    public class Supplier : BaseEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()

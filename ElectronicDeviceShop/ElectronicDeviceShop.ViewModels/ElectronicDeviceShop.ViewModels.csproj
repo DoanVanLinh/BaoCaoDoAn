@@ -58,19 +58,35 @@
     <Compile Include="Accounts\AccountDetailViewModel.cs" />
     <Compile Include="Bills\BillDetailViewModel.cs" />
     <Compile Include="Bills\BillViewModel.cs" />
-    <Compile Include="Bills\ChangeStatusAccountViewModel.cs" />
+    <Compile Include="Bills\ChangeStatusBillViewModel.cs" />
+    <Compile Include="Carts\CreateCartViewModel.cs" />
+    <Compile Include="Carts\DeleteCartViewModel.cs" />
+    <Compile Include="Carts\EditCartViewModel.cs" />
+    <Compile Include="Carts\CartDetailViewModel.cs" />
+    <Compile Include="Carts\CartViewModel.cs" />
+    <Compile Include="Categories\CategoryDetailViewModel.cs" />
+    <Compile Include="Categories\CategoryViewModel.cs" />
+    <Compile Include="Categories\DeleteCategoryViewModel.cs" />
+    <Compile Include="Categories\CreateCategoryViewModel.cs" />
+    <Compile Include="Categories\EditCategoryViewModel.cs" />
+    <Compile Include="Products\ProductDetailViewModel.cs" />
+    <Compile Include="Products\ProductViewModel.cs" />
+    <Compile Include="Products\CreateProductViewModel.cs" />
+    <Compile Include="Products\DeleteProductViewModel.cs" />
+    <Compile Include="Products\EditProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ResponseResult.cs" />
+    <Compile Include="Suppliers\SupplierDetailViewModel.cs" />
+    <Compile Include="Suppliers\SupplierViewModel.cs" />
+    <Compile Include="Suppliers\CreateSupplierViewModel.cs" />
+    <Compile Include="Suppliers\DeleteSupplierViewModel.cs" />
+    <Compile Include="Suppliers\EditSupplierViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Carts\" />
-    <Folder Include="Categories\" />
-    <Folder Include="Products\" />
-    <Folder Include="Suppliers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ElectronicDeviceShop.Models\ElectronicDeviceShop.Models.csproj">
       <Project>{314bc8f6-78c7-4248-a374-f3f03a7d416a}</Project>

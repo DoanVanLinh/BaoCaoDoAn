@@ -57,6 +57,8 @@
     <Compile Include="ElectronicDeviceShopInitializer.cs" />
     <Compile Include="Infrastructures\GenericRepository.cs" />
     <Compile Include="Infrastructures\IGenericRepository.cs" />
+    <Compile Include="Infrastructures\IUnitOfWork.cs" />
+    <Compile Include="Infrastructures\UnitOfWork.cs" />
     <Compile Include="IRepositories\IBillRepository.cs" />
     <Compile Include="IRepositories\ICartRepository.cs" />
     <Compile Include="IRepositories\ISupplierRepository.cs" />

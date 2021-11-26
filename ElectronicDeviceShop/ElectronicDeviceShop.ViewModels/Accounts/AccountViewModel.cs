@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ElectronicDeviceShop.ViewModels.Accounts
 {
-    class AccountViewModel
+    public class AccountViewModel
     {
         public int ID_Account { get; set; }
 
