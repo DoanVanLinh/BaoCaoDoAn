@@ -1,5 +1,5 @@
 ﻿<!-- modal create -->
-<div class="modal" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+<div class="modal" id="modal-add-edit" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -11,7 +11,7 @@
             <div class="modal-body ">
                 <div class="form-group ">
                     <label for="Name " class="fw-bold ">Tên Nhà cung cấp</label>
-                    <input type="text" class="form-control form-control-lg " name="Name " id="Name" placeholder="" value="" required="">
+                    <input type="text" class="form-control form-control-lg " name="Name " id="Name" placeholder="" value="" required="" onchange = "changeUrl('Name','UrlSlug')">
                     <div class="valid-feedback "></div>
                 </div>
                 <div class="form-group ">
@@ -31,7 +31,8 @@
             </div>
             <div class="modal-footer ">
                 <button type="button" class="btn btn-danger btn-lg me-md-2" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-success btn-lg" onclick="return Add();" id="Add" @*onclick="toastr.success('Thêm thành công!');"*@>Thêm</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="return Add();" id="Add" @*onclick="toastr.success('Thêm thành công!');"*@ data-bs-dismiss="modal">Thêm</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="return Edit();" id="Edit" data-bs-dismiss="modal">Sửa</button>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ CREATE TABLE Categories
 	[Name] NVARCHAR(255) NOT NULL,
 	UrlSlug NVARCHAR(255),
 	Icon NVARCHAR(255) NOT NULL,
-	[Status] INT DEFAULT 0 NOT NULL,
+	[Status] INT DEFAULT 0,
 ) 
 GO
 
@@ -27,7 +27,7 @@ CREATE TABLE Suppliers
 	[Name] NVARCHAR(255) NOT NULL,
 	UrlSlug NVARCHAR(255),
 	Icon NVARCHAR(255) NOT NULL,
-	[Status] INT DEFAULT 0 NOT NULL,
+	[Status] INT DEFAULT 0,
 ) 
 GO
 
@@ -48,7 +48,7 @@ CREATE TABLE Products
 	ShortDescription NTEXT NULL,
 	Detail NTEXT NULL,
 	[Image] NVARCHAR(255) NOT NULL,
-	[Status] BIT DEFAULT 0 NOT NULL,	
+	[Status] BIT DEFAULT 0,	
 	CONSTRAINT FK_Products_Categories FOREIGN KEY (ID_Category) REFERENCES Categories(ID_Category),
 	CONSTRAINT FK_Products_Suppliers FOREIGN KEY (ID_Supplier) REFERENCES Suppliers(ID_Supplier)
 ) 
@@ -65,7 +65,7 @@ CREATE TABLE Accounts
 	Email Varchar(50) NULL,
 	Avatar NVARCHAR(255) NULL,
 	[Role] INT NOT NULL,
-	[Status] BIT DEFAULT 0 NOT NULL,
+	[Status] BIT DEFAULT 0,
 ) 
 GO
 
@@ -75,7 +75,7 @@ CREATE TABLE Carts
 	ID_Product INT NOT NULL,
 	ID_Account INT NOT NULL,
 	Amount INT NOT NULL,
-	[Status] INT DEFAULT 0 NOT NULL,
+	[Status] INT DEFAULT 0,
 	CONSTRAINT FK_Carts_Products FOREIGN KEY (ID_Product) REFERENCES Products(ID_Product),
 	CONSTRAINT FK_Carts_Accounts FOREIGN KEY (ID_Account) REFERENCES Accounts(ID_Account)
 
@@ -93,7 +93,7 @@ CREATE TABLE Bills
 	Note NTEXT NULL,
 	PayType NVARCHAR(255) NOT NULL,
 	BuyDate DATE NOT NULL,
-	[Status] INT DEFAULT 2 NOT NULL,
+	[Status] INT DEFAULT 2,
 	CONSTRAINT FK_Bills_Accounts FOREIGN KEY (ID_Account) REFERENCES Accounts(ID_Account)
 )
 GO

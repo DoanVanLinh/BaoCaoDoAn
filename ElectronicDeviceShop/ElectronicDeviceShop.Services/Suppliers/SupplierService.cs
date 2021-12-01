@@ -85,5 +85,6 @@ namespace ElectronicDeviceShop.Services.Suppliers
             var supplier = unitOfWork.SupplierRepository.GetById(id);
             return Mapper.Map<SupplierDetailViewModel>(supplier);
         }
+
     }
 }

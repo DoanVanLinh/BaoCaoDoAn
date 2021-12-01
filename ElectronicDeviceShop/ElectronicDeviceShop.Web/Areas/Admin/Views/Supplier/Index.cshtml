@@ -13,7 +13,7 @@
             <div class="card card-small mb-4 mt-5">
                 <div class="card-header row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
                     <h3 class="m-0 col-sm-6 col-md-9 col-lg-9 text-black text-center text-sm-left">Nhà cung cấp</h3>
-                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add"><i class="fas fa-plus "></i></button>
+                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="ClearTextBox();"><i class="fas fa-plus "></i></button>
                 </div>
                 <div class="card-body p-0 text-center align-middle table-responsive-lg">
                     <table class="table mb-0 ">
@@ -175,7 +175,6 @@
 
 @section modal{
     @Html.Partial("Create")
-    @Html.Partial("Edit")
     @Html.Partial("Delete")
 
 }
@@ -208,8 +207,8 @@
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
                         html += '<td class="align-middle d-flex justify-content-center ">';
                         html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>';
-                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="fas fa-pencil-alt"></i></button>';
-                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fas fa-trash-alt"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Supplier + ')"><i class="fas fa-pencil-alt"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Supplier + ')"><i class="fas fa-trash-alt"></i></button>';
                         html += '</td>';
                         html += '</tr>';
                     });
@@ -301,6 +300,85 @@
                     toastr.error('Thêm không thành thành công!');
                 }
             });
+        }
+        let id = 0;
+        function GetById(ID) {
+            id = ID;
+            $.ajax({
+                url: "/Supplier/GetById/" + ID,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#Name').val(result.Name);
+                    $('#UrlSlug').val(result.UrlSlug);
+                    //$('#Icon').val(result.Icon);
+                    $('#Add').hide();
+                    $('#Edit').show();
+                    $('#Status').hide();
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+            return false;
+        }
+        function Edit() {
+            var fileData = GetImage();
+            let supplier = {};
+            supplier["ID_Supplier"] = id;
+            supplier["Name"] = $('#Name').val();
+            supplier["UrlSlug"] = $('#UrlSlug').val();
+            if (fileData.getAll.length != 0)
+                supplier["Icon"] = fileData.get(0);
+            
+
+            $.ajax({
+                url: "/Supplier/Edit",
+                data: JSON.stringify(supplier),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    UploadImage();
+                    LoadData();
+                    ClearTextBox();
+                    toastr.success('Sửa thành công!');
+                },
+                error: function (errormessage) {
+                    toastr.error('Sửa không thành công!');
+                }
+            });
+        }
+        function DeleteConfirm(ID) {
+            id = ID;
+        }
+        function Delele(ID) {
+            $.ajax({
+                url: "/Supplier/Delete/" + ID,
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        LoadData();
+                        toastr.success("Xóa thành công!");
+                    }
+                    else {
+                        toastr.error("Xóa không thành công!");
+                    }
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+        }
+        function ClearTextBox() {
+            $('#Name').val('');
+            $('#UrlSlug').val('');
+            $('#Edit').hide();
+            $('#Add').show();
+            $('#Status').show();
         }
     </script>
 }}

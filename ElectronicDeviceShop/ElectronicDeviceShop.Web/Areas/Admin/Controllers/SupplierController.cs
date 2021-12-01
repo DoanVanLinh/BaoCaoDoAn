@@ -28,6 +28,11 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 
             return Json(suppliers, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetById(int id)
+        {
+            var supplier = supplierService.GetEditSupplierById(id);
+            return Json(supplier, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Details(int id)
         {
             var supplier = supplierService.GetDetailSupplierById(id);
@@ -41,74 +46,21 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
 
-
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult Create(CreateSupplierViewModel request)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var response = supplierService.Create(request);
-        //        if (response.IsSuccessed)
-        //        {
-        //            TempData["Message"] = "Thêm thành công!";
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        ModelState.AddModelError(string.Empty, response.ErrorMessage);
-        //    }
-        //    return View(request);
-        //}
-
-        public ActionResult Edit(int id)
-        {
-            EditSupplierViewModel supplier = supplierService.GetEditSupplierById(id);
-            return View(supplier);
-        }
-
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Edit(EditSupplierViewModel request)
+        public ActionResult Edit(EditSupplierViewModel supplier)
         {
-            if (ModelState.IsValid)
-            {
-                var response = supplierService.Edit(request);
-                if (response.IsSuccessed)
-                {
-                    TempData["Message"] = "Sửa thành công!";
-                    return RedirectToAction(nameof(Index));
-                }
-                ModelState.AddModelError(string.Empty, response.ErrorMessage);
-            }
-            return View(request);
+            var response = supplierService.Edit(supplier);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-            DeleteSupplierViewModel supplier = supplierService.GetDeleteSupplierById(id);
-            return View(supplier);
+            var supplier = supplierService.GetDeleteSupplierById(id);
+            var response = supplierService.Delete(supplier);
+
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateInput(false)]
-        public ActionResult DeleteConfirmed(DeleteSupplierViewModel request)
-        {
-            if (ModelState.IsValid)
-            {
-                var response = supplierService.Delete(request);
-                if (response.IsSuccessed)
-                {
-                    TempData["Message"] = "Xóa thành công!";
-                    return RedirectToAction(nameof(Index));
-                }
-                ModelState.AddModelError(string.Empty, response.ErrorMessage);
-            }
-            return View(request);
-        }
         [HttpPost]
         public ActionResult UploadFiles()
         {

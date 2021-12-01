@@ -222,6 +222,7 @@
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.min.css" />
     <Content Include="Areas\Admin\Assets\css\style.css" />
     <Content Include="Areas\Admin\Assets\js\jquery.validate.min.js" />
+    <Content Include="Areas\Admin\Assets\js\UrlHelper.js" />
     <Content Include="wwwroot\ImageProducts\-00BMt7.jpg" />
     <Content Include="wwwroot\ImageProducts\-1eEOdS.jpg" />
     <Content Include="wwwroot\ImageProducts\-5pw465.jpg" />
@@ -393,7 +394,6 @@
     <Content Include="Areas\Admin\Assets\css\scss\_utilities.scss" />
     <Content Include="Areas\Admin\Assets\css\scss\_variables.scss" />
     <Content Include="Areas\Admin\Assets\js\shards-dashboards.1.1.0.js.map" />
-    <Content Include="Areas\Admin\Views\Supplier\_Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
