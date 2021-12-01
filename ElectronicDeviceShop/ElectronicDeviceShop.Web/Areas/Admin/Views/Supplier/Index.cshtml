@@ -185,6 +185,7 @@
 
         $(document).ready(function () {
             LoadData();
+
         });
 
 
@@ -234,9 +235,6 @@
                     fileData.append(files[i].name, files[i]);
                 }
 
-                //// Adding one more key to FormData object
-                //fileData.append('username', ‘Manas’);
-
                 $.ajax({
                     url: '/Supplier/UploadFiles',
                     type: "POST",
@@ -244,51 +242,51 @@
                     processData: false, // Not to process data
                     data: fileData,
                     success: function (result) {
-                        $('#Icon').get(0).files[0] = result;
+                        return true;
                     },
                     error: function (err) {
-                        $('#Icon').val('');
+                        return false;
                     }
                 });
             } else {
-                $('#Icon').val('');
+                return false;
             }
+        }
+        function GetImage() {
+            var fileUpload = $("#Icon").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(i, files[i].name);
+            }
+            return fileData;
         }
         function Add() {
             //var res = validate();
             //if (res == false) {
             //    return false;
             //}
-            //UploadImage();
-            //var fileUpload = $("#Icon").get(0);
-            //var files = fileUpload.files;
-
-            // Create FormData object
-            var fileData = new FormData();
-
-            // Looping over all files and add it to FormData object
-            //for (var i = 0; i < files.length; i++) {
-            //    fileData.append(files[i].name, files[i]);
-            //}
-            fileData.append('file', $('#Icon')[0].files[0]);
-            fileData.append('Name', $('#Name').val());
-            fileData.append('UrlSlug', $('#UrlSlug').val());
-            fileData.append('Status', $('#Status').is(":checked") ? true : false);
-
-            //let supplier = {};
-            //supplier["Name"] = $('#Name').val();
-            //supplier["UrlSlug"] = $('#UrlSlug').val();
-            //supplier["Icon"] = $('#Icon').get(0).files[0];
-            //supplier["Status"] = $('#Status').is(":checked") ? true : false;
+            var fileData = GetImage();
+            let supplier = {};
+            supplier["Name"] = $('#Name').val();
+            supplier["UrlSlug"] = $('#UrlSlug').val();
+            supplier["Icon"] = fileData.get(0);
+            supplier["Status"] = $('#Status').is(":checked") ? true : false;
 
             $.ajax({
                 url: "/Supplier/Create",
-                data: fileData,
+                data: JSON.stringify(supplier),
                 type: "POST",
+                processData: false,
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
                     if (result) {
+                        UploadImage();
                         LoadData();
                         $('#modal-add').modal('hide');
                         toastr.success('Thêm thành công!');

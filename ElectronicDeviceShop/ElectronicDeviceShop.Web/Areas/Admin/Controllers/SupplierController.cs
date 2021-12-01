@@ -25,6 +25,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         public JsonResult GetAll()
         {
             var suppliers = supplierService.GetAll();
+
             return Json(suppliers, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Details(int id)
@@ -34,21 +35,10 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateSupplierViewModel supplier,HttpPostedFileBase file)
+        public ActionResult Create(CreateSupplierViewModel supplier)
         {
             var response = supplierService.Create(supplier);
-            if (ModelState.IsValid)
-            {
-                if (file != null)
-                {
-                    file.SaveAs(HttpContext.Server.MapPath("~/wwwroot/ImageProducts/")+ file.FileName);
-                    supplier.Icon = file.FileName;
-                }
-
-                supplierService.Create(supplier);
-                return RedirectToAction("Index");
-            }
-            return View(supplier);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -122,32 +112,45 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UploadFiles()
         {
-            string imageName = "";
-            HttpFileCollectionBase files = Request.Files;
-            for (int i = 0; i < files.Count; i++)
+            // Checking no of files injected in Request object  
+            if (Request.Files.Count > 0)
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + "ImageProducts/";
-                string filename = Path.GetFileName(Request.Files[i].FileName);
+                try
+                {
+                    //  Get all files from Request object  
+                    HttpFileCollectionBase files = Request.Files;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        HttpPostedFileBase file = files[i];
+                        string fname;
 
-                HttpPostedFileBase file = files[i];
-                string fname;
-                if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
-                {
-                    string[] testfiles = file.FileName.Split(new char[] { '\\' });
-                    fname = testfiles[testfiles.Length - 1];
+                        // Checking for Internet Explorer  
+                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                        {
+                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                            fname = testfiles[testfiles.Length - 1];
+                        }
+                        else
+                        {
+                            fname = file.FileName;
+                        }
+
+                        // Get the complete folder path and store the file inside it.  
+                        fname = Path.Combine(Server.MapPath("~/wwwroot/ImageProducts/"), fname);
+                        file.SaveAs(fname);
+                    }
+                    // Returns message that successfully uploaded  
+                    return Json("File Uploaded Successfully!");
                 }
-                else
+                catch (Exception ex)
                 {
-                    fname = file.FileName;
+                    return Json("Error occurred. Error details: " + ex.Message);
                 }
-                imageName = fname;
-                fname = Path.Combine(Server.MapPath("~/wwwroot/ImageProducts/"), fname);
-                file.SaveAs(fname);
             }
-
-            return Json(imageName);
-
+            else
+            {
+                return Json("No files selected.");
+            }
         }
-
     }
 }

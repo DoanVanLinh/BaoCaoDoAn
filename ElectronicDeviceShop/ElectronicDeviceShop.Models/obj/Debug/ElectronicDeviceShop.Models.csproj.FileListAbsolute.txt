@@ -9,3 +9,4 @@ D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.CopyComplete
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.dll
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csprojAssemblyReference.cache
