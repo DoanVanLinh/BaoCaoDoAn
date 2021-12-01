@@ -10,10 +10,10 @@ namespace ElectronicDeviceShop.Models.EntityBase
 {
     public class BaseEntity : IBaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
+        //[Key]
+        //public int Id { get; set; }
+
         [Display(Name = "Trạng thái")]
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
     }
 }

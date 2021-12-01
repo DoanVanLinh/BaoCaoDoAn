@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using ElectronicDeviceShop.Web.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,8 @@ namespace ElectronicDeviceShop.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutofacConfig.RegisterComponents();
+            Mapper.Initialize(config => config.AddProfile(new AutoMapperConfig()));
         }
     }
 }

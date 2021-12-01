@@ -39,7 +39,7 @@ namespace ElectronicDeviceShop.Services.Products
             try
             {
                 var product = Mapper.Map<Product>(request);
-                this.unitOfWork.ProductRepository.Delete(product.Id);
+                this.unitOfWork.ProductRepository.Delete(product.ID_Product);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }

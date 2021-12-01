@@ -172,7 +172,7 @@ button.md-toast-close-button {
 }
 
 #toast-container.md-toast-bottom-center > div, #toast-container.md-toast-top-center > div {
-    width: 18.75rem;
+    width: 20.75rem;
     margin: auto
 }
 

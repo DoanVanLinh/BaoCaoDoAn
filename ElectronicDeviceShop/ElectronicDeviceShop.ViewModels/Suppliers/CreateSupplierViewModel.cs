@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicDeviceShop.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace ElectronicDeviceShop.ViewModels.Suppliers
         [StringLength(255)]
         [Display(Name = "Biểu tượng")]
         public string Icon { get; set; }
+
+        [Display(Name = "Trạng thái")]
+        public Status Status { get; set; }
     }
 }

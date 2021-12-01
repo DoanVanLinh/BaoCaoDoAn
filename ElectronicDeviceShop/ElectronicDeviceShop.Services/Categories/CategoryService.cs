@@ -39,7 +39,7 @@ namespace ElectronicDeviceShop.Services.Categories
             try
             {
                 var category = Mapper.Map<Category>(request);
-                this.unitOfWork.CategoryRepository.Delete(category.Id);
+                this.unitOfWork.CategoryRepository.Delete(category.ID_Category);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }

@@ -1,4 +1,6 @@
-﻿
+﻿@using ElectronicDeviceShop.ViewModels.Suppliers
+@model IEnumerable<SupplierViewModel>
+@*@model CreateSupplierViewModel*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -18,50 +20,14 @@
                         <thead class="bg-light ">
                             <tr>
                                 <th class="border-0">#</th>
-                                <th class="border-0">First Name</th>
-                                <th class="border-0">Last Name</th>
-                                <th class="border-0">Country</th>
-                                <th class="border-0">Phone</th>
-                                <th class="border-0">Action</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Name)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.UrlSlug)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Icon)</th>
+                                <th class="border-0">Chức năng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="fas fa-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
+                        <tbody class="tbody-light">
+                            @*AJAX LOAD*@
                         </tbody>
                     </table>
                 </div>
@@ -177,6 +143,8 @@
     </div>
     <!-- End Default Dark Table -->
 </div>
+<input type="file" id="FileUpload1" />
+<input type="button" id="btnUpload" value="Upload Files" />
 <!-- Modal -->
 <!-- modal detail -->
 <div class="modal" id="modal-detail" tabindex="-1 " role="dialog" aria-labelledby="mediumModalLabel " aria-hidden="true">
@@ -205,10 +173,136 @@
     </div>
 </div>
 
-
 @section modal{
     @Html.Partial("Create")
     @Html.Partial("Edit")
     @Html.Partial("Delete")
 
 }
+@section Script{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            LoadData();
+        });
+
+
+        function LoadData() {
+            $.ajax({
+                url: "/Supplier/GetAll",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var count = 0;
+                    var html = '';
+                    $.each(result, function (key, item) {
+                        imgPath = '/wwwroot/ImageProducts/' + item.Icon;
+                        count++;
+                        html += '<tr>';
+                        html += '<td class="align-middle">' + count + '</td>';
+                        html += '<td class="align-middle">' + item.Name + '</td>';
+                        html += '<td class="align-middle">' + item.UrlSlug + '</td>';
+                        html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
+                        html += '<td class="align-middle d-flex justify-content-center ">';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="fas fa-pencil-alt"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fas fa-trash-alt"></i></button>';
+                        html += '</td>';
+                        html += '</tr>';
+                    });
+                    $('.tbody-light').html(html);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+        }
+        function UploadImage() {
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#Icon").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                //// Adding one more key to FormData object
+                //fileData.append('username', ‘Manas’);
+
+                $.ajax({
+                    url: '/Supplier/UploadFiles',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        $('#Icon').get(0).files[0] = result;
+                    },
+                    error: function (err) {
+                        $('#Icon').val('');
+                    }
+                });
+            } else {
+                $('#Icon').val('');
+            }
+        }
+        function Add() {
+            //var res = validate();
+            //if (res == false) {
+            //    return false;
+            //}
+            //UploadImage();
+            //var fileUpload = $("#Icon").get(0);
+            //var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            //for (var i = 0; i < files.length; i++) {
+            //    fileData.append(files[i].name, files[i]);
+            //}
+            fileData.append('file', $('#Icon')[0].files[0]);
+            fileData.append('Name', $('#Name').val());
+            fileData.append('UrlSlug', $('#UrlSlug').val());
+            fileData.append('Status', $('#Status').is(":checked") ? true : false);
+
+            //let supplier = {};
+            //supplier["Name"] = $('#Name').val();
+            //supplier["UrlSlug"] = $('#UrlSlug').val();
+            //supplier["Icon"] = $('#Icon').get(0).files[0];
+            //supplier["Status"] = $('#Status').is(":checked") ? true : false;
+
+            $.ajax({
+                url: "/Supplier/Create",
+                data: fileData,
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        LoadData();
+                        $('#modal-add').modal('hide');
+                        toastr.success('Thêm thành công!');
+                    }
+                    else {
+                        toastr.error('Thêm không thành thành công!');
+                        return false;
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                    toastr.error('Thêm không thành thành công!');
+                }
+            });
+        }
+    </script>
+}}

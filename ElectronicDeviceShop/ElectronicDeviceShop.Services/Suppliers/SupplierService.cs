@@ -39,7 +39,7 @@ namespace ElectronicDeviceShop.Services.Suppliers
             try
             {
                 var supplier = Mapper.Map<Supplier>(request);
-                this.unitOfWork.SupplierRepository.Delete(supplier.Id);
+                this.unitOfWork.SupplierRepository.Delete(supplier.ID_Supplier);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }
