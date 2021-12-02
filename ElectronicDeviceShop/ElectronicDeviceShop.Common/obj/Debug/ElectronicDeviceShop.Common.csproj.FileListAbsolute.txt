@@ -1,0 +1,6 @@
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\bin\Debug\ElectronicDeviceShop.Common.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\bin\Debug\ElectronicDeviceShop.Common.pdb
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.csprojAssemblyReference.cache
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.csproj.CoreCompileInputs.cache
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.dll
+D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.pdb

@@ -32,10 +32,10 @@
                     </table>
                 </div>
                 <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top">
-                    <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite"></div>
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
                         <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
+                            @*<li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
                             <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
                             <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
                             <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
@@ -44,7 +44,7 @@
                             <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
                             <li class="paginate_button page-item next" id="dt-material-checkbox_next">
                                 <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                 </div>
@@ -183,21 +183,35 @@
     <script>
 
         $(document).ready(function () {
-            LoadData();
+            LoadData(null,1);
+            $("body").on("click", ".pagination li a", function (event) {
+            event.preventDefault();
+            var page = $(this).attr('data-page');
+            LoadData(null, page);
+            //load event pagination
+            //var txtSearch = $(".txtSearch").val();
+            //if (txtSearch != "") {
+            //    load(txtSearch, page)
+            //}
+            //else {
+            //    load(null, page);
+            //}
 
+        });
         });
 
 
-        function LoadData() {
+        function LoadData(txtSearch,page) {
             $.ajax({
                 url: "/Supplier/GetAll",
                 type: "GET",
+                data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
                     var count = 0;
                     var html = '';
-                    $.each(result, function (key, item) {
+                    $.each(result.data, function (key, item) {
                         imgPath = '/wwwroot/ImageProducts/' + item.Icon;
                         count++;
                         html += '<tr>';
@@ -213,6 +227,34 @@
                         html += '</tr>';
                     });
                     $('.tbody-light').html(html);
+
+                    //create pagination
+                    var pagination_string = "";
+                    var pageCurrent = result.pageCurrent;
+                    var numSize = result.numSize;
+
+                    $('.dataTables_info').val(numSize + '/');
+                    //create button previous
+                    if (pageCurrent > 1) {
+                        var pagePrevious = pageCurrent - 1;
+                        pagination_string += '<li class="page-item"><a href="" class="page-link" data-page=' + pagePrevious + '>Previous</a></li>';
+                    }
+
+                    for (i = 1; i <= numSize; i++) {
+                        if (i == pageCurrent) {
+                            pagination_string += '<li class="page-item active"><a href="" class="page-link" data-page=' + i + '>' + pageCurrent + '</a></li>';
+                        } else {
+                            pagination_string += '<li class="page-item"><a href="" class="page-link" data-page=' + i + '>' + i + '</a></li>';
+                        }
+                    }
+
+                    //create button next
+                    if (pageCurrent > 0 && pageCurrent < numSize) {
+                        var pageNext = pageCurrent + 1;
+                        pagination_string += '<li class="page-item"><a href="" class="page-link"  data-page=' + pageNext + '>Next</a></li>';
+                    }
+                    $(".pagination").html(pagination_string);
+
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
@@ -380,5 +422,13 @@
             $('#Add').show();
             $('#Status').show();
         }
+        Icon.onchange = evt => {
+            const [file] = Icon.files
+            if (file) {
+                imgPreview.src = URL.createObjectURL(file)
+            }
+        }
+        
+
     </script>
 }}

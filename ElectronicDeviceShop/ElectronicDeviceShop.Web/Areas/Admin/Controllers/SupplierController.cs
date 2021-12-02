@@ -12,7 +12,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
     public class SupplierController : Controller
     {
         private readonly ISupplierService supplierService;
-
+        int pageSize = 4;
         public SupplierController(ISupplierService supplierService)
         {
             this.supplierService = supplierService;
@@ -22,11 +22,22 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public JsonResult GetAll()
+        public JsonResult GetAll(string txtSearch,int? page)
         {
             var suppliers = supplierService.GetAll();
+            if (page<=0)
+            {
+                page = 1;
+            }
 
-            return Json(suppliers, JsonRequestBehavior.AllowGet);
+            int start = (int)(page - 1) * pageSize;
+            ViewBag.pageCurrent = page;
+            int totalPage = suppliers.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            ViewBag.numSize = numSize;
+            var dataSupplier = suppliers.Skip(start).Take(pageSize);
+            return Json(new { data = dataSupplier, pageCurrent = page, numSize = numSize }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int id)
         {

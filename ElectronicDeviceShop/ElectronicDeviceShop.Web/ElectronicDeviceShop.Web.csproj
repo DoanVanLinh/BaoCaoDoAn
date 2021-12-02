@@ -221,6 +221,8 @@
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.css" />
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.min.css" />
     <Content Include="Areas\Admin\Assets\css\style.css" />
+    <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.min.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.validate.min.js" />
     <Content Include="Areas\Admin\Assets\js\UrlHelper.js" />
     <Content Include="wwwroot\ImageProducts\-00BMt7.jpg" />
@@ -267,6 +269,7 @@
     <Content Include="wwwroot\ImageProducts\lg-OI70q3.png" />
     <Content Include="wwwroot\ImageProducts\loa-soundbar-lg-qp5w-O2GroS.jpg" />
     <Content Include="wwwroot\ImageProducts\loa-soundbar-samsung-hwq950axv-X3aY50.jpg" />
+    <Content Include="wwwroot\ImageProducts\no-image-icon-0.jpg" />
     <Content Include="wwwroot\ImageProducts\noi-chien-khong-dau-coex-afc3109-T74L46.png" />
     <Content Include="wwwroot\ImageProducts\noi-chien-khong-dau-dien-tu-35-lit-coex-afc3115-C5ixBc.png" />
     <Content Include="wwwroot\ImageProducts\noi-chien-khong-dau-dien-tu-cao-cap-5-lit-coex-afc3118-f962HO.png" />
