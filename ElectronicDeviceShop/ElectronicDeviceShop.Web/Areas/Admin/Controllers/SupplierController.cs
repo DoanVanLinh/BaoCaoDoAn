@@ -22,22 +22,24 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public JsonResult GetAll(string txtSearch,int? page)
+        public JsonResult GetAll(string txtSearch, int? page)
         {
             var suppliers = supplierService.GetAll();
-            if (page<=0)
-            {
+            if (page <= 0)
                 page = 1;
-            }
-
-            int start = (int)(page - 1) * pageSize;
-            ViewBag.pageCurrent = page;
             int totalPage = suppliers.Count();
             float totalNumsize = (totalPage / (float)pageSize);
             int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
             ViewBag.numSize = numSize;
+
+            int start = (int)(page - 1) * pageSize;
             var dataSupplier = suppliers.Skip(start).Take(pageSize);
-            return Json(new { data = dataSupplier, pageCurrent = page, numSize = numSize }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = dataSupplier, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int id)
         {

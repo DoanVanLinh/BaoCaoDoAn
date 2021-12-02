@@ -36,15 +36,15 @@
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
                         <ul class="pagination">
                             @*<li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
-                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
-                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                            </li>*@
+                                <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
+                                <li class="paginate_button page-item next" id="dt-material-checkbox_next">
+                                    <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
+                                </li>*@
                         </ul>
                     </div>
                 </div>
@@ -181,27 +181,28 @@
 @section Script{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-
+        var lastPage = 1;
+        var pageCurrent = 1;
         $(document).ready(function () {
-            LoadData(null,1);
+            LoadData(null, 1);
             $("body").on("click", ".pagination li a", function (event) {
-            event.preventDefault();
-            var page = $(this).attr('data-page');
-            LoadData(null, page);
-            //load event pagination
-            //var txtSearch = $(".txtSearch").val();
-            //if (txtSearch != "") {
-            //    load(txtSearch, page)
-            //}
-            //else {
-            //    load(null, page);
-            //}
+                event.preventDefault();
+                var page = $(this).attr('data-page');
+                LoadData(null, page);
+                //load event pagination
+                //var txtSearch = $(".txtSearch").val();
+                //if (txtSearch != "") {
+                //    load(txtSearch, page)
+                //}
+                //else {
+                //    load(null, page);
+                //}
 
+            });
         });
-        });
 
 
-        function LoadData(txtSearch,page) {
+        function LoadData(txtSearch, page) {
             $.ajax({
                 url: "/Supplier/GetAll",
                 type: "GET",
@@ -215,7 +216,7 @@
                         imgPath = '/wwwroot/ImageProducts/' + item.Icon;
                         count++;
                         html += '<tr>';
-                        html += '<td class="align-middle">' + count + '</td>';
+                        html += '<td class="align-middle">' + ((result.pageCurrent -1) * result.pageSize + count) + '</td>';
                         html += '<td class="align-middle">' + item.Name + '</td>';
                         html += '<td class="align-middle">' + item.UrlSlug + '</td>';
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
@@ -227,12 +228,12 @@
                         html += '</tr>';
                     });
                     $('.tbody-light').html(html);
-
+                   
                     //create pagination
                     var pagination_string = "";
-                    var pageCurrent = result.pageCurrent;
+                    pageCurrent = result.pageCurrent;
                     var numSize = result.numSize;
-
+                    lastPage = numSize;
                     $('.dataTables_info').val(numSize + '/');
                     //create button previous
                     if (pageCurrent > 1) {
@@ -328,7 +329,7 @@
                 success: function (result) {
                     if (result) {
                         UploadImage();
-                        LoadData();
+                        LoadData(null, lastPage+1);
                         $('#modal-add').modal('hide');
                         toastr.success('Thêm thành công!');
                     }
@@ -354,7 +355,7 @@
                 success: function (result) {
                     $('#Name').val(result.Name);
                     $('#UrlSlug').val(result.UrlSlug);
-                    //$('#Icon').val(result.Icon);
+                    $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Icon);
                     $('#Add').hide();
                     $('#Edit').show();
                     $('#Status').hide();
@@ -371,9 +372,10 @@
             supplier["ID_Supplier"] = id;
             supplier["Name"] = $('#Name').val();
             supplier["UrlSlug"] = $('#UrlSlug').val();
-            if (fileData.getAll.length != 0)
+            if ($("#Icon").get(0).files.length != 0)
                 supplier["Icon"] = fileData.get(0);
-            
+            else
+                supplier["Icon"] = $("#imgPreview").attr('src').split('/')[3];
 
             $.ajax({
                 url: "/Supplier/Edit",
@@ -383,7 +385,7 @@
                 dataType: "json",
                 success: function (result) {
                     UploadImage();
-                    LoadData();
+                    LoadData(null, pageCurrent);
                     ClearTextBox();
                     toastr.success('Sửa thành công!');
                 },
@@ -403,7 +405,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result) {
-                        LoadData();
+                        LoadData(null, pageCurrent);
                         toastr.success("Xóa thành công!");
                     }
                     else {
@@ -428,7 +430,5 @@
                 imgPreview.src = URL.createObjectURL(file)
             }
         }
-        
-
     </script>
-}}
+}
