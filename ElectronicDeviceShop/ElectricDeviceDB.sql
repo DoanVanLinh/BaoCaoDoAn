@@ -17,7 +17,7 @@ CREATE TABLE Categories
 	[Name] NVARCHAR(255) NOT NULL,
 	UrlSlug NVARCHAR(255),
 	Icon NVARCHAR(255) NOT NULL,
-	[Status] INT DEFAULT 0,
+	[Status] INT DEFAULT 1,
 ) 
 GO
 
@@ -27,7 +27,7 @@ CREATE TABLE Suppliers
 	[Name] NVARCHAR(255) NOT NULL,
 	UrlSlug NVARCHAR(255),
 	Icon NVARCHAR(255) NOT NULL,
-	[Status] INT DEFAULT 0,
+	[Status] INT DEFAULT 1,
 ) 
 GO
 
@@ -65,7 +65,7 @@ CREATE TABLE Accounts
 	Email Varchar(50) NULL,
 	Avatar NVARCHAR(255) NULL,
 	[Role] INT NOT NULL,
-	[Status] BIT DEFAULT 0,
+	[Status] BIT DEFAULT 1,
 ) 
 GO
 
@@ -75,7 +75,7 @@ CREATE TABLE Carts
 	ID_Product INT NOT NULL,
 	ID_Account INT NOT NULL,
 	Amount INT NOT NULL,
-	[Status] INT DEFAULT 0,
+	[Status] INT DEFAULT 1,
 	CONSTRAINT FK_Carts_Products FOREIGN KEY (ID_Product) REFERENCES Products(ID_Product),
 	CONSTRAINT FK_Carts_Accounts FOREIGN KEY (ID_Account) REFERENCES Accounts(ID_Account)
 

@@ -8,8 +8,8 @@ namespace ElectronicDeviceShop.Models.Enums
 {
     public enum Status
     {
-        Active,
         IsDeleted,
+        Active,
         NewOrders,
         ConfirmOrders,
         ShippingOrders,

@@ -348,7 +348,6 @@
     <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
@@ -360,7 +359,6 @@
     <Content Include="Areas\Admin\Views\Statistic\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Supplier\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -403,6 +401,7 @@
     <Content Include="Areas\Admin\Assets\css\scss\_variables.scss" />
     <Content Include="Areas\Admin\Assets\js\shards-dashboards.1.1.0.js.map" />
     <Content Include="wwwroot\ImageProducts\up.png" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
