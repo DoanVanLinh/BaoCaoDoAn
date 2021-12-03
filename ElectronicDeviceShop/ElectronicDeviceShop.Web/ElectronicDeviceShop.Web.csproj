@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -223,6 +225,7 @@
     <Content Include="Areas\Admin\Assets\css\style.css" />
     <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.js" />
     <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.min.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.dataTables.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.validate.min.js" />
     <Content Include="Areas\Admin\Assets\js\UrlHelper.js" />
     <Content Include="wwwroot\ImageProducts\-00BMt7.jpg" />
@@ -251,6 +254,7 @@
     <Content Include="wwwroot\ImageProducts\binh-nong-lanh-50l-ariston-pro-r-50-sh-25-fe-binh-ngang-39WSh0.png" />
     <Content Include="wwwroot\ImageProducts\binh-nong-lanh-truc-tiep-ariston-sm45pevn-4500wco-bom-44a9Xv.png" />
     <Content Include="wwwroot\ImageProducts\binh-nuoc-nong-22l-kangaroo-kg68a2-XkMpfg.jpg" />
+    <Content Include="wwwroot\ImageProducts\both.png" />
     <Content Include="wwwroot\ImageProducts\coex-5u7kJo.png" />
     <Content Include="wwwroot\ImageProducts\dieu-hoa-lg-1-chieu-inverter-21500btu-v24enf1-OV7SYU.png" />
     <Content Include="wwwroot\ImageProducts\dieu-hoa-lg-1-chieu-inverter-9200btu-v10enw1-V96Zd2.png" />
@@ -259,6 +263,7 @@
     <Content Include="wwwroot\ImageProducts\dieu-hoa-samsung-1-chieu-inverter-9700btu-ar10nvfscurxsv-6N779O.jpg" />
     <Content Include="wwwroot\ImageProducts\dieu-hoa-samsung-windfree-1-chieu-inverter-12000btu-ar13tygcdwknsv-8CN26y.png" />
     <Content Include="wwwroot\ImageProducts\dieu-hoa-samsung-windfree-1-chieu-inverter-9400btu-ar10tygcdwknsv-FbD86A.png" />
+    <Content Include="wwwroot\ImageProducts\down.png" />
     <Content Include="wwwroot\ImageProducts\icon-binh-tam-nong-lanh.png" />
     <Content Include="wwwroot\ImageProducts\icon-dieu-hoa.png" />
     <Content Include="wwwroot\ImageProducts\icon-noi-chien.png" />
@@ -397,6 +402,7 @@
     <Content Include="Areas\Admin\Assets\css\scss\_utilities.scss" />
     <Content Include="Areas\Admin\Assets\css\scss\_variables.scss" />
     <Content Include="Areas\Admin\Assets\js\shards-dashboards.1.1.0.js.map" />
+    <Content Include="wwwroot\ImageProducts\up.png" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -459,11 +465,15 @@
       <Name>ElectronicDeviceShop.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

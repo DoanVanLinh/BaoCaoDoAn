@@ -12,12 +12,28 @@
         <div class="col">
             <div class="card card-small mb-4 mt-5">
                 <div class="card-header row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
-                    <h3 class="m-0 col-sm-6 col-md-9 col-lg-9 text-black text-center text-sm-left">Nhà cung cấp</h3>
+                    <h3 class="m-0 col-sm-6 col-md-9 col-lg-2 text-black text-center text-sm-left">Nhà cung cấp</h3>
+                    @*<div class="input-group mb-3 col-sm-6 col-md-9 col-lg-7">
+                            <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-white" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>*@
+                    <div class="input-group mb-3 col-sm-6 col-md-9 col-lg-7">
+                        <div class="input-group input-group-seamless">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </span>
+                            <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        </div>
+                    </div>
                     <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="ClearTextBox();"><i class="fas fa-plus "></i></button>
                 </div>
-                <div class="card-body p-0 text-center align-middle table-responsive-lg">
-                    <table class="table mb-0 ">
-                        <thead class="bg-light ">
+                <div class="card-body p-0 text-center align-middle table-responsive">
+                    <table class="table mb-0" id="dataTable">
+                        <thead class="bg-light">
                             <tr>
                                 <th class="border-0">#</th>
                                 <th class="border-0">@Html.DisplayNameFor(model => model.Name)</th>
@@ -35,16 +51,7 @@
                     <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite"></div>
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
                         <ul class="pagination">
-                            @*<li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
-                                <li class="paginate_button page-item next" id="dt-material-checkbox_next">
-                                    <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                                </li>*@
+                            @*Pagination*@
                         </ul>
                     </div>
                 </div>
@@ -52,99 +59,7 @@
         </div>
     </div>
     <!-- End Default Light Table -->
-    <!-- Default Dark Table -->
-    <div class="row ">
-        <div class="col ">
-            <div class="card card-small overflow-hidden mb-4 ">
-                <div class="card-header bg-dark row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
-                    <h3 class="m-0 text-white col-sm-6 col-md-9 col-lg-9 text-center text-sm-left">Nhà cung cấp ẩn</h3>
-                    <div class="col-sm-6 col-md-2 col-lg-1 mb-2 mr-1"></div>
-                </div>
-                <div class="card-body p-0 pb-3 bg-dark text-center ">
-                    <table class="table table-dark mb-0 ">
-                        <thead class="thead-dark ">
-                            <tr>
-                                <th scope="col" class="border-bottom-0 ">#</th>
-                                <th scope="col" class="border-bottom-0 ">First Name</th>
-                                <th scope="col" class="border-bottom-0 ">Last Name</th>
-                                <th scope="col" class="border-bottom-0 ">Country</th>
-                                <th scope="col" class="border-bottom-0 ">City</th>
-                                <th scope="col" class="border-bottom-0 ">Phone</th>
-                                <th scope="col" class="border-bottom-0 ">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="mb-2 btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
-                    <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
-                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
-                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Default Dark Table -->
 </div>
-<input type="file" id="FileUpload1" />
-<input type="button" id="btnUpload" value="Upload Files" />
 <!-- Modal -->
 <!-- modal detail -->
 <div class="modal" id="modal-detail" tabindex="-1 " role="dialog" aria-labelledby="mediumModalLabel " aria-hidden="true">
@@ -156,14 +71,11 @@
                 </div>
                 <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body d-flex ">
-                <img src="https://i2.wp.com/www.icon0.com/wp-content/uploads/2021/05/stock-photo-tick-icon-sign-design-13148.jpg?fit=400%2C400&ssl=1 " alt=" " class="col-2 col-lg-2 rounded-circle p-0 ">
-                <div class="d-flex flex-column justify-content-center ml-3 col-8 ">
-                    <span class="fw-bold fs-1 ">James Khan</span>
-                    <small class="text-muted fs-3 ">21 March 2011</small>
-                </div>
-                <div class="col-sm-3 col-lg-2 text-center align-middle row">
-                    <div class="bg-primary rounded text-white text-center fw-bold w-75 h-50 " style="box-shadow: inset 0 0 5px rgba(0,0,0,.2); ">Active</div>
+            <div class="modal-body d-flex justify-content-center">
+                <img src="https://i2.wp.com/www.icon0.com/wp-content/uploads/2021/05/stock-photo-tick-icon-sign-design-13148.jpg?fit=400%2C400&ssl=1 " height="80" alt=" " class="col-6 p-0 img-fluid" id="icon-detail">
+                <div class="d-flex flex-column justify-content-center ml-3 col-6 ">
+                    <span class="fw-bold fs-1 text-wrap" style="word-wrap: break-word;" id="name-detail">James Khan</span>
+                    <small class="text-muted fs-3 text-wrap" style="word-wrap: break-word;" id="url-detail">21 March 2011</small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -179,7 +91,6 @@
 
 }
 @section Script{
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         var lastPage = 1;
         var pageCurrent = 1;
@@ -188,19 +99,10 @@
             $("body").on("click", ".pagination li a", function (event) {
                 event.preventDefault();
                 var page = $(this).attr('data-page');
-                LoadData(null, page);
-                //load event pagination
-                //var txtSearch = $(".txtSearch").val();
-                //if (txtSearch != "") {
-                //    load(txtSearch, page)
-                //}
-                //else {
-                //    load(null, page);
-                //}
-
+                Search(page);
             });
-        });
 
+        });
 
         function LoadData(txtSearch, page) {
             $.ajax({
@@ -216,19 +118,19 @@
                         imgPath = '/wwwroot/ImageProducts/' + item.Icon;
                         count++;
                         html += '<tr>';
-                        html += '<td class="align-middle">' + ((result.pageCurrent -1) * result.pageSize + count) + '</td>';
+                        html += '<td class="align-middle">' + ((result.pageCurrent - 1) * result.pageSize + count) + '</td>';
                         html += '<td class="align-middle">' + item.Name + '</td>';
                         html += '<td class="align-middle">' + item.UrlSlug + '</td>';
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
                         html += '<td class="align-middle d-flex justify-content-center ">';
-                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="Detail(' + item.ID_Supplier + ')"><i class="fas fa-eye"></i></button>';
                         html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Supplier + ')"><i class="fas fa-pencil-alt"></i></button>';
                         html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Supplier + ')"><i class="fas fa-trash-alt"></i></button>';
                         html += '</td>';
                         html += '</tr>';
                     });
                     $('.tbody-light').html(html);
-                   
+
                     //create pagination
                     var pagination_string = "";
                     pageCurrent = result.pageCurrent;
@@ -255,12 +157,12 @@
                         pagination_string += '<li class="page-item"><a href="" class="page-link"  data-page=' + pageNext + '>Next</a></li>';
                     }
                     $(".pagination").html(pagination_string);
-
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
                 }
             });
+
         }
         function UploadImage() {
             // Checking whether FormData is available in browser
@@ -307,11 +209,29 @@
             }
             return fileData;
         }
+        function Detail(ID) {
+            $.ajax({
+                url: "/Supplier/GetById/" + ID,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#name-detail').text(result.Name);
+                    $('#url-detail').text(result.UrlSlug);
+                    $("#icon-detail").attr("src", '/wwwroot/ImageProducts/' + result.Icon);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+        }
         function Add() {
-            //var res = validate();
-            //if (res == false) {
-            //    return false;
-            //}
+            errorName();
+            errorIcon();
+
+            if (checkError)
+                return;
+
             var fileData = GetImage();
             let supplier = {};
             supplier["Name"] = $('#Name').val();
@@ -328,8 +248,9 @@
                 dataType: "json",
                 success: function (result) {
                     if (result) {
+                        $('#modal-add-edit').modal('hide');
                         UploadImage();
-                        LoadData(null, lastPage+1);
+                        Search(lastPage + 1);
                         $('#modal-add').modal('hide');
                         toastr.success('Thêm thành công!');
                     }
@@ -347,6 +268,8 @@
         let id = 0;
         function GetById(ID) {
             id = ID;
+            ClearValidation();
+
             $.ajax({
                 url: "/Supplier/GetById/" + ID,
                 typr: "GET",
@@ -358,7 +281,6 @@
                     $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Icon);
                     $('#Add').hide();
                     $('#Edit').show();
-                    $('#Status').hide();
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
@@ -367,6 +289,10 @@
             return false;
         }
         function Edit() {
+            errorName();
+            if (checkError)
+                return;
+
             var fileData = GetImage();
             let supplier = {};
             supplier["ID_Supplier"] = id;
@@ -384,8 +310,9 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
+                    $('#modal-add-edit').modal('hide');
                     UploadImage();
-                    LoadData(null, pageCurrent);
+                    Search(pageCurrent);
                     ClearTextBox();
                     toastr.success('Sửa thành công!');
                 },
@@ -405,7 +332,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result) {
-                        LoadData(null, pageCurrent);
+                        Search(pageCurrent);
                         toastr.success("Xóa thành công!");
                     }
                     else {
@@ -423,12 +350,80 @@
             $('#Edit').hide();
             $('#Add').show();
             $('#Status').show();
+            ClearValidation();
+        }
+        function ClearValidation() {
+            $('#Name').removeClass('is-invalid');
+            $('#Name').removeClass('is-valid');
+            $('#Icon').removeClass('is-invalid');
+            $('#Icon').removeClass('is-valid');
+            $("#imgPreview").attr("src", '/wwwroot/ImageProducts/no-image-icon-0.jpg');
+            $('#error_name').hide();
+            $('#error_icon').hide();
         }
         Icon.onchange = evt => {
-            const [file] = Icon.files
+            const [file] = Icon.files;
             if (file) {
-                imgPreview.src = URL.createObjectURL(file)
+                imgPreview.src = URL.createObjectURL(file);
+            } else {
+                imgPreview.src = '/wwwroot/ImageProducts/no-image-icon-0.jpg';
+            }
+            errorIcon();
+        }
+
+        //Validations
+        let checkError = false;
+        const errorName = () => {
+            if ($('#Name').val() == '') {
+                $('#error_name').show();
+                $('#error_name').addClass('invalid-feedback');
+                $('#error_name').removeClass('valid-feedback');
+                $('#Name').addClass('is-invalid');
+                $('#error_name').text("Tên không được để trống!");
+                checkError = true;
+            } else {
+                $('#error_name').hide();
+                $('#Name').addClass('is-valid');
+                $('#Name').removeClass('is-invalid');
+                checkError = false;
             }
         }
+        $('#Name').keyup(() => {
+            errorName();
+        });
+        $('#Name').keydown(() => {
+            errorName();
+        });
+        const errorIcon = () => {
+            if ($('#Icon').get(0).files.length == 0) {
+                $('#error_icon').show();
+                $('#error_icon').addClass('invalid-feedback');
+                $('#error_icon').removeClass('valid-feedback');
+                $('#Icon').addClass('is-invalid');
+                $('#error_icon').text("Biểu tượng không được để trống");
+                checkError = true;
+            } else {
+                $('#error_icon').hide();
+                $('#Icon').addClass('is-valid');
+                $('#Icon').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+
+        const Search = (page) => {
+            var txtSearch = $("#txtSearch").val();
+            if (txtSearch != "") {
+                LoadData(txtSearch, 1)
+            }
+            else {
+                LoadData(null, page);
+            }
+        }
+        $('#txtSearch').keyup(() => {
+            Search(1);
+        });
+        $('#txtSearch').keydown(() => {
+            Search(1);
+        });
     </script>
 }

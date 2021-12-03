@@ -12,7 +12,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
     public class SupplierController : Controller
     {
         private readonly ISupplierService supplierService;
-        int pageSize = 4;
+        private readonly int pageSize = 4;
         public SupplierController(ISupplierService supplierService)
         {
             this.supplierService = supplierService;
@@ -25,6 +25,12 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         public JsonResult GetAll(string txtSearch, int? page)
         {
             var suppliers = supplierService.GetAll();
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+                suppliers = suppliers.Where(s => s.Name.ToLower().Contains(txtSearch.ToLower()));
+            }
+
             if (page <= 0)
                 page = 1;
             int totalPage = suppliers.Count();
@@ -36,20 +42,16 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             ViewBag.pageCurrent = page;
             ViewBag.pageSize = pageSize;
             ViewBag.numSize = numSize;
+            ViewBag.all = suppliers;
 
             int start = (int)(page - 1) * pageSize;
             var dataSupplier = suppliers.Skip(start).Take(pageSize);
-            return Json(new { data = dataSupplier, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+            return Json(new {all = suppliers,  data = dataSupplier, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int id)
         {
             var supplier = supplierService.GetEditSupplierById(id);
             return Json(supplier, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult Details(int id)
-        {
-            var supplier = supplierService.GetDetailSupplierById(id);
-            return View(supplier);
         }
 
         [HttpPost]

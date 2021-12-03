@@ -214,3 +214,18 @@ button.md-toast-close-button {
     filter: alpha(opacity=40);
     opacity: .4
 }
+th.border-0.sortable {
+    cursor: pointer;
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 20px !important;
+}
+th.border-0.sortable.both {
+    background-image: url(/wwwroot/ImageProducts/both.png);
+}
+th.border-0.sortable.asc {
+    background-image: url(/wwwroot/ImageProducts/up.png);
+}
+th.border-0.sortable.desc {
+    background-image: url(/wwwroot/ImageProducts/down.png);
+}
