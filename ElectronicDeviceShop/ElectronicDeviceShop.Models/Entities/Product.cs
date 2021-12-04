@@ -10,7 +10,6 @@ namespace ElectronicDeviceShop.Models
 
     public partial class Product : BaseEntity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
             BillDetails = new HashSet<BillDetail>();
@@ -45,7 +44,7 @@ namespace ElectronicDeviceShop.Models
         [StringLength(255)]
         public string Origin { get; set; }
 
-        public short? Discount { get; set; }
+        public int? Discount { get; set; }
 
         [Column(TypeName = "ntext")]
         public string ShortDescription { get; set; }
@@ -57,10 +56,8 @@ namespace ElectronicDeviceShop.Models
         [StringLength(255)]
         public string Image { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillDetail> BillDetails { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
 
         public virtual Category Category { get; set; }

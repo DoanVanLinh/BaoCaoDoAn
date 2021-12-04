@@ -54,6 +54,7 @@ namespace ElectronicDeviceShop.Services.Products
             try
             {
                 var product = Mapper.Map<Product>(request);
+                product.Status = Status.Active;
                 this.unitOfWork.ProductRepository.Update(product);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();

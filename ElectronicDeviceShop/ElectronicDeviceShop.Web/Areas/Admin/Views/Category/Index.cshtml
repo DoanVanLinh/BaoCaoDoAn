@@ -43,7 +43,7 @@
                     </table>
                 </div>
                 <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top">
-                    <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite"></div>
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
                         <ul class="pagination">
                             @*Pagination*@
@@ -132,7 +132,9 @@
                     pageCurrent = result.pageCurrent;
                     var numSize = result.numSize;
                     lastPage = numSize;
-                    $('.dataTables_info').val(numSize + '/');
+
+                    $('#dt-material-checkbox_info').text(result.data.length + '/' + result.all.length);
+
                     //create button previous
                     if (pageCurrent > 1) {
                         var pagePrevious = pageCurrent - 1;
@@ -233,7 +235,7 @@
             supplier["Name"] = $('#Name').val();
             supplier["UrlSlug"] = $('#UrlSlug').val();
             supplier["Icon"] = fileData.get(0);
-            supplier["Status"] = $('#Status').is(":checked") ? true : false;
+            supplier["Status"] =true ;
 
             $.ajax({
                 url: "/Category/Create",
@@ -386,9 +388,11 @@
         }
         $('#Name').keyup(() => {
             errorName();
+            changeUrl('Name', 'UrlSlug')
         });
         $('#Name').keydown(() => {
             errorName();
+            changeUrl('Name', 'UrlSlug')
         });
         const errorIcon = () => {
             if ($('#Icon').get(0).files.length == 0) {
@@ -409,7 +413,7 @@
         const Search = (page) => {
             var txtSearch = $("#txtSearch").val();
             if (txtSearch != "") {
-                LoadData(txtSearch, 1)
+                LoadData(txtSearch, page)
             }
             else {
                 LoadData(null, page);

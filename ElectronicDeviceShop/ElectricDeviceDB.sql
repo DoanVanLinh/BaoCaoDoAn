@@ -48,7 +48,7 @@ CREATE TABLE Products
 	ShortDescription NTEXT NULL,
 	Detail NTEXT NULL,
 	[Image] NVARCHAR(255) NOT NULL,
-	[Status] BIT DEFAULT 0,	
+	[Status] INT DEFAULT 1,	
 	CONSTRAINT FK_Products_Categories FOREIGN KEY (ID_Category) REFERENCES Categories(ID_Category),
 	CONSTRAINT FK_Products_Suppliers FOREIGN KEY (ID_Supplier) REFERENCES Suppliers(ID_Supplier)
 ) 
@@ -65,7 +65,7 @@ CREATE TABLE Accounts
 	Email Varchar(50) NULL,
 	Avatar NVARCHAR(255) NULL,
 	[Role] INT NOT NULL,
-	[Status] BIT DEFAULT 1,
+	[Status] INT DEFAULT 1,
 ) 
 GO
 

@@ -1,4 +1,5 @@
-﻿
+﻿@using ElectronicDeviceShop.ViewModels.Products
+@model IEnumerable<ProductViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,75 +11,42 @@
         <div class="col">
             <div class="card card-small mb-4 mt-5">
                 <div class="card-header row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
-                    <h3 class="m-0 col-sm-6 col-md-9 col-lg-9 text-black text-center text-sm-left">Sản phẩm</h3>
-                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add"><i class="fas fa-plus "></i></button>
+                    <h3 class="m-0 col-sm-6 col-md-9 col-lg-2 text-black text-center text-sm-left">Sản phẩm</h3>
+                    <div class="input-group mb-3 col-sm-6 col-md-9 col-lg-7">
+                        <div class="input-group input-group-seamless">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </span>
+                            <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        </div>
+                    </div>
+                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="ClearTextBox();"><i class="fas fa-plus "></i></button>
                 </div>
                 <div class="card-body p-0 text-center align-middle table-responsive-lg">
                     <table class="table mb-0 ">
                         <thead class="bg-light ">
                             <tr>
                                 <th class="border-0">#</th>
-                                <th class="border-0">First Name</th>
-                                <th class="border-0">Last Name</th>
-                                <th class="border-0">Country</th>
-                                <th class="border-0">Phone</th>
-                                <th class="border-0">Action</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Name)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Price)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Amount)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Origin)</th>
+                                <th class="border-0">@Html.DisplayNameFor(model => model.Image)</th>
+                                <th class="border-0">Chức năng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="fas fa-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Ali</td>
-                                <td class="align-middle ">Kerry</td>
-                                <td class="align-middle ">Russian Federation</td>
-                                <td class="align-middle ">Gdańsk</td>
-                                <td class="align-middle d-flex justify-content-center ">
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                    <button type="button" class=" btn btn-lg btn-info mr-1 "><i class="fas fa-pencil-alt "></i></button>
-                                    <button type="button" class="btn btn-lg btn-info mr-1 "><i class="fas fa-trash-alt "></i></button>
-                                </td>
-                            </tr>
+                        <tbody class="tbody-light">
+                            @*DATA*@
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top">
                     <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate" >
+                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
                         <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
-                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
-                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                            </li>
+                            @*Pagination*@
                         </ul>
                     </div>
                 </div>
@@ -86,96 +54,6 @@
         </div>
     </div>
     <!-- End Default Light Table -->
-    <!-- Default Dark Table -->
-    <div class="row ">
-        <div class="col ">
-            <div class="card card-small overflow-hidden mb-4 ">
-                <div class="card-header bg-dark row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
-                    <h3 class="m-0 text-white col-sm-6 col-md-9 col-lg-9 text-center text-sm-left">Sản phẩm ẩn</h3>
-                    <div class="col-sm-6 col-md-2 col-lg-1 mb-2 mr-1"></div>
-                </div>
-                <div class="card-body p-0 pb-3 bg-dark text-center ">
-                    <table class="table table-dark mb-0 ">
-                        <thead class="thead-dark ">
-                            <tr>
-                                <th scope="col" class="border-bottom-0 ">#</th>
-                                <th scope="col" class="border-bottom-0 ">First Name</th>
-                                <th scope="col" class="border-bottom-0 ">Last Name</th>
-                                <th scope="col" class="border-bottom-0 ">Country</th>
-                                <th scope="col" class="border-bottom-0 ">City</th>
-                                <th scope="col" class="border-bottom-0 ">Phone</th>
-                                <th scope="col" class="border-bottom-0 ">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ">1</td>
-                                <td class="align-middle ">Graham</td>
-                                <td class="align-middle ">Brent</td>
-                                <td class="align-middle ">Benin</td>
-                                <td class="align-middle ">Ripabottoni</td>
-                                <td class="align-middle ">1-512-760-9094</td>
-                                <td class="align-middle ">
-                                    <button type="button" class="mb-2 btn btn-lg btn-info mr-1 "><i class="fas fa-eye "></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
-                    <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="dt-material-checkbox_previous"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="0" tabindex="0" class="page-link waves-effect waves-effect">Previous</a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="1" tabindex="0" class="page-link waves-effect waves-effect">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="2" tabindex="0" class="page-link waves-effect waves-effect">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="3" tabindex="0" class="page-link waves-effect waves-effect">3</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="4" tabindex="0" class="page-link waves-effect waves-effect">4</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="5" tabindex="0" class="page-link waves-effect waves-effect">5</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="dt-material-checkbox" data-dt-idx="6" tabindex="0" class="page-link waves-effect waves-effect">6</a></li>
-                            <li class="paginate_button page-item next" id="dt-material-checkbox_next">
-                                <a href="#" aria-controls="dt-material-checkbox" data-dt-idx="7" tabindex="0" class="page-link waves-effect waves-effect">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Default Dark Table -->
     <!-- Modal -->
     <!-- modal detail -->
     <div class="modal" id="modal-detail" tabindex="-1 " role="dialog" aria-labelledby="mediumModalLabel " aria-hidden="true">
@@ -188,7 +66,7 @@
                     <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body p-3 d-flex flex-column">
-                    <div class="rounded mx-auto d-block" style="background-image: url('images/content-management/1.jpeg');height: 250px">
+                    <div class="rounded mx-auto d-block" style="background-image: url('#');height: 250px">
                         <img src="https://kimnganadv.com/wp-content/uploads/2018/07/samsung-logo-png-blue-samsung-logo-png-1288-1641.png" alt="" class="rounded bg-light float-right p-1 m-3" width="100">
                     </div>
                     <div class="card-body p-0">
@@ -250,8 +128,586 @@
 
 @section modal{
     @Html.Partial("Create")
-    @Html.Partial("Edit")
     @Html.Partial("Delete")
 
 }
 
+@section Script{
+    <script>
+        var lastPage = 1;
+        var pageCurrent = 1;
+        $(document).ready(function () {
+            LoadData(null, 1);
+            $("body").on("click", ".pagination li a", function (event) {
+                event.preventDefault();
+                var page = $(this).attr('data-page');
+                Search(page);
+            });
+
+        });
+
+        function LoadData(txtSearch, page) {
+            $.ajax({
+                url: "/Product/GetAll",
+                type: "GET",
+                data: { txtSearch: txtSearch, page: page },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var count = 0;
+                    var html = '';
+                    $.each(result.data, function (key, item) {
+                        imgPath = '/wwwroot/ImageProducts/' + item.Image;
+                        count++;
+                        html += '<tr>';
+                        html += '<td class="align-middle">' + ((result.pageCurrent - 1) * result.pageSize + count) + '</td>';
+                        html += '<td class="align-middle">' + item.Name + '</td>';
+                        html += '<td class="align-middle">' + item.Price + '</td>';
+                        html += '<td class="align-middle">' + item.Amount + '</td>';
+                        html += '<td class="align-middle">' + item.Origin + '</td>';
+                        html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
+                        html += '<td class="align-middle d-flex justify-content-center ">';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="Detail(' + item.ID_Product + ')"><i class="fas fa-eye"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Product + ')"><i class="fas fa-pencil-alt"></i></button>';
+                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Product + ')"><i class="fas fa-trash-alt"></i></button>';
+                        html += '</td>';
+                        html += '</tr>';
+                    });
+                    $('.tbody-light').html(html);
+
+                    //create pagination
+                    var pagination_string = "";
+                    pageCurrent = result.pageCurrent;
+                    var numSize = result.numSize;
+                    lastPage = numSize;
+
+                    $('#dt-material-checkbox_info').text(result.data.length + '/' + result.all.length);
+
+                    //create button previous
+                    if (pageCurrent > 1) {
+                        var pagePrevious = pageCurrent - 1;
+                        pagination_string += '<li class="page-item"><a href="" class="page-link" data-page=' + pagePrevious + '>Previous</a></li>';
+                    }
+
+                    for (i = 1; i <= numSize; i++) {
+                        if (i == pageCurrent) {
+                            pagination_string += '<li class="page-item active"><a href="" class="page-link" data-page=' + i + '>' + pageCurrent + '</a></li>';
+                        } else {
+                            pagination_string += '<li class="page-item"><a href="" class="page-link" data-page=' + i + '>' + i + '</a></li>';
+                        }
+                    }
+
+                    //create button next
+                    if (pageCurrent > 0 && pageCurrent < numSize) {
+                        var pageNext = pageCurrent + 1;
+                        pagination_string += '<li class="page-item"><a href="" class="page-link"  data-page=' + pageNext + '>Next</a></li>';
+                    }
+                    $(".pagination").html(pagination_string);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+
+        }
+        function UploadImage() {
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#Image").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                $.ajax({
+                    url: '/Product/UploadFiles',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        return true;
+                    },
+                    error: function (err) {
+                        return false;
+                    }
+                });
+            } else {
+                return false;
+            }
+        }
+        function GetImage() {
+            var fileUpload = $("#Image").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(i, files[i].name);
+            }
+            return fileData;
+        }
+        function Detail(ID) {
+            $.ajax({
+                url: "/Product/GetById/" + ID,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#name-detail').text(result.Name);
+                    $('#url-detail').text(result.UrlSlug);
+                    $("#icon-detail").attr("src", '/wwwroot/ImageProducts/' + result.Image);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+        }
+        function Add() {
+            errorName();
+            errorPrice();
+            errorModel();
+            errorAmount();
+            errorGuarantee();
+            errorDiscount();
+            errorImage();
+
+            if (checkError)
+                return;
+
+            var fileData = GetImage();
+            let supplier = {};
+            supplier["Name"] = $('#Name').val();
+            supplier["UrlSlug"] = $('#UrlSlug').val();
+            supplier["Price"] = $('#Price').val();
+            supplier["Model"] = $('#Model').val();
+            supplier["Amount"] = $('#Amount').val();
+            supplier["Guarantee"] = $('#Guarantee').val();
+            supplier["Origin"] = $('#Origin').val();
+            supplier["Discount"] = $('#Discount').val();
+            supplier["ShortDescription"] = $('#ShortDescription').val();
+            supplier["Detail"] = $('#Detail').val();
+            supplier["Image"] = fileData.get(0);
+            supplier["Status"] = 1;
+
+            $.ajax({
+                url: "/Product/Create",
+                data: JSON.stringify(supplier),
+                type: "POST",
+                processData: false,
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        $('#modal-add-edit').modal('hide');
+                        UploadImage();
+                        Search(lastPage + 1);
+                        $('#modal-add').modal('hide');
+                        toastr.success('Thêm thành công!');
+                    }
+                    else {
+                        toastr.error('Thêm không thành thành công!');
+                        return false;
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                    toastr.error('Thêm không thành thành công!');
+                }
+            });
+        }
+        let id = 0;
+        function GetById(ID) {
+            id = ID;
+            ClearValidation();
+
+            $.ajax({
+                url: "/Product/GetById/" + ID,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#Name').val(result.Name);
+                    $('#UrlSlug').val(result.UrlSlug);
+                    $('#Price').val(result.Price);
+                    $('#Model').val(result.Model);
+                    $('#Amount').val(result.Amount);
+                    $('#Guarantee').val(result.Guarantee);
+                    $('#Origin').val(result.Origin);
+                    $('#Discount').val(result.Discount);
+                    $('#ShortDescription').val(result.ShortDescription);
+                    $('#Detail').val(result.Detail);
+                    $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Image);
+                    $('#Add').hide();
+                    $('#Edit').show();
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+            return false;
+        }
+        function Edit() {
+            errorName();
+            errorPrice();
+            errorModel();
+            errorAmount();
+            errorGuarantee();
+            errorDiscount();
+            if (checkError)
+                return;
+
+            var fileData = GetImage();
+            let supplier = {};
+            supplier["ID_Product"] = id;
+            supplier["Name"] = $('#Name').val();
+            supplier["UrlSlug"] = $('#UrlSlug').val();
+            supplier["Price"] = $('#Price').val();
+            supplier["Model"] = $('#Model').val();
+            supplier["Amount"] = $('#Amount').val();
+            supplier["Guarantee"] = $('#Guarantee').val();
+            supplier["Origin"] = $('#Origin').val();
+            supplier["Discount"] = $('#Discount').val();
+            supplier["ShortDescription"] = $('#ShortDescription').val();
+            supplier["Detail"] = $('#Detail').val();
+            if ($("#Image").get(0).files.length != 0)
+                supplier["Image"] = fileData.get(0);
+            else
+                supplier["Image"] = $("#imgPreview").attr('src').split('/')[3];
+
+            $.ajax({
+                url: "/Product/Edit",
+                data: JSON.stringify(supplier),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#modal-add-edit').modal('hide');
+                    UploadImage();
+                    Search(pageCurrent);
+                    ClearTextBox();
+                    toastr.success('Sửa thành công!');
+                },
+                error: function (errormessage) {
+                    toastr.error('Sửa không thành công!');
+                }
+            });
+        }
+        function DeleteConfirm(ID) {
+            id = ID;
+        }
+        function Delele(ID) {
+            $.ajax({
+                url: "/Product/Delete/" + ID,
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        Search(pageCurrent);
+                        toastr.success("Xóa thành công!");
+                    }
+                    else {
+                        toastr.error("Xóa không thành công!");
+                    }
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+        }
+        function ClearTextBox() {
+            $('#Name').val('');
+            $('#UrlSlug').val('');
+            $('#Price').val('');
+            $('#Model').val('');
+            $('#Amount').val('');
+            $('#Guarantee').val('');
+            $('#Origin').val('');
+            $('#Discount').val('');
+            $('#ShortDescription').val('');
+            $('#Detail').val('');
+            $('#Edit').hide();
+            $('#Add').show();
+            $('#Status').show();
+            ClearValidation();
+        }
+        function ClearValidation() {
+            $('#Name').removeClass('is-invalid');
+            $('#Name').removeClass('is-valid');
+            $('#UrlSlug').removeClass('is-invalid');
+            $('#UrlSlug').removeClass('is-valid');
+            $('#Price').removeClass('is-invalid');
+            $('#Price').removeClass('is-valid');
+            $('#Model').removeClass('is-invalid');
+            $('#Model').removeClass('is-valid');
+            $('#Amount').removeClass('is-invalid');
+            $('#Amount').removeClass('is-valid');
+            $('#Guarantee').removeClass('is-invalid');
+            $('#Guarantee').removeClass('is-valid');
+            $('#Origin').removeClass('is-invalid');
+            $('#Origin').removeClass('is-valid');
+            $('#Discount').removeClass('is-invalid');
+            $('#Discount').removeClass('is-valid');
+            $('#ShortDescription').removeClass('is-invalid');
+            $('#ShortDescription').removeClass('is-valid');
+            $('#Detail').removeClass('is-invalid');
+            $('#Detail').removeClass('is-valid');
+            $('#Image').removeClass('is-invalid');
+            $('#Image').removeClass('is-valid');
+            $("#imgPreview").attr("src", '/wwwroot/ImageProducts/no-image-icon-0.jpg');
+            $('#error_name').hide();
+            $('#error_price').hide();
+            $('#error_model').hide();
+            $('#error_amount').hide();
+            $('#error_guarentee').hide();
+            $('#error_discount').hide();
+        }
+
+        $('#Image').change(function () {
+            const [file] = $('#Image').get(0).files;
+            if (file) {
+                imgPreview.src = URL.createObjectURL(file);
+            } else {
+                imgPreview.src = '/wwwroot/ImageProducts/no-image-icon-0.jpg';
+            }
+            errorImage();
+        });
+
+        //Validations
+        let checkError = false;
+        let numberRegex = /^[0-9]+$/;
+        const errorName = () => {
+            if ($('#Name').val() == '') {
+                $('#error_name').show();
+                $('#error_name').addClass('invalid-feedback');
+                $('#error_name').removeClass('valid-feedback');
+                $('#Name').addClass('is-invalid');
+                $('#error_name').text("Tên không được để trống!");
+                checkError = true;
+            } else {
+                $('#error_name').hide();
+                $('#Name').addClass('is-valid');
+                $('#Name').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Name').keyup(() => {
+            errorName();
+            changeUrl('Name', 'UrlSlug');
+        });
+        $('#Name').keydown(() => {
+            errorName();
+            changeUrl('Name', 'UrlSlug');
+        });
+
+        const errorPrice = () => {
+            if ($('#Price').val() == '') {
+                $('#error_price').show();
+                $('#error_price').addClass('invalid-feedback');
+                $('#error_price').removeClass('valid-feedback');
+                $('#Price').addClass('is-invalid');
+                $('#error_price').text("Giá không được để trống!");
+                checkError = true;
+            }
+            else if (numberRegex.test($('#Price').val()) == false) {
+                $('#error_price').show();
+                $('#error_price').addClass('invalid-feedback');
+                $('#error_price').removeClass('valid-feedback');
+                $('#Price').addClass('is-invalid');
+                $('#error_price').text("Không đúng định dạng!");
+                checkError = true;
+            }
+            else if ($('#Price').val() <= 0) {
+                $('#error_price').show();
+                $('#error_price').addClass('invalid-feedback');
+                $('#error_price').removeClass('valid-feedback');
+                $('#Price').addClass('is-invalid');
+                $('#error_price').text("Giá phải lớn hơn 0!");
+                checkError = true;
+            } else {
+                $('#error_price').hide();
+                $('#Price').addClass('is-valid');
+                $('#Price').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Price').keyup(() => {
+            errorPrice();
+        });
+        $('#Price').keydown(() => {
+            errorPrice();
+        });
+
+        const errorModel = () => {
+            if ($('#Model').val() == '') {
+                $('#error_model').show();
+                $('#error_model').addClass('invalid-feedback');
+                $('#error_model').removeClass('valid-feedback');
+                $('#Model').addClass('is-invalid');
+                $('#error_model').text("Model không được để trống!");
+                checkError = true;
+            }
+            else {
+                $('#error_model').hide();
+                $('#Model').addClass('is-valid');
+                $('#Model').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Model').keyup(() => {
+            errorModel();
+        });
+        $('#Model').keydown(() => {
+            errorModel();
+        });
+
+        const errorAmount = () => {
+            if ($('#Amount').val() == '') {
+                $('#error_amount').show();
+                $('#error_amount').addClass('invalid-feedback');
+                $('#error_amount').removeClass('valid-feedback');
+                $('#Amount').addClass('is-invalid');
+                $('#error_amount').text("Số lượng không được để trống!");
+                checkError = true;
+            }
+            else if (numberRegex.test($('#Amount').val()) == false) {
+                $('#error_amount').show();
+                $('#error_amount').addClass('invalid-feedback');
+                $('#error_amount').removeClass('valid-feedback');
+                $('#Amount').addClass('is-invalid');
+                $('#error_amount').text("Không đúng định dạng!");
+                checkError = true;
+            }
+            else if ($('#Amount').val() <= 0) {
+                $('#error_amount').show();
+                $('#error_amount').addClass('invalid-feedback');
+                $('#error_amount').removeClass('valid-feedback');
+                $('#Amount').addClass('is-invalid');
+                $('#error_amount').text("Số lượng phải lớn hơn 0!");
+                checkError = true;
+            } else {
+                $('#error_amount').hide();
+                $('#Amount').addClass('is-valid');
+                $('#Amount').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Amount').keyup(() => {
+            errorAmount();
+        });
+        $('#Amount').keydown(() => {
+            errorAmount();
+        });
+
+        const errorGuarantee = () => {
+            if ($('#Guarantee').val() == '') {
+                $('#error_guarantee').show();
+                $('#error_guarantee').addClass('invalid-feedback');
+                $('#error_guarantee').removeClass('valid-feedback');
+                $('#Guarantee').addClass('is-invalid');
+                $('#error_guarantee').text("Bảo hành không được để trống!");
+                checkError = true;
+            }
+            else if (numberRegex.test($('#Guarantee').val()) == false) {
+                $('#error_guarantee').show();
+                $('#error_guarantee').addClass('invalid-feedback');
+                $('#error_guarantee').removeClass('valid-feedback');
+                $('#Guarantee').addClass('is-invalid');
+                $('#error_guarantee').text("Không đúng định dạng!");
+                checkError = true;
+            }
+            else if ($('#Guarantee').val() < 0) {
+                $('#error_guarantee').show();
+                $('#error_guarantee').addClass('invalid-feedback');
+                $('#error_guarantee').removeClass('valid-feedback');
+                $('#Guarantee').addClass('is-invalid');
+                $('#error_guarantee').text("Bảo hành phải không âm!");
+                checkError = true;
+            } else {
+                $('#error_guarantee').hide();
+                $('#Guarantee').addClass('is-valid');
+                $('#Guarantee').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Guarantee').keyup(() => {
+            errorGuarantee();
+        });
+        $('#Guarantee').keydown(() => {
+            errorGuarantee();
+        });
+
+        const errorDiscount = () => {
+            if ($('#Discount').val() != '' && numberRegex.test($('#Discount').val()) == false) {
+                $('#error_discount').show();
+                $('#error_discount').addClass('invalid-feedback');
+                $('#error_discount').removeClass('valid-feedback');
+                $('#Discount').addClass('is-invalid');
+                $('#error_discount').text("Không đúng định dạng!");
+                checkError = true;
+            }
+            else if ($('#Discount').val() < 0 || $('#Discount').val() > 100) {
+                $('#error_discount').show();
+                $('#error_discount').addClass('invalid-feedback');
+                $('#error_discount').removeClass('valid-feedback');
+                $('#Discount').addClass('is-invalid');
+                $('#error_discount').text("Giảm giá từ 0%-100%!");
+                checkError = true;
+            } else {
+                if ($('#Discount').val() != '') {
+                    $('#error_discount').hide();
+                    $('#Discount').addClass('is-valid');
+                    $('#Discount').removeClass('is-invalid');
+                    checkError = false;
+                }
+            }
+        }
+        $('#Discount').keyup(() => {
+            errorDiscount();
+        });
+        $('#Discount').keydown(() => {
+            errorDiscount();
+        });
+
+        const errorImage = () => {
+            if ($('#Image').get(0).files.length == 0) {
+                $('#error_image').show();
+                $('#error_image').addClass('invalid-feedback');
+                $('#error_image').removeClass('valid-feedback');
+                $('#Image').addClass('is-invalid');
+                $('#error_image').text("Biểu tượng không được để trống");
+                checkError = true;
+            } else {
+                $('#error_image').hide();
+                $('#Image').addClass('is-valid');
+                $('#Image').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+
+        const Search = (page) => {
+            var txtSearch = $("#txtSearch").val();
+            if (txtSearch != "") {
+                LoadData(txtSearch, page)
+            }
+            else {
+                LoadData(null, page);
+            }
+        }
+        $('#txtSearch').keyup(() => {
+            Search(1);
+        });
+        $('#txtSearch').keydown(() => {
+            Search(1);
+        });
+    </script>
+}

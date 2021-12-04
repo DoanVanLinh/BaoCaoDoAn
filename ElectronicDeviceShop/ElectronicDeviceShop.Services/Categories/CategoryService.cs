@@ -54,6 +54,7 @@ namespace ElectronicDeviceShop.Services.Categories
             try
             {
                 var category = Mapper.Map<Category>(request);
+                category.Status = Status.Active;
                 this.unitOfWork.CategoryRepository.Update(category);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
