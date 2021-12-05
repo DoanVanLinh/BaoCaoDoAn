@@ -59,12 +59,12 @@ CREATE TABLE Accounts
 	ID_Account INT IDENTITY PRIMARY KEY,
 	UserName Varchar(255) UNIQUE NOT NULL,
 	[Password] Varchar(255) NOT NULL,
-	FullName NVARCHAR(255) NOT NULL,
+	FullName NVARCHAR(255) NULL,
 	Phone Char(20) NULL,
 	[Address] NVARCHAR(255) NULL,
 	Email Varchar(50) NULL,
 	Avatar NVARCHAR(255) NULL,
-	[Role] INT NOT NULL,
+	[Role] INT DEFAULT 2,--0:AD,1:NV,2:KH
 	[Status] INT DEFAULT 1,
 ) 
 GO
@@ -471,9 +471,9 @@ Một số tính năng khác
 GO
 
 INSERT INTO Accounts(UserName,[Password],FullName,Phone,[Address],Email,Avatar,[Role]) VALUES
-('Admin','Admin123456',N'Đoàn Văn Admin',123456789,N'Việt Nam','Admin@gmail.com',N'icons8_user_80px_1.png',1),
-('User','Admin123456',N'Đoàn Văn User',123456789,N'Việt Nam','User@gmail.com',N'icons8_user_80px_1.png',2),
-('Staff','Admin123456',N'Đoàn Văn Staff',123456789,N'Việt Nam','Staff@gmail.com',N'icons8_user_80px_1.png',3)
+('Admin','Admin123456',N'Đoàn Văn Admin',123456789,N'Việt Nam','Admin@gmail.com',N'icons8_user_80px_1.png',0),
+('User','User123456',N'Đoàn Văn User',123456789,N'Việt Nam','User@gmail.com',N'icons8_user_80px_1.png',2),
+('Staff','Staff123456',N'Đoàn Văn Staff',123456789,N'Việt Nam','Staff@gmail.com',N'icons8_user_80px_1.png',1)
 GO
 
 INSERT INTO Carts(ID_Product, ID_Account, Amount) VALUES

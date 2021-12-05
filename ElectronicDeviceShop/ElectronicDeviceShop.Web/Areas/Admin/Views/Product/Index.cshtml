@@ -66,54 +66,58 @@
                     <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body p-3 d-flex flex-column">
-                    <div class="rounded mx-auto d-block" style="background-image: url('#');height: 250px">
-                        <img src="https://kimnganadv.com/wp-content/uploads/2018/07/samsung-logo-png-blue-samsung-logo-png-1288-1641.png" alt="" class="rounded bg-light float-right p-1 m-3" width="100">
+                    <div class="text-center">
+                        <img class="img-fluid" id="image-detail" height="50%" width="50%" src="#" />
                     </div>
                     <div class="card-body p-0">
-                        <table class="table table-bordered" style="table-layout: fixed;">
+                        <table class="table table-bordered" style="table-layout: fixed;" id="product-detail">
                             <tr>
-                                <th class="col-3" tyle="word-wrap: break-word;">1</th>
-                                <td style="word-wrap: break-word;">MarMaMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkrkMarkMarkMarkMarkMarkMarkMarkMarkk</td>
+                                <th class="col-3" style="word-wrap: break-word;">Tên</th>
+                                <td style="word-wrap: break-word;" id="name-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">URL</th>
+                                <td style="word-wrap: break-word;" id="url-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Giá</th>
+                                <td style="word-wrap: break-word;" id="price-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Model</th>
+                                <td style="word-wrap: break-word;" id="model-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Số lượng</th>
+                                <td style="word-wrap: break-word;" id="amount-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Bảo hành</th>
+                                <td style="word-wrap: break-word;" id="guarantee-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Suất xứ</th>
+                                <td style="word-wrap: break-word;" id="origin-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Giảm giá</th>
+                                <td style="word-wrap: break-word;" id="discount-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Mô tả ngắn</th>
+                                <td style="word-wrap: break-word;" id="shortDescription-detail"></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word; ">Chi tiết</th>
+                                <td><div class="overflow-scroll" id="detail-detail" style="height:200px"></div></td>
                             </tr>
                             <tr>
-                                <th>1</th>
-                                <td>Mark</td>
+                                <th class="col-3" style="word-wrap: break-word;">Danh mục</th>
+                                <td style="word-wrap: break-word;" id="category-detail"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-3" style="word-wrap: break-word;">Nhà cung cấp</th>
+                                <td style="word-wrap: break-word;" id="supplier-detail"></td>
                             </tr>
                         </table>
                     </div>
@@ -136,6 +140,9 @@
     <script>
         var lastPage = 1;
         var pageCurrent = 1;
+        let formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
+        let money = new Intl.NumberFormat({ style: 'currency', currency: 'VND' });
+
         $(document).ready(function () {
             LoadData(null, 1);
             $("body").on("click", ".pagination li a", function (event) {
@@ -143,9 +150,28 @@
                 var page = $(this).attr('data-page');
                 Search(page);
             });
-
         });
+        function LoadSupCate() {
+            $.ajax({
+                url: "/Product/GetSupGetCate",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '';
+                    $.each(result.category, function (key, item) {
+                        html += '<option selected="" value="' + item.ID + '">' + item.Name + '</option>';
+                    });
+                    $('#Categories').html(html);
 
+                    html = '';
+                    $.each(result.supplier, function (key, item) {
+                        html += '<option selected="" value="' + item.ID + '">' + item.Name + '</option>';
+                    });
+                    $('#Suppliers').html(html);
+                }
+            });
+        }
         function LoadData(txtSearch, page) {
             $.ajax({
                 url: "/Product/GetAll",
@@ -162,7 +188,7 @@
                         html += '<tr>';
                         html += '<td class="align-middle">' + ((result.pageCurrent - 1) * result.pageSize + count) + '</td>';
                         html += '<td class="align-middle">' + item.Name + '</td>';
-                        html += '<td class="align-middle">' + item.Price + '</td>';
+                        html += '<td class="align-middle">' + formatter.format(item.Price) + '</td>';
                         html += '<td class="align-middle">' + item.Amount + '</td>';
                         html += '<td class="align-middle">' + item.Origin + '</td>';
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
@@ -262,9 +288,19 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#name-detail').text(result.Name);
-                    $('#url-detail').text(result.UrlSlug);
-                    $("#icon-detail").attr("src", '/wwwroot/ImageProducts/' + result.Image);
+                    $('#name-detail').text(result.product.Name);
+                    $('#url-detail').text(result.product.UrlSlug);
+                    $('#price-detail').text(result.product.Price);
+                    $('#model-detail').text(result.product.Model);
+                    $('#amount-detail').text(result.product.Amount);
+                    $('#guarantee-detail').text(result.product.Guarantee);
+                    $('#origin-detail').text(result.product.Origin);
+                    $('#discount-detail').text(result.product.Discount);
+                    $('#shortDescription-detail').text(result.product.ShortDescription);
+                    $('#detail-detail').text(result.product.Detail);
+                    $('#supplier-detail').text(result.supplier);
+                    $('#category-detail').text(result.category);
+                    $("#image-detail").attr("src", '/wwwroot/ImageProducts/' + result.product.Image);
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
@@ -282,25 +318,26 @@
 
             if (checkError)
                 return;
-
             var fileData = GetImage();
-            let supplier = {};
-            supplier["Name"] = $('#Name').val();
-            supplier["UrlSlug"] = $('#UrlSlug').val();
-            supplier["Price"] = $('#Price').val();
-            supplier["Model"] = $('#Model').val();
-            supplier["Amount"] = $('#Amount').val();
-            supplier["Guarantee"] = $('#Guarantee').val();
-            supplier["Origin"] = $('#Origin').val();
-            supplier["Discount"] = $('#Discount').val();
-            supplier["ShortDescription"] = $('#ShortDescription').val();
-            supplier["Detail"] = $('#Detail').val();
-            supplier["Image"] = fileData.get(0);
-            supplier["Status"] = 1;
+            let product = {};
+            product["Name"] = $('#Name').val();
+            product["UrlSlug"] = $('#UrlSlug').val();
+            product["Price"] = parseInt($('#Price').val());
+            product["Model"] = $('#Model').val();
+            product["Amount"] = parseInt($('#Amount').val());
+            product["Guarantee"] = parseInt($('#Guarantee').val());
+            product["Origin"] = $('#Origin').val();
+            product["Discount"] = parseInt($('#Discount').val());
+            product["ShortDescription"] = $('#ShortDescription').val();
+            product["Detail"] = $('#Detail').val();
+            product["ID_Category"] = parseInt($('#Categories').val());
+            product["ID_Supplier"] = parseInt($('#Suppliers').val());
+            product["Image"] = fileData.get(0);
+            product["Status"] = 1;
 
             $.ajax({
                 url: "/Product/Create",
-                data: JSON.stringify(supplier),
+                data: JSON.stringify(product),
                 type: "POST",
                 processData: false,
                 contentType: "application/json;charset=utf-8",
@@ -310,7 +347,6 @@
                         $('#modal-add-edit').modal('hide');
                         UploadImage();
                         Search(lastPage + 1);
-                        $('#modal-add').modal('hide');
                         toastr.success('Thêm thành công!');
                     }
                     else {
@@ -328,24 +364,26 @@
         function GetById(ID) {
             id = ID;
             ClearValidation();
-
+            LoadSupCate();
             $.ajax({
                 url: "/Product/GetById/" + ID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#Name').val(result.Name);
-                    $('#UrlSlug').val(result.UrlSlug);
-                    $('#Price').val(result.Price);
-                    $('#Model').val(result.Model);
-                    $('#Amount').val(result.Amount);
-                    $('#Guarantee').val(result.Guarantee);
-                    $('#Origin').val(result.Origin);
-                    $('#Discount').val(result.Discount);
-                    $('#ShortDescription').val(result.ShortDescription);
-                    $('#Detail').val(result.Detail);
-                    $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Image);
+                    $('#Name').val(result.product.Name);
+                    $('#UrlSlug').val(result.product.UrlSlug);
+                    $('#Price').val(result.product.Price);
+                    $('#Model').val(result.product.Model);
+                    $('#Amount').val(result.product.Amount);
+                    $('#Guarantee').val(result.product.Guarantee);
+                    $('#Origin').val(result.product.Origin);
+                    $('#Discount').val(result.product.Discount);
+                    $('#ShortDescription').val(result.product.ShortDescription);
+                    $('#Detail').val(result.product.Detail);
+                    $('#Categories').val(result.product.ID_Category);
+                    $('#Suppliers').val(result.product.ID_Supplier);
+                    $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.product.Image);
                     $('#Add').hide();
                     $('#Edit').show();
                 },
@@ -366,26 +404,28 @@
                 return;
 
             var fileData = GetImage();
-            let supplier = {};
-            supplier["ID_Product"] = id;
-            supplier["Name"] = $('#Name').val();
-            supplier["UrlSlug"] = $('#UrlSlug').val();
-            supplier["Price"] = $('#Price').val();
-            supplier["Model"] = $('#Model').val();
-            supplier["Amount"] = $('#Amount').val();
-            supplier["Guarantee"] = $('#Guarantee').val();
-            supplier["Origin"] = $('#Origin').val();
-            supplier["Discount"] = $('#Discount').val();
-            supplier["ShortDescription"] = $('#ShortDescription').val();
-            supplier["Detail"] = $('#Detail').val();
+            let product = {};
+            product["ID_Product"] = id;
+            product["Name"] = $('#Name').val();
+            product["UrlSlug"] = $('#UrlSlug').val();
+            product["Price"] = parseInt($('#Price').val());
+            product["Model"] = $('#Model').val();
+            product["Amount"] = parseInt($('#Amount').val());
+            product["Guarantee"] = parseInt($('#Guarantee').val());
+            product["Origin"] = $('#Origin').val();
+            product["Discount"] = parseInt($('#Discount').val());
+            product["ShortDescription"] = $('#ShortDescription').val();
+            product["Detail"] = $('#Detail').val();
+            product["ID_Category"] = parseInt($('#Categories').val());
+            product["ID_Supplier"] = parseInt($('#Suppliers').val());
             if ($("#Image").get(0).files.length != 0)
-                supplier["Image"] = fileData.get(0);
+                product["Image"] = fileData.get(0);
             else
-                supplier["Image"] = $("#imgPreview").attr('src').split('/')[3];
+                product["Image"] = $("#imgPreview").attr('src').split('/')[3];
 
             $.ajax({
                 url: "/Product/Edit",
-                data: JSON.stringify(supplier),
+                data: JSON.stringify(product),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -439,6 +479,7 @@
             $('#Add').show();
             $('#Status').show();
             ClearValidation();
+            LoadSupCate();
         }
         function ClearValidation() {
             $('#Name').removeClass('is-invalid');
@@ -647,7 +688,7 @@
         });
 
         const errorDiscount = () => {
-            if ($('#Discount').val() != '' && numberRegex.test($('#Discount').val()) == false) {
+            if (numberRegex.test($('#Discount').val()) == false) {
                 $('#error_discount').show();
                 $('#error_discount').addClass('invalid-feedback');
                 $('#error_discount').removeClass('valid-feedback');
@@ -655,7 +696,7 @@
                 $('#error_discount').text("Không đúng định dạng!");
                 checkError = true;
             }
-            else if ($('#Discount').val() < 0 || $('#Discount').val() > 100) {
+            else if ($('#Discount').val() == '' || $('#Discount').val() < 0 || $('#Discount').val() > 100) {
                 $('#error_discount').show();
                 $('#error_discount').addClass('invalid-feedback');
                 $('#error_discount').removeClass('valid-feedback');

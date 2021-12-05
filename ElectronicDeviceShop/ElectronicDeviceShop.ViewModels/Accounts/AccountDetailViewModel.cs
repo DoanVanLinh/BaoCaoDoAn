@@ -33,6 +33,6 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
         public string Avatar { get; set; }
 
         [Display(Name = "Vai trò")]
-        public short Role { get; set; }
+        public int Role { get; set; }
     }
 }

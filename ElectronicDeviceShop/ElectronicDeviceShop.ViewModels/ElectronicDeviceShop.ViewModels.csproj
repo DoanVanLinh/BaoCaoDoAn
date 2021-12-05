@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Accounts\AccountViewModel.cs" />
     <Compile Include="Accounts\CreateAccountViewModel.cs" />
-    <Compile Include="Accounts\ChangeStatusAccountViewModel.cs" />
+    <Compile Include="Accounts\DeleteAccountViewModel.cs" />
     <Compile Include="Accounts\EditAccountViewModel.cs" />
     <Compile Include="Accounts\AccountDetailViewModel.cs" />
     <Compile Include="Bills\BillDetailViewModel.cs" />

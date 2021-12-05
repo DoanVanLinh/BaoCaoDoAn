@@ -32,7 +32,7 @@ namespace ElectronicDeviceShop.ViewModels.Products
         [Required(ErrorMessage = "Không được để trống")]
         [Column(TypeName = "money")]
         [Display(Name = "Giá")]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         [StringLength(255)]
@@ -40,13 +40,11 @@ namespace ElectronicDeviceShop.ViewModels.Products
         public string Model { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        [StringLength(255)]
         [Display(Name = "Số lượng")]
         [Range(1, Int32.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0!")]
         public int Amount { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        [StringLength(255)]
         [Display(Name = "Bảo hành")]
         [Range(1, Int32.MaxValue, ErrorMessage = "Số năm phải lớn hơn 0!")]
         public int Guarantee { get; set; }
@@ -57,7 +55,7 @@ namespace ElectronicDeviceShop.ViewModels.Products
 
         [Display(Name = "Khuyến mãi")]
         [Range(0, 100, ErrorMessage = "Khuyến mãi từ 0% - 100%!")]
-        public short? Discount { get; set; }
+        public int Discount { get; set; }
 
         [Display(Name = "Mô tả ngắn")]
         [Column(TypeName = "ntext")]

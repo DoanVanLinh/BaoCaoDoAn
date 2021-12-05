@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\AccountService.cs" />
+    <Compile Include="Accounts\IAccountService.cs" />
     <Compile Include="Categories\ICategoryService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Class1.cs" />
@@ -93,7 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Accounts\" />
     <Folder Include="Bills\" />
     <Folder Include="Carts\" />
   </ItemGroup>

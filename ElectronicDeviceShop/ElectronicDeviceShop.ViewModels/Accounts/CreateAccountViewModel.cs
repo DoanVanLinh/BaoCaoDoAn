@@ -48,6 +48,6 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
 
         [Required(ErrorMessage = "Không được để trống")]
         [Display(Name = "Vai trò")]
-        public short Role { get; set; }
+        public int Role { get; set; }
     }
 }

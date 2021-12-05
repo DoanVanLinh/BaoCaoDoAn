@@ -231,15 +231,15 @@
                 return;
 
             var fileData = GetImage();
-            let supplier = {};
-            supplier["Name"] = $('#Name').val();
-            supplier["UrlSlug"] = $('#UrlSlug').val();
-            supplier["Icon"] = fileData.get(0);
-            supplier["Status"] =true ;
+            let category = {};
+            category["Name"] = $('#Name').val();
+            category["UrlSlug"] = $('#UrlSlug').val();
+            category["Icon"] = fileData.get(0);
+            category["Status"] = 1;
 
             $.ajax({
                 url: "/Category/Create",
-                data: JSON.stringify(supplier),
+                data: JSON.stringify(category),
                 type: "POST",
                 processData: false,
                 contentType: "application/json;charset=utf-8",
@@ -292,18 +292,18 @@
                 return;
 
             var fileData = GetImage();
-            let supplier = {};
-            supplier["ID_Category"] = id;
-            supplier["Name"] = $('#Name').val();
-            supplier["UrlSlug"] = $('#UrlSlug').val();
+            let category = {};
+            category["ID_Category"] = id;
+            category["Name"] = $('#Name').val();
+            category["UrlSlug"] = $('#UrlSlug').val();
             if ($("#Icon").get(0).files.length != 0)
-                supplier["Icon"] = fileData.get(0);
+                category["Icon"] = fileData.get(0);
             else
-                supplier["Icon"] = $("#imgPreview").attr('src').split('/')[3];
+                category["Icon"] = $("#imgPreview").attr('src').split('/')[3];
 
             $.ajax({
                 url: "/Category/Edit",
-                data: JSON.stringify(supplier),
+                data: JSON.stringify(category),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",

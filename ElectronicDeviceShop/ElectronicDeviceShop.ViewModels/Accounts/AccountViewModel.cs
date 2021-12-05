@@ -14,9 +14,6 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
         [Display(Name = "Tên tài khoản")]
         public string UserName { get; set; }
 
-        [Display(Name = "Họ và tên")]
-        public string FullName { get; set; }
-
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -24,6 +21,6 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
         public string Avatar { get; set; }
 
         [Display(Name = "Vai trò")]
-        public short Role { get; set; }
+        public int Role { get; set; }
     }
 }
