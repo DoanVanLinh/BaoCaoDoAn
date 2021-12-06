@@ -27,7 +27,6 @@ namespace ElectronicDeviceShop.Models
         [StringLength(255)]
         public string Password { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string FullName { get; set; }
 
@@ -43,7 +42,7 @@ namespace ElectronicDeviceShop.Models
         [StringLength(255)]
         public string Avatar { get; set; }
 
-        public short Role { get; set; }
+        public int Role { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }

@@ -43,7 +43,7 @@
                 <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top">
                     <div class="dataTables_info" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-                        <ul class="pagination-light">
+                        <ul class="pagination">
                             @*PAGINATION*@
                         </ul>
                     </div>
@@ -52,8 +52,8 @@
         </div>
     </div>
     <!-- End Default Light Table -->
-    <!-- Default Dark Table -->
-    <div class="row ">
+    <!--<!-- Default Dark Table -->
+    <!--<div class="row ">
         <div class="col ">
             <div class="card card-small overflow-hidden mb-4 ">
                 <div class="card-header bg-dark row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
@@ -65,29 +65,29 @@
                         <thead class="thead-dark ">
                             <tr>
                                 <th class="border-0">#</th>
-                                <th class="border-0">@Html.DisplayNameFor(model => model.UserName)</th>
-                                <th class="border-0">@Html.DisplayNameFor(model => model.Email)</th>
-                                <th class="border-0">@Html.DisplayNameFor(model => model.Role)</th>
-                                <th class="border-0">@Html.DisplayNameFor(model => model.Avatar)</th>
+                                <th class="border-0"></th>
+                                <th class="border-0"></th>
+                                <th class="border-0"></th>
+                                <th class="border-0"></th>
                                 <th class="border-0">Chức năng</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody-dark">
+                        <tbody class="tbody-dark">-->
                             @*DATA*@
-                        </tbody>
+                        <!--</tbody>
                     </table>
                 </div>
                 <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
                     <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
                     <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-                        <ul class="pagination-dark">
+                        <ul class="pagination-dark">-->
                             @*Pagination*@
-                        </ul>
+                        @*</ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->*@
     <!-- End Default Dark Table -->
 </div>
 <!-- Modal -->
@@ -102,54 +102,34 @@
                 <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body p-3 d-flex flex-column">
-                <div class="rounded" style="background-image: url('images/content-management/1.jpeg');height: 250px">
-                    <img src="https://kimnganadv.com/wp-content/uploads/2018/07/samsung-logo-png-blue-samsung-logo-png-1288-1641.png" alt="" class="rounded bg-light float-right p-1 m-3" width="100">
+                <div class="text-center">
+                    <img class="img-fluid" id="avatar-detail" height="50%" width="50%" src="#" />
                 </div>
                 <div class="card-body p-0">
-                    <table class="table table-bordered" style="table-layout: fixed;">
+                    <table class="table table-bordered" style="table-layout: fixed;" id="product-detail">
                         <tr>
-                            <th class="col-3" tyle="word-wrap: break-word;">1</th>
-                            <td style="word-wrap: break-word;">MarMaMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkMarMarkMarkMarkMarkMarkMarkMarkMarkMarkkrkMarkMarkMarkMarkMarkMarkMarkMarkk</td>
+                            <th class="col-3" style="word-wrap: break-word;">Tên tài khoản</th>
+                            <td style="word-wrap: break-word;" id="userName-detail"></td>
                         </tr>
                         <tr>
-                            <th>1</th>
-                            <td>Mark</td>
+                            <th class="col-3" style="word-wrap: break-word;">Họ và tên</th>
+                            <td style="word-wrap: break-word;" id="fullName-detail"></td>
                         </tr>
                         <tr>
-                            <th>1</th>
-                            <td>Mark</td>
+                            <th class="col-3" style="word-wrap: break-word;">SĐT</th>
+                            <td style="word-wrap: break-word;" id="phone-detail"></td>
                         </tr>
                         <tr>
-                            <th>1</th>
-                            <td>Mark</td>
+                            <th class="col-3" style="word-wrap: break-word;">Địa chỉ</th>
+                            <td style="word-wrap: break-word;" id="address-detail"></td>
                         </tr>
                         <tr>
-                            <th>1</th>
-                            <td>Mark</td>
+                            <th class="col-3" style="word-wrap: break-word;">Email</th>
+                            <td style="word-wrap: break-word;" id="email-detail"></td>
                         </tr>
                         <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
+                            <th class="col-3" style="word-wrap: break-word;">Vai trò</th>
+                            <td style="word-wrap: break-word;" id="role-detail"></td>
                         </tr>
                     </table>
                 </div>
@@ -173,14 +153,25 @@
         var pageCurrent = 1;
         $(document).ready(function () {
             LoadData(null, 1);
-            $("body").on("click", ".pagination-light li a", function (event) {
+            $("body").on("click", ".pagination li a", function (event) {
                 event.preventDefault();
                 var page = $(this).attr('data-page');
                 Search(page);
             });
 
         });
-
+        function GetRole(role) {
+            switch (role) {
+                case 0:
+                    return "Admin";
+                case 1:
+                    return "Nhân viên";
+                case 2:
+                    return "Khách hàng";
+                default:
+                    return "";
+            }
+        }
         function LoadData(txtSearch, page) {
             $.ajax({
                 url: "/Account/GetAll",
@@ -192,19 +183,8 @@
                     var count = 0;
                     var html = '';
                     $.each(result.data, function (key, item) {
-                        var ROLE = "";
-                        switch (item.Role) {
-                            case 0:
-                                ROLE = "Admin";
-                                break;
-                            case 1:
-                                ROLE = "Nhân viên";
-                                break;
-                            case 2:
-                                ROLE = "Khách hàng";
-                                break;
-                            default:
-                        }
+                        var ROLE = GetRole(item.Role);
+
                         imgPath = '/wwwroot/ImageProducts/' + item.Avatar;
                         count++;
                         html += '<tr>';
@@ -249,7 +229,7 @@
                         var pageNext = pageCurrent + 1;
                         pagination_string += '<li class="page-item"><a href="" class="page-link"  data-page=' + pageNext + '>Next</a></li>';
                     }
-                    $(".pagination-light").html(pagination_string);
+                    $(".pagination").html(pagination_string);
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
@@ -309,8 +289,12 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#name-detail').text(result.Name);
-                    $('#url-detail').text(result.UrlSlug);
+                    $('#userName-detail').text(result.UserName);
+                    $('#fullName-detail').text(result.FullName);
+                    $('#phone-detail').text(result.Phone);
+                    $('#address-detail').text(result.Address);
+                    $('#email-detail').text(result.Email);
+                    $('#role-detail').text(GetRole(result.Role))
                     $("#avatar-detail").attr("src", '/wwwroot/ImageProducts/' + result.Avatar);
                 },
                 error: function (errormessage) {
@@ -319,7 +303,10 @@
             });
         }
         function Add() {
-            errorName();
+            errorUserName();
+            errorPassword();
+            errorEmail();
+            errorPhone();
             errorAvatar();
 
             if (checkError)
@@ -327,8 +314,13 @@
 
             var fileData = GetImage();
             let account = {};
-            account["Name"] = $('#Name').val();
-            account["UrlSlug"] = $('#UrlSlug').val();
+            account["UserName"] = $('#UserName').val();
+            account["Password"] = $('#Password').val();
+            account["FullName"] = $('#FullName').val();
+            account["Phone"] = $('#Phone').val();
+            account["Address"] = $('#Address').val();
+            account["Email"] = $('#Email').val();
+            account["Role"] = $('#Role').val();
             account["Avatar"] = fileData.get(0);
             account["Status"] = 1;
 
@@ -369,8 +361,14 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#Name').val(result.Name);
-                    $('#UrlSlug').val(result.UrlSlug);
+                    $('#UserName').val(result.UserName);
+                    $('#UserName').attr("disabled", "disabled");
+                    $('#FullName').val(result.FullName);
+                    $('#Password').val(result.Password);
+                    $('#Phone').val(result.Phone);
+                    $('#Address').val(result.Address);
+                    $('#Email').val(result.Email);
+                    $('#Role').val(result.Role);
                     $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Avatar);
                     $('#Add').hide();
                     $('#Edit').show();
@@ -382,15 +380,23 @@
             return false;
         }
         function Edit() {
-            errorName();
+            errorUserName();
+            errorPassword();
+            errorPhone();
+            errorEmail();
             if (checkError)
                 return;
 
             var fileData = GetImage();
             let account = {};
             account["ID_Account"] = id;
-            account["Name"] = $('#Name').val();
-            account["UrlSlug"] = $('#UrlSlug').val();
+            account["UserName"] = $('#UserName').val();
+            account["Password"] = $('#Password').val();
+            account["FullName"] = $('#FullName').val();
+            account["Phone"] = $('#Phone').val();
+            account["Address"] = $('#Address').val();
+            account["Email"] = $('#Email').val();
+            account["Role"] = $('#Role').val();
             if ($("#Avatar").get(0).files.length != 0)
                 account["Avatar"] = fileData.get(0);
             else
@@ -438,56 +444,161 @@
             });
         }
         function ClearTextBox() {
-            $('#Name').val('');
-            $('#UrlSlug').val('');
+            $('#UserName').val('');
+            $('#UserName').removeAttr("disabled");
+            $('#Password').val('');
+            $('#FullName').val('');
+            $('#Phone').val('');
+            $('#Address').val('');
+            $('#Email').val('');
+            $('#Role').val(2);
             $('#Edit').hide();
             $('#Add').show();
             $('#Status').show();
+
             ClearValidation();
         }
         function ClearValidation() {
-            $('#Name').removeClass('is-invalid');
-            $('#Name').removeClass('is-valid');
+            $('#UserName').removeClass('is-invalid');
+            $('#UserName').removeClass('is-valid');
+            $('#Password').removeClass('is-invalid');
+            $('#Password').removeClass('is-valid');
             $('#Avatar').removeClass('is-invalid');
             $('#Avatar').removeClass('is-valid');
-            $("#imgPreview").attr("src", '/wwwroot/ImageProducts/no-image-avatar-0.jpg');
-            $('#error_name').hide();
+            $("#imgPreview").attr("src", '/wwwroot/ImageProducts/no-image-icon-0.jpg');
+            $('#error_userName').hide();
+            $('#error_password').hide();
             $('#error_avatar').hide();
         }
-        Avatar.onchange = evt => {
-            const [file] = Avatar.files;
+        $('#Avatar').change(function () {
+            const [file] = $('#Avatar').get(0).files;
             if (file) {
                 imgPreview.src = URL.createObjectURL(file);
             } else {
-                imgPreview.src = '/wwwroot/ImageProducts/no-image-avatar-0.jpg';
+                imgPreview.src = '/wwwroot/ImageProducts/no-image-icon-0.jpg';
             }
             errorAvatar();
+        });
+        function ResetPassword() {
+            $('#Password').val('abcd1234!');
+            errorPassword();
         }
-
         //Validations
+        let passwordRegex = /^\w.{8,}$/;
+        let phoneRegex = /^[0-9]{10}$/;
+        let emailRegex = /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         let checkError = false;
-        const errorName = () => {
-            if ($('#Name').val() == '') {
-                $('#error_name').show();
-                $('#error_name').addClass('invalid-feedback');
-                $('#error_name').removeClass('valid-feedback');
-                $('#Name').addClass('is-invalid');
-                $('#error_name').text("Tên không được để trống!");
+        const errorUserName = () => {
+            if ($('#UserName').val() == '') {
+                $('#error_userName').show();
+                $('#error_userName').addClass('invalid-feedback');
+                $('#error_userName').removeClass('valid-feedback');
+                $('#UserName').addClass('is-invalid');
+                $('#error_userName').text("Tên không được để trống!");
                 checkError = true;
             } else {
-                $('#error_name').hide();
-                $('#Name').addClass('is-valid');
-                $('#Name').removeClass('is-invalid');
+                $('#error_userName').hide();
+                $('#UserName').addClass('is-valid');
+                $('#UserName').removeClass('is-invalid');
                 checkError = false;
             }
         }
-        $('#Name').keyup(() => {
-            errorName();
-            changeUrl('Name', 'UrlSlug')
+        $('#UserName').keyup(() => {
+            errorUserName();
         });
-        $('#Name').keydown(() => {
-            errorName();
-            changeUrl('Name', 'UrlSlug')
+        $('#UserName').keydown(() => {
+            errorUserName();
+        });
+        const errorPassword = () => {
+            if ($('#Password').val() == '') {
+                $('#error_password').show();
+                $('#error_password').addClass('invalid-feedback');
+                $('#error_password').removeClass('valid-feedback');
+                $('#Password').addClass('is-invalid');
+                $('#error_password').text("Mật khẩu không được để trống!");
+                checkError = true;
+            }
+            else if ($('#Password').val().length < 8 ) {
+                $('#error_password').show();
+                $('#error_password').addClass('invalid-feedback');
+                $('#error_password').removeClass('valid-feedback');
+                $('#Password').addClass('is-invalid');
+                $('#error_password').text("Mật khẩu dài hơn 8 kí tự!");
+                checkError = true;
+            }
+            else if (!passwordRegex.test($('#Password').val())) {
+                $('#error_password').show();
+                $('#error_password').addClass('invalid-feedback');
+                $('#error_password').removeClass('valid-feedback');
+                $('#Password').addClass('is-invalid');
+                $('#error_password').text("Mật khẩu có chữ, số và kí tự!");
+                checkError = true;
+            }
+            else {
+                $('#error_password').hide();
+                $('#Password').addClass('is-valid');
+                $('#Password').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Password').keyup(() => {
+            errorPassword();
+        });
+        $('#Password').keydown(() => {
+            errorPassword();
+        });
+
+        const errorEmail = () => {
+            if ($('#Email').val() != '' && !emailRegex.test($('#Email').val())) {
+                $('#error_email').show();
+                $('#error_email').addClass('invalid-feedback');
+                $('#error_email').removeClass('valid-feedback');
+                $('#Email').addClass('is-invalid');
+                $('#error_email').text("Email không đúng định dạng!");
+                checkError = true;
+            } else if ($('#Email').val() != ''){
+                $('#error_email').hide();
+                $('#Email').addClass('is-valid');
+                $('#Email').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Email').keyup(() => {
+            errorEmail();
+        });
+        $('#Email').keydown(() => {
+            errorEmail();
+        });
+        const errorPhone = () => {
+            if ($('#Phone').val() != '' && $('#Phone').val().length != 10)
+            {
+                $('#error_phone').show();
+                $('#error_phone').addClass('invalid-feedback');
+                $('#error_phone').removeClass('valid-feedback');
+                $('#Phone').addClass('is-invalid');
+                $('#error_phone').text("SĐT có 10 số!");
+                checkError = true;
+            }
+            else if ($('#Phone').val() != '' && !phoneRegex.test($('#Phone').val())) {
+                $('#error_phone').show();
+                $('#error_phone').addClass('invalid-feedback');
+                $('#error_phone').removeClass('valid-feedback');
+                $('#Phone').addClass('is-invalid');
+                $('#error_phone').text("SĐT không đúng định dạng!");
+                checkError = true;
+            } else if ($('#Phone').val() != ''){
+                $('#error_phone').hide();
+                $('#Phone').addClass('is-valid');
+                $('#Phone').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#Phone').keyup(() => {
+            errorPhone();
+        });
+        $('#Phone').keydown(() => {
+            errorPhone();
         });
         const errorAvatar = () => {
             if ($('#Avatar').get(0).files.length == 0) {
@@ -495,7 +606,7 @@
                 $('#error_avatar').addClass('invalid-feedback');
                 $('#error_avatar').removeClass('valid-feedback');
                 $('#Avatar').addClass('is-invalid');
-                $('#error_avatar').text("Biểu tượng không được để trống");
+                $('#error_avatar').text("Ảnh dại diện không được để trống");
                 checkError = true;
             } else {
                 $('#error_avatar').hide();

@@ -23,8 +23,8 @@ namespace ElectronicDeviceShop.Services.Accounts
         {
             try
             {
-                var category = Mapper.Map<Account>(request);
-                this.unitOfWork.AccountRepository.Add(category);
+                var account = Mapper.Map<Account>(request);
+                this.unitOfWork.AccountRepository.Add(account);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }
@@ -38,8 +38,8 @@ namespace ElectronicDeviceShop.Services.Accounts
         {
             try
             {
-                var category = Mapper.Map<Account>(request);
-                this.unitOfWork.AccountRepository.Delete(category.ID_Account);
+                var account = Mapper.Map<Account>(request);
+                this.unitOfWork.AccountRepository.Delete(account.ID_Account);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }
@@ -53,9 +53,9 @@ namespace ElectronicDeviceShop.Services.Accounts
         {
             try
             {
-                var category = Mapper.Map<Account>(request);
-                category.Status = Status.Active;
-                this.unitOfWork.AccountRepository.Update(category);
+                var account = Mapper.Map<Account>(request);
+                account.Status = Status.Active;
+                this.unitOfWork.AccountRepository.Update(account);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }
@@ -67,24 +67,24 @@ namespace ElectronicDeviceShop.Services.Accounts
 
         public IEnumerable<AccountViewModel> GetAll()
         {
-            var categorys = this.unitOfWork.AccountRepository.GetAll().Where(p => p.Status != Status.IsDeleted);
-            return Mapper.Map<IEnumerable<AccountViewModel>>(categorys);
+            var accounts = this.unitOfWork.AccountRepository.GetAll().Where(p => p.Status != Status.IsDeleted);
+            return Mapper.Map<IEnumerable<AccountViewModel>>(accounts);
         }
 
         public EditAccountViewModel GetEditAccountById(int id)
         {
-            var category = unitOfWork.AccountRepository.GetById(id);
-            return Mapper.Map<EditAccountViewModel>(category);
+            var account = unitOfWork.AccountRepository.GetById(id);
+            return Mapper.Map<EditAccountViewModel>(account);
         }
         public DeleteAccountViewModel GetDeleteAccountById(int id)
         {
-            var category = unitOfWork.AccountRepository.GetById(id);
-            return Mapper.Map<DeleteAccountViewModel>(category);
+            var account = unitOfWork.AccountRepository.GetById(id);
+            return Mapper.Map<DeleteAccountViewModel>(account);
         }
         public AccountDetailViewModel GetDetailAccountById(int id)
         {
-            var category = unitOfWork.AccountRepository.GetById(id);
-            return Mapper.Map<AccountDetailViewModel>(category);
+            var account = unitOfWork.AccountRepository.GetById(id);
+            return Mapper.Map<AccountDetailViewModel>(account);
         }
     }
 }

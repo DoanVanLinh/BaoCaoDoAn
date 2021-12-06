@@ -30,7 +30,8 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             if (!String.IsNullOrEmpty(txtSearch))
             {
                 ViewBag.txtSearch = txtSearch;
-                accounts = accounts.Where(s => s.UserName.ToLower().Contains(txtSearch.ToLower()));
+                accounts = accounts.Where(s => s.UserName.ToLower().Contains(txtSearch.ToLower()) ||
+                                                s.Email.ToLower().Contains(txtSearch.ToLower()));
             }
 
             if (page <= 0)
@@ -67,6 +68,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         public ActionResult Edit(EditAccountViewModel account)
         {
             var response = accountService.Edit(account);
+
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicDeviceShop.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,22 +22,18 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(255)]
         [Display(Name = "Họ và tên")]
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(10)]
         [Display(Name = "Số điện thoại")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(255)]
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(255)]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -49,5 +46,7 @@ namespace ElectronicDeviceShop.ViewModels.Accounts
         [Required(ErrorMessage = "Không được để trống")]
         [Display(Name = "Vai trò")]
         public int Role { get; set; }
+        public Status Status { get; set; }
+
     }
 }
