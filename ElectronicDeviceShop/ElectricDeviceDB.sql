@@ -483,19 +483,34 @@ INSERT INTO Carts(ID_Product, ID_Account, Amount) VALUES
 (2,2,4)
 GO
 
-INSERT INTO Bills(ID_Account, ReceiverName, ReceiverAddress, ReceiverEmail, ReceiverPhone, Note, PayType, BuyDate) VALUES
-(2, N'Nguyễn Văn Mua', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021'),
-(2, N'Nguyễn Văn Mua 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021'),
-(2, N'Nguyễn Văn Mua 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021')
+INSERT INTO Bills(ID_Account, ReceiverName, ReceiverAddress, ReceiverEmail, ReceiverPhone, Note, PayType, BuyDate,[Status]) VALUES
+(2, N'Nguyễn Văn Mua Test', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',2),
+(2, N'Nguyễn Văn Mua 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021',2),
+(2, N'Nguyễn Văn Mua 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',2),
+(2, N'Nguyễn Văn', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',2),
+(2, N'Nguyễn Văn 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021',2),
+(2, N'Nguyễn Văn 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',2),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
+(2, N'Nguyễn Văn Mua 6', N'Hải Dương 6', 'Mua6@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',4),
+(2, N'Nguyễn Văn Mua 7', N'Hải Dương 7', 'Mua7@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',4),
+(2, N'Nguyễn Văn Mua 8', N'Hải Dương 8', 'Mua8@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',5),
+(2, N'Nguyễn Văn Mua 9', N'Hải Dương 9', 'Mua9@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',5),
+(2, N'Nguyễn Văn Mua 8', N'Hải Dương 8', 'Mua8@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',6),
+(2, N'Nguyễn Văn Mua 9', N'Hải Dương 9', 'Mua9@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',6)
 GO
 
 INSERT INTO BillDetails(ID_Bill, ID_Product, Amount, CurrentlyPrice) VALUES
 (1, 16, 16, 1234567),
-(2, 6, 6, 78532),
-(2, 20, 2, 7865),
-(3, 32, 16, 13105),
-(3, 11, 16, 3150450),
-(3, 23, 16, 570453)
+(1, 6, 6, 78532),
+(1, 20, 2, 7865),
+(1, 32, 16, 13105),
+(1, 11, 16, 3150450),
+(1, 23, 16, 570453)
 GO
 
 SELECT * FROM Categories

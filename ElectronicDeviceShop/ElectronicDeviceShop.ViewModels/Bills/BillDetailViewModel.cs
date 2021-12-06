@@ -38,6 +38,5 @@ namespace ElectronicDeviceShop.ViewModels.Bills
         [Display(Name = "Ngày mua")]
         public DateTime BuyDate { get; set; }
 
-        public virtual Account Account { get; set; }
     }
 }

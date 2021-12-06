@@ -58,7 +58,7 @@
     <Compile Include="Accounts\AccountDetailViewModel.cs" />
     <Compile Include="Bills\BillDetailViewModel.cs" />
     <Compile Include="Bills\BillViewModel.cs" />
-    <Compile Include="Bills\ChangeStatusBillViewModel.cs" />
+    <Compile Include="Bills\EditBillViewModel.cs" />
     <Compile Include="Carts\CreateCartViewModel.cs" />
     <Compile Include="Carts\DeleteCartViewModel.cs" />
     <Compile Include="Carts\EditCartViewModel.cs" />

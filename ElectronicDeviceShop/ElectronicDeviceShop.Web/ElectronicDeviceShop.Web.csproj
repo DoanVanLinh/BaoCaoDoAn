@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CreateBillViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticController.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.css" />
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.min.css" />
     <Content Include="Areas\Admin\Assets\css\style.css" />
+    <Content Include="Areas\Admin\Assets\js\date.js" />
     <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.js" />
     <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.min.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.dataTables.js" />

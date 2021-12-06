@@ -44,12 +44,10 @@ namespace ElectronicDeviceShop.Models
         [StringLength(255)]
         public string PayType { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime BuyDate { get; set; }
 
         public virtual Account Account { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillDetail> BillDetails { get; set; }
     }
 }

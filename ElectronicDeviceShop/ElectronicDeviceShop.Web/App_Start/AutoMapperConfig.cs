@@ -24,7 +24,7 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<AccountDetailViewModel, Account>().ReverseMap();
 
             CreateMap<BillViewModel, Bill>().ReverseMap();
-            CreateMap<ChangeStatusBillViewModel, Bill>().ReverseMap();
+            CreateMap<EditBillViewModel, Bill>().ReverseMap();
             CreateMap<BillDetailViewModel, Bill>().ReverseMap();
 
             CreateMap<CreateCartViewModel, Cart>().ReverseMap();

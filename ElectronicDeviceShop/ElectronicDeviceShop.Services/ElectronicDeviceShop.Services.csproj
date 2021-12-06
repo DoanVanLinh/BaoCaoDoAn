@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="Accounts\AccountService.cs" />
     <Compile Include="Accounts\IAccountService.cs" />
+    <Compile Include="Bills\BillService.cs" />
+    <Compile Include="Bills\IBillService.cs" />
     <Compile Include="Categories\ICategoryService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Class1.cs" />
@@ -95,7 +97,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bills\" />
     <Folder Include="Carts\" />
   </ItemGroup>
   <ItemGroup>
