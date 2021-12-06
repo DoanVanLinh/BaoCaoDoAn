@@ -10,3 +10,15 @@ D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.dll
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.pdb
 D:\Desktop\BaoCaoDoAn\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csprojAssemblyReference.cache
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.dll.config
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.dll
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\ElectronicDeviceShop.Models.pdb
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.dll
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.xml
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.dll
+C:\Users\ADMIN\Desktop\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Models\obj\Debug\ElectronicDeviceShop.Models.pdb

@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="Accounts\AccountService.cs" />
     <Compile Include="Accounts\IAccountService.cs" />
+    <Compile Include="BillDetails\BillDetailService.cs" />
+    <Compile Include="BillDetails\IBillDetailService.cs" />
     <Compile Include="Bills\BillService.cs" />
     <Compile Include="Bills\IBillService.cs" />
     <Compile Include="Categories\ICategoryService.cs" />

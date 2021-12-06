@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ElectronicDeviceShop.Models;
 using ElectronicDeviceShop.ViewModels.Accounts;
+using ElectronicDeviceShop.ViewModels.BillDetails;
 using ElectronicDeviceShop.ViewModels.Bills;
 using ElectronicDeviceShop.ViewModels.Carts;
 using ElectronicDeviceShop.ViewModels.Categories;
@@ -50,6 +51,8 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<EditSupplierViewModel, Supplier>().ReverseMap();
             CreateMap<DeleteSupplierViewModel, Supplier>().ReverseMap();
             CreateMap<SupplierDetailViewModel, Supplier>().ReverseMap();
+
+            CreateMap<BillDetailDetailViewModel, BillDetail>().ReverseMap();
         }
     }
 }

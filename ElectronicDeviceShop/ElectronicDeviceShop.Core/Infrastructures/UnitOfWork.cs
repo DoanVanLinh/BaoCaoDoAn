@@ -18,6 +18,7 @@ namespace ElectronicDeviceShop.Core.Infrastructures
         private ICategoryRepository categoryRepository;
         private IProductRepository productRepository;
         private ISupplierRepository supplierRepository;
+        IBillDetailRepository billDetailRepository;
 
         public UnitOfWork(ElectronicDeviceShopContext context)
         {
@@ -92,6 +93,18 @@ namespace ElectronicDeviceShop.Core.Infrastructures
                     this.supplierRepository = new SupplierRepository(this.context);
                 }
                 return this.supplierRepository;
+
+            }
+        } 
+        public IBillDetailRepository BillDetailRepository
+        {
+            get
+            {
+                if (this.billDetailRepository == null)
+                {
+                    this.billDetailRepository = new BillDetailRepository(this.context);
+                }
+                return this.billDetailRepository;
 
             }
         }

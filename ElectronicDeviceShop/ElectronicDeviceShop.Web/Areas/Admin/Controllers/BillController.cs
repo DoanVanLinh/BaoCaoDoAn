@@ -1,6 +1,9 @@
 ﻿using ElectronicDeviceShop.Models.Enums;
+using ElectronicDeviceShop.Services.BillDetails;
 using ElectronicDeviceShop.Services.Bills;
+using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.ViewModels.Bills;
+using ElectronicDeviceShop.ViewModels.Products;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,49 +16,27 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
     public class BillController : Controller
     {
         private readonly IBillService billService;
+        private readonly IProductService productService;
+        private readonly IBillDetailService billDetailService;
         private readonly int pageSize = 4;
-        public BillController(IBillService billService)
+        public BillController(IBillService billService, IProductService productService, IBillDetailService billDetailService)
         {
             this.billService = billService;
+            this.billDetailService = billDetailService;
+            this.productService = productService;
         }
 
         public ActionResult Index()
         {
             return View();
         }
-        //public JsonResult GetAll(string txtSearch, int? page)
-        //{
-        //    var bills = billService.GetAll();
-        //    if (!String.IsNullOrEmpty(txtSearch))
-        //    {
-        //        ViewBag.txtSearch = txtSearch;
-        //        bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
-        //    }
-
-        //    if (page <= 0)
-        //        page = 1;
-        //    int totalPage = bills.Count();
-        //    float totalNumsize = (totalPage / (float)pageSize);
-        //    int numSize = (int)Math.Ceiling(totalNumsize);
-        //    if (page > numSize)
-        //        page = numSize;
-
-        //    ViewBag.pageCurrent = page;
-        //    ViewBag.pageSize = pageSize;
-        //    ViewBag.numSize = numSize;
-        //    ViewBag.all = bills;
-
-        //    int start = (int)(page - 1) * pageSize;
-        //    var dataBill = bills.Skip(start).Take(pageSize);
-        //    return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
-        //}
         public JsonResult GetNewOrder(string txtSearch, int? page)
         {
             var bills = billService.GetDetailBillByStatus(Status.NewOrders);
             if (!String.IsNullOrEmpty(txtSearch))
             {
                 ViewBag.txtSearch = txtSearch;
-                
+
                 bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
             }
 
@@ -183,7 +164,14 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         public JsonResult GetById(int id)
         {
             var bill = billService.GetEditBillById(id);
-            return Json(bill, JsonRequestBehavior.AllowGet);
+            var billDetail = billDetailService.GetDetailBillDetailByBill(bill.ID_Bill);
+            var product = new List<ProductDetailViewModel>();
+            foreach (var item in billDetail)
+            {
+                product.Add(productService.GetDetailProductById(item.ID_Product));
+            }
+
+            return Json(new { bill = bill, billDetail = billDetail,product = product }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

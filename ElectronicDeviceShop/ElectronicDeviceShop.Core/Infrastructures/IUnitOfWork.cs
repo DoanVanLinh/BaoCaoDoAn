@@ -15,6 +15,7 @@ namespace ElectronicDeviceShop.Core.Infrastructures
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
         ISupplierRepository SupplierRepository { get; }
+        IBillDetailRepository BillDetailRepository { get; }
 
         ElectronicDeviceShopContext ElectronicDeviceShopContext { get; }
         int SaveChange();

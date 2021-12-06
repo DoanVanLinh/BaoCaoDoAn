@@ -105,6 +105,7 @@ CREATE TABLE BillDetails
 	ID_Product INT NOT NULL,
 	Amount INT NOT NULL,
 	CurrentlyPrice Money NOT NULL,
+	[Status] INT DEFAULT 1,
 	CONSTRAINT FK_BillDetails_Product FOREIGN KEY (ID_Product) REFERENCES Products(ID_Product),
 	CONSTRAINT FK_BillDetails_Bill FOREIGN KEY (ID_Bill) REFERENCES Bills(ID_Bill)
 ) 

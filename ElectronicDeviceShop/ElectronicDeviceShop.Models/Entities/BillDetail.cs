@@ -1,3 +1,4 @@
+using ElectronicDeviceShop.Models.EntityBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.Data.Entity.Spatial;
 
 namespace ElectronicDeviceShop.Models
 {
-    public partial class BillDetail
+    public partial class BillDetail: BaseEntity
     {
         [Key]
         public int ID_Billdetail { get; set; }
@@ -19,9 +20,7 @@ namespace ElectronicDeviceShop.Models
 
         [Column(TypeName = "money")]
         public decimal CurrentlyPrice { get; set; }
-
         public virtual Bill Bill { get; set; }
-
         public virtual Product Product { get; set; }
     }
 }
