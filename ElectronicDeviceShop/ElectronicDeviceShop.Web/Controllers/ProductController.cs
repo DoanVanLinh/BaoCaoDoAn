@@ -79,10 +79,16 @@ namespace ElectronicDeviceShop.Web.Controllers
             return Json(new { supplier = supplier, category = category }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Detail(int id)
+        {
+            var product = productService.GetDetailProductById(id);
+            return View(product);
+        }
+        [HttpPost]
         public ActionResult Detail()
         {
+            
             return View();
         }
-
     }
 }

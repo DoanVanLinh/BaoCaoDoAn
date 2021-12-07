@@ -397,6 +397,7 @@ G:\Download\BaoCaoDoAn-master\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\
 G:\Download\BaoCaoDoAn-master\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.csproj.CopyComplete
 G:\Download\BaoCaoDoAn-master\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.dll
 G:\Download\BaoCaoDoAn-master\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.pdb
+G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\ElectronicDeviceShop.Web.dll.config
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\ElectronicDeviceShop.Web.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\ElectronicDeviceShop.Web.pdb
@@ -407,7 +408,6 @@ G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\csi.e
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\csi.exe.config
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\csi.rsp
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.CodeAnalysis.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
