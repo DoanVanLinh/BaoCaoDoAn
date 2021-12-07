@@ -15,6 +15,7 @@ namespace ElectronicDeviceShop.Services.Products
         ResponseResult Delete(DeleteProductViewModel request);
 
         IEnumerable<ProductViewModel> GetAll();
+        IEnumerable<ProductDetailViewModel> GetAllDetail();
         EditProductViewModel GetEditProductById(int id);
         DeleteProductViewModel GetDeleteProductById(int id);
         ProductDetailViewModel GetDetailProductById(int id);

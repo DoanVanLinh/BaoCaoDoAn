@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ElectronicDeviceShop.Services.Categories;
+using ElectronicDeviceShop.Services.Products;
+using ElectronicDeviceShop.Services.Suppliers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +11,51 @@ namespace ElectronicDeviceShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
+        private readonly ISupplierService supplierService;
+
+        private readonly int pageSize = 4;
+        public HomeController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
+        {
+            this.productService = productService;
+            this.categoryService = categoryService;
+            this.supplierService = supplierService;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        public JsonResult GetAll()
         {
-            ViewBag.Message = "Your application description page.";
+            var products = productService.GetAllDetail();
+            var dataProduct = products.Skip(0).Take(10);
+            return Json(new { all = products, data = dataProduct }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetById(int id)
+        {
+            var product = productService.GetEditProductById(id);
+            var sup = supplierService.GetDetailSupplierById(product.ID_Supplier).Name;
+            var cate = categoryService.GetDetailCategoryById(product.ID_Category).Name;
 
-            return View();
+            return Json(new { product = product, supplier = sup, category = cate }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Contact()
+        public JsonResult GetSupGetCate()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var supplier = supplierService.GetAll().Select(s => new
+            {
+                ID = s.ID_Supplier,
+                Name = s.Name
+            }).ToList();
+            var category = categoryService.GetAll().Select(c => new
+            {
+                ID = c.ID_Category,
+                Name = c.Name
+            }).ToList();
+            return Json(new { supplier = supplier, category = category }, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

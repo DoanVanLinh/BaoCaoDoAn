@@ -86,5 +86,11 @@ namespace ElectronicDeviceShop.Services.Products
             var product = unitOfWork.ProductRepository.GetById(id);
             return Mapper.Map<ProductDetailViewModel>(product);
         }
+
+        public IEnumerable<ProductDetailViewModel> GetAllDetail()
+        {
+            var products = this.unitOfWork.ProductRepository.GetAll().Where(p => p.Status != Status.IsDeleted);
+            return Mapper.Map<IEnumerable<ProductDetailViewModel>>(products);
+        }
     }
 }
