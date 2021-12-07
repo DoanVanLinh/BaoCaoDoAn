@@ -86,5 +86,25 @@ namespace ElectronicDeviceShop.Services.Accounts
             var account = unitOfWork.AccountRepository.GetById(id);
             return Mapper.Map<AccountDetailViewModel>(account);
         }
+        public ResponseResult Login(LoginViewModel request)
+        {
+            try
+            {
+                var account = GetAccountByUserName(request.UserName);
+                if (account == null || account.Password != request.Password)
+                    throw new Exception("Sai TK!");
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+
+        public LoginViewModel GetAccountByUserName(string userName)
+        {
+            var account = unitOfWork.AccountRepository.GetAll().Where(a => a.UserName == userName).FirstOrDefault();
+            return Mapper.Map<LoginViewModel>(account);
+        }
     }
 }

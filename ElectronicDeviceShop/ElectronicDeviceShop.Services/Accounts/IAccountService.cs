@@ -13,10 +13,14 @@ namespace ElectronicDeviceShop.Services.Accounts
         ResponseResult Create(CreateAccountViewModel request);
         ResponseResult Edit(EditAccountViewModel request);
         ResponseResult Delete(DeleteAccountViewModel request);
+        ResponseResult Login(LoginViewModel request);
+
 
         IEnumerable<AccountViewModel> GetAll();
         EditAccountViewModel GetEditAccountById(int id);
         DeleteAccountViewModel GetDeleteAccountById(int id);
         AccountDetailViewModel GetDetailAccountById(int id);
+        LoginViewModel GetAccountByUserName(string userName);
+
     }
 }

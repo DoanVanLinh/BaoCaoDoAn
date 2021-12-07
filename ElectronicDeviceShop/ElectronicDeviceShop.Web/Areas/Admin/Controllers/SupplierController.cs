@@ -1,5 +1,6 @@
 ﻿using ElectronicDeviceShop.Services.Suppliers;
 using ElectronicDeviceShop.ViewModels.Suppliers;
+using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class SupplierController : Controller
     {
         private readonly ISupplierService supplierService;

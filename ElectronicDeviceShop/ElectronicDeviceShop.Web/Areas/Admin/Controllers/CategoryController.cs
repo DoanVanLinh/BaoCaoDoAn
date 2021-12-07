@@ -1,5 +1,6 @@
 ﻿using ElectronicDeviceShop.Services.Categories;
 using ElectronicDeviceShop.ViewModels.Categories;
+using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,8 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;

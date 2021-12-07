@@ -2,6 +2,7 @@
 using ElectronicDeviceShop.Services.Categories;
 using ElectronicDeviceShop.ViewModels.Accounts;
 using ElectronicDeviceShop.ViewModels.Categories;
+using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;

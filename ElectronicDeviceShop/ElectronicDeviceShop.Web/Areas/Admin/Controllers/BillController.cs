@@ -4,6 +4,7 @@ using ElectronicDeviceShop.Services.Bills;
 using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.ViewModels.Bills;
 using ElectronicDeviceShop.ViewModels.Products;
+using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class BillController : Controller
     {
         private readonly IBillService billService;
