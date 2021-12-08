@@ -15,7 +15,6 @@ namespace ElectronicDeviceShop.Web.Controllers
         private readonly ICategoryService categoryService;
         private readonly ISupplierService supplierService;
 
-        private readonly int pageSize = 4;
         public HomeController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
         {
             this.productService = productService;

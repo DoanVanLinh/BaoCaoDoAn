@@ -75,6 +75,8 @@
     <Compile Include="BillDetails\IBillDetailService.cs" />
     <Compile Include="Bills\BillService.cs" />
     <Compile Include="Bills\IBillService.cs" />
+    <Compile Include="Carts\CartService.cs" />
+    <Compile Include="Carts\ICartService.cs" />
     <Compile Include="Categories\ICategoryService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Class1.cs" />
@@ -98,9 +100,7 @@
       <Name>ElectronicDeviceShop.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Carts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

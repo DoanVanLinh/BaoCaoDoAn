@@ -84,11 +84,5 @@ namespace ElectronicDeviceShop.Web.Controllers
             var product = productService.GetDetailProductById(id);
             return View(product);
         }
-        [HttpPost]
-        public ActionResult Detail()
-        {
-            
-            return View();
-        }
     }
 }
