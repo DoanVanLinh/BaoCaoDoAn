@@ -48,5 +48,10 @@ namespace ElectronicDeviceShop.Web.Controllers
             var response = cartService.Edit(cart);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Create(CreateCartViewModel cart)
+        {
+            var response = cartService.Create(cart);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
     }
 }

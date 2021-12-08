@@ -144,7 +144,7 @@
             $('#Money' + id).html(formatter.format(price * amount));
             TotalPrice();
 
-            let cart = {}
+            let cart = {};
             cart["ID_Product"] = id;
             if(@Session["ID_Cart"]!= -1)
                 cart["ID_Cart"] =  @Session["ID_Cart"];

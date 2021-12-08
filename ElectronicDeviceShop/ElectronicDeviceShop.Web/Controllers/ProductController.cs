@@ -25,10 +25,15 @@ namespace ElectronicDeviceShop.Web.Controllers
 
         public ActionResult Index()
         {
+            Session["ID_Account"] = 2;
+            if (Session["ID_Account"] == null)
+                Session["ID_Account"] = -1;
             return View();
         }
         public JsonResult GetAll(string txtSearch, int? page)
         {
+            Session["ID_Account"] = 2;
+
             var products = productService.GetAllDetail();
             if (!String.IsNullOrEmpty(txtSearch))
             {

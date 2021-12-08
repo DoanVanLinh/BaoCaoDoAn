@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ElectronicDeviceShop.ViewModels.Carts;
+using System.Data.Entity;
 
 namespace ElectronicDeviceShop.Services.Carts
 {
@@ -50,7 +51,20 @@ namespace ElectronicDeviceShop.Services.Carts
             try
             {
                 var cart = Mapper.Map<Cart>(request);
-                this.unitOfWork.CartRepository.Add(cart);
+                var oldCart = GetCartByAccount(cart.ID_Account).Where(c => c.ID_Product == cart.ID_Product).FirstOrDefault();
+                
+                var checkCart = Mapper.Map<Cart>(oldCart);
+
+                if (checkCart != null)//da ton tai
+                {
+                    
+                    checkCart.Amount += cart.Amount;
+                    this.unitOfWork.CartRepository.Update(checkCart);
+                }
+                else
+                {
+                    this.unitOfWork.CartRepository.Add(cart);
+                }
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
             }

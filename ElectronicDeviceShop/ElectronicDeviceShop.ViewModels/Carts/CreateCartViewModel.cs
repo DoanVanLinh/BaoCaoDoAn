@@ -17,7 +17,6 @@ namespace ElectronicDeviceShop.ViewModels.Carts
         [Display(Name = "Tài khoản")]
         public int ID_Account { get; set; }
 
-        [StringLength(255)]
         [Range(1,Int32.MaxValue,ErrorMessage ="Số lượng phải là số không âm!")]
         [Display(Name = "Số Lượng")]
         public int Amount { get; set; }

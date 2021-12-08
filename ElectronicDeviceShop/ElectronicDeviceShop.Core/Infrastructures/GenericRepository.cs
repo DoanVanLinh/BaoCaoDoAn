@@ -44,12 +44,12 @@ namespace ElectronicDeviceShop.Core.Infrastructures
 
         public IEnumerable<T> Find(Func<T, bool> condition)
         {
-            return this.dbSet.Where(condition);
+            return this.dbSet.AsNoTracking().Where(condition);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return this.dbSet.ToList();
+            return this.dbSet.AsNoTracking().ToList();
         }
 
         public T GetById(int key)

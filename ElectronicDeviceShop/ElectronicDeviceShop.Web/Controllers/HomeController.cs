@@ -3,6 +3,7 @@ using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.Services.Suppliers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,7 +15,6 @@ namespace ElectronicDeviceShop.Web.Controllers
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
         private readonly ISupplierService supplierService;
-
         public HomeController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
         {
             this.productService = productService;
@@ -24,10 +24,12 @@ namespace ElectronicDeviceShop.Web.Controllers
 
         public ActionResult Index()
         {
+            
             return View();
         }
         public JsonResult GetAll()
         {
+           
             var products = productService.GetAllDetail();
             var dataProduct = products.Skip(0).Take(10);
             return Json(new { all = products, data = dataProduct }, JsonRequestBehavior.AllowGet);
