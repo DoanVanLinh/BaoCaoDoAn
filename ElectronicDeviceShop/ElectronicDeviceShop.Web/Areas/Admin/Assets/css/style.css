@@ -229,3 +229,6 @@ th.border-0.sortable.asc {
 th.border-0.sortable.desc {
     background-image: url(/wwwroot/ImageProducts/down.png);
 }
+section.cat_product_area.section_gap {
+    background-color: white;
+}

@@ -79,11 +79,11 @@
                             html += '</td>';
                             html += '<td>';
                             html += '<div class="product_count">';
-                            html += '<input type="text" name="qty" class="amount" id="sst' + item.ID_Product + '" maxlength="12" value="' + result.cart[count].Amount + '" title="Quantity:" onchange="Edit(' + item.ID_Product + ');">';
+                            html += '<input type="text" name="qty" class="amount" id="sst' + item.ID_Product + '" maxlength="12" value="' + result.cart[count].Amount + '" title="Quantity:" onchange="Edit(' + item.ID_Product + ',' + result.cart[count].ID_Cart + ');">';
                             html += '<button onclick=" var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst )) result.value++; Edit(' + item.ID_Product + ');return false;" class="increase items-count" type="button">';
                             html += '<i class="lnr lnr-chevron-up"></i>';
                             html += '</button>';
-                            html += '<button onclick="var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;Edit(' + item.ID_Product + ');return false; " class="reduced items-count" type="button">';
+                            html += '<button onclick="var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;Edit(' + item.ID_Product + ',' + result.cart[count].ID_Cart + ');return false; " class="reduced items-count" type="button">';
                             html += '<i class="lnr lnr-chevron-down"></i>';
                             html += '</button>';
                             html += '</div>';
@@ -137,7 +137,7 @@
 
             });
         }
-        function Edit(id) {
+        function Edit(id, idCard) {
 
             var amount = parseInt($('#sst' + id).val());
             var price = parseInt($('#Price' + id).text().replaceAll('.', '').replace('đ', ''));
@@ -146,8 +146,7 @@
 
             let cart = {};
             cart["ID_Product"] = id;
-            if(@Session["ID_Cart"]!= -1)
-                cart["ID_Cart"] =  @Session["ID_Cart"];
+                cart["ID_Cart"] = idCard;
             cart["Amount"] = amount;
             cart["ID_Account"] = @Session["ID_Account"];
 
@@ -158,7 +157,7 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    LoadData();
+                  LoadData();
                 },
                 error: function (errormessage) {
                 }

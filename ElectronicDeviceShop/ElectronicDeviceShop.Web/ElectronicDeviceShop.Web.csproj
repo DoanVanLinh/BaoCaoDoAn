@@ -197,6 +197,7 @@
     <Compile Include="Areas\Admin\Controllers\StatisticController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Areas\Admin\Filters\CustomAuthorize.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="wwwroot\css\bootstrap.css" />
     <Content Include="wwwroot\css\flaticon.css" />
     <Content Include="wwwroot\css\font-awesome.min.css" />
+    <Content Include="wwwroot\css\Login\style.css" />
     <Content Include="wwwroot\css\responsive.css" />
     <Content Include="wwwroot\css\style.css" />
     <Content Include="wwwroot\css\themify-icons.css" />
@@ -420,6 +422,7 @@
     <Content Include="wwwroot\img\b2.jpg" />
     <Content Include="wwwroot\img\b3.jpg" />
     <Content Include="wwwroot\img\banner\banner-bg.jpg" />
+    <Content Include="wwwroot\img\bg.jpg" />
     <Content Include="wwwroot\img\blog\add.jpg" />
     <Content Include="wwwroot\img\blog\author.png" />
     <Content Include="wwwroot\img\blog\blog1.png" />
@@ -635,6 +638,8 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

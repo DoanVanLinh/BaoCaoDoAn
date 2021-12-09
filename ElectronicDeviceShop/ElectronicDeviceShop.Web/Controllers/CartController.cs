@@ -21,15 +21,15 @@ namespace ElectronicDeviceShop.Web.Controllers
             this.cartService = cartService;
         }
 
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            Session["ID_Account"] = id;
-            cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
-            if (cart.Count() != 0)
-                Session["ID_Cart"] = cart.FirstOrDefault().ID_Cart;
+            if (Session["ID_Account"] != null)
+            {
+                cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
+                return View();
+            }
             else
-                Session["ID_Cart"] = -1;
-            return View();
+                return RedirectToAction("Index", "Home");
         }
         public JsonResult GetAll()
         {

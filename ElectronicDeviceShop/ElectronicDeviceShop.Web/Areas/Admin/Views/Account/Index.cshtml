@@ -174,7 +174,7 @@
         }
         function LoadData(txtSearch, page) {
             $.ajax({
-                url: "/Account/GetAll",
+                url: "/Admin/Account/GetAll",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",

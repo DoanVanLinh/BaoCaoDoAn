@@ -29,7 +29,6 @@ namespace ElectronicDeviceShop.Web.Controllers
         }
         public JsonResult GetAll()
         {
-           
             var products = productService.GetAllDetail();
             var dataProduct = products.Skip(0).Take(10);
             return Json(new { all = products, data = dataProduct }, JsonRequestBehavior.AllowGet);

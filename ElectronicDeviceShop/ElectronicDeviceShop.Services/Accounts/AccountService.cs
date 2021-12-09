@@ -23,6 +23,9 @@ namespace ElectronicDeviceShop.Services.Accounts
         {
             try
             {
+                var oldAccount = unitOfWork.AccountRepository.GetAll().Where(a => a.UserName == request.UserName).FirstOrDefault();
+                if (oldAccount != null)
+                    throw new Exception("Tài khoản đã tồn tại!");
                 var account = Mapper.Map<Account>(request);
                 this.unitOfWork.AccountRepository.Add(account);
                 this.unitOfWork.SaveChange();
@@ -105,6 +108,22 @@ namespace ElectronicDeviceShop.Services.Accounts
         {
             var account = unitOfWork.AccountRepository.GetAll().Where(a => a.UserName == userName).FirstOrDefault();
             return Mapper.Map<LoginViewModel>(account);
+        }
+
+        public ResponseResult CheckUserName(CreateAccountViewModel request)
+        {
+           
+            try
+            {
+                var account = Mapper.Map<Account>(GetAll().Where(a=>a.UserName == request.UserName).FirstOrDefault());
+                if (account != null)
+                    throw new Exception("Tài khoản đã tồn tại!");
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
         }
     }
 }
