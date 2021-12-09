@@ -13,9 +13,11 @@ namespace ElectronicDeviceShop.Services.Carts
     {
         ResponseResult Edit(EditCartViewModel request);
         ResponseResult Create(CreateCartViewModel request);
+        ResponseResult Delete(DeleteCartViewModel request);
 
         IEnumerable<CartViewModel> GetCartByAccount(int id);
         EditCartViewModel GetEditCartById(int id);
         CartDetailViewModel GetDetailCartById(int id);
+        DeleteCartViewModel GetDeleteCartById(int id);
     }
 }

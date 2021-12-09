@@ -57,7 +57,6 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<BillDetailDetailViewModel, BillDetail>().ReverseMap();
             CreateMap<DeleteBillDetailViewModel, BillDetail>().ReverseMap();
             CreateMap<CreateBillDetailViewModel, BillDetail>().ReverseMap();
-            CreateMap<EditBillViewModel, BillDetail>().ReverseMap();
         }
     }
 }

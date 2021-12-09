@@ -10,11 +10,10 @@
         <div class="container">
             <div class="banner_content d-md-flex justify-content-between align-items-center">
                 <div class="mb-3 mb-md-0">
-                    <h2>Product Details</h2>
-                    <p>Very us move be blessed multiply night</p>
+                    <h2>Chi tiết sản phẩm</h2>
                 </div>
                 <div class="page_link">
-                    <a href="index.html">Home</a>
+                    <a href="/Home/Indexs">Home</a>
                     <a href="single-product.html">Product Details</a>
                 </div>
             </div>
@@ -32,14 +31,6 @@
                          class="carousel slide"
                          data-ride="carousel">
                         <ol class="carousel-indicators">
-                            @*@{
-                                    <li data-target="#carouselExampleIndicators"
-                                        data-slide-to="0"
-                                        class="active">
-                                        <img src="#"
-                                             alt="" />
-                                    </li>
-                                }*@
 
                         </ol>
                         <div class="carousel-inner">
@@ -60,6 +51,7 @@
                 <div class="s_product_text">
                     <h3>@Model.Name</h3>
                     <h1 id="Money" style="color:red"></h1>
+                    <h2><del id="MoneyDis" style="color:red">9000</del></h2>
                     <ul class="list">
                         <li>
                             <span>Model:</span><b> @Model.Model</b>
@@ -70,8 +62,8 @@
                         <div class="card" style="width: 100%;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item bg-warning"><i class="fas fa-gift"></i><span style="font-weight:bold; font-size:larger;font-style:normal">Khuyến mãi</span></li>
-                                <li class="list-group-item border-0">Dapibus ac facilisis in</li>
-                                <li class="list-group-item border-0">Vestibulum at eros</li>
+                                <li class="list-group-item border-0">Trả góp 0%</li>
+                                <li class="list-group-item border-0">Miễn phí vận chuyển</li>
                             </ul>
                         </div>
                         <br />
@@ -121,7 +113,8 @@
             return formatter.format(number);
         }
         $(document).ready(function () {
-            $('#Money').text(ToMoney(@Model.Price));
+            $('#Money').text(ToMoney(@Model.Price * (100 -@Model.Discount)/100));
+            $('#MoneyDis').text(ToMoney(@Model.Price));
         });
         function Check() {
             if (@Model.Amount== 0) {

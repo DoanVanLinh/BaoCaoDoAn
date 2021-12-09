@@ -224,6 +224,7 @@
     <Content Include="Areas\Admin\Assets\css\accents\warning.1.1.0.css" />
     <Content Include="Areas\Admin\Assets\css\accents\warning.1.1.0.min.css" />
     <Content Include="Areas\Admin\Assets\css\extras.1.1.0.min.css" />
+    <Content Include="Areas\Admin\Assets\css\Login\styleLogin.css" />
     <Content Include="Areas\Admin\Assets\css\mdb.min.css" />
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.css" />
     <Content Include="Areas\Admin\Assets\css\shards-dashboards.1.1.0.min.css" />
@@ -233,6 +234,7 @@
     <Content Include="Areas\Admin\Assets\js\jquery-3.6.0.min.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.dataTables.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.validate.min.js" />
+    <Content Include="Areas\Admin\Assets\js\Login\main.js" />
     <Content Include="Areas\Admin\Assets\js\UrlHelper.js" />
     <Content Include="wwwroot\css\bootstrap.css" />
     <Content Include="wwwroot\css\flaticon.css" />

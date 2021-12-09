@@ -53,6 +53,7 @@ namespace ElectronicDeviceShop.Web.Controllers
         }
         public JsonResult GetAllProductInCart()
         {
+            product.Clear();
             int id = int.Parse(Session["ID_Account"].ToString());
             cart = cartService.GetCartByAccount(id);
             foreach (var item in cart)
@@ -81,6 +82,11 @@ namespace ElectronicDeviceShop.Web.Controllers
                     billService.Edit(billNewest);
                     break;
                 }
+            }
+            foreach (var item in cart)
+            {
+                var oldCart = cartService.GetDeleteCartById(item.ID_Cart);
+                cartService.Delete(oldCart);
             }
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }

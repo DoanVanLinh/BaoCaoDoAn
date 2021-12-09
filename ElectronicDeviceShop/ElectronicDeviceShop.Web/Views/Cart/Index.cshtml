@@ -80,7 +80,7 @@
                             html += '<td>';
                             html += '<div class="product_count">';
                             html += '<input type="text" name="qty" class="amount" id="sst' + item.ID_Product + '" maxlength="12" value="' + result.cart[count].Amount + '" title="Quantity:" onchange="Edit(' + item.ID_Product + ',' + result.cart[count].ID_Cart + ');">';
-                            html += '<button onclick=" var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst )) result.value++; Edit(' + item.ID_Product + ');return false;" class="increase items-count" type="button">';
+                            html += '<button onclick=" var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst )) result.value++; Edit(' + item.ID_Product + ',' + result.cart[count].ID_Cart + ');return false;" class="increase items-count" type="button">';
                             html += '<i class="lnr lnr-chevron-up"></i>';
                             html += '</button>';
                             html += '<button onclick="var result = document.getElementById(' + specialSymbol + '); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;Edit(' + item.ID_Product + ',' + result.cart[count].ID_Cart + ');return false; " class="reduced items-count" type="button">';

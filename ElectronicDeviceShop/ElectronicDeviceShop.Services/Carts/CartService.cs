@@ -75,8 +75,29 @@ namespace ElectronicDeviceShop.Services.Carts
         }
         public IEnumerable<CartViewModel> GetCartByAccount(int id)
         {
-            var cart = unitOfWork.CartRepository.GetAll().Where(c => c.ID_Account == id && c.Amount!=0);
+            var cart = unitOfWork.CartRepository.GetAll().Where(c => c.ID_Account == id && c.Amount!=0 && c.Status != 0);
             return Mapper.Map<IEnumerable<CartViewModel>>(cart);
+        }
+
+        public ResponseResult Delete(DeleteCartViewModel request)
+        {
+            try
+            {
+                var cart = Mapper.Map<Cart>(request);
+                this.unitOfWork.CartRepository.Delete(cart);
+                this.unitOfWork.SaveChange();
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+
+        public DeleteCartViewModel GetDeleteCartById(int id)
+        {
+            var cart = unitOfWork.CartRepository.GetAll().Where(c => c.ID_Cart == id).FirstOrDefault();
+            return Mapper.Map<DeleteCartViewModel>(cart);
         }
     }
 }

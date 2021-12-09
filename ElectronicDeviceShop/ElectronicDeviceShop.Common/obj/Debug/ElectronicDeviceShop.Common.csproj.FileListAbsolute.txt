@@ -9,4 +9,3 @@ G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Common\bin\Debug\Ele
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.csproj.CoreCompileInputs.cache
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.pdb
-G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Common\obj\Debug\ElectronicDeviceShop.Common.csproj.AssemblyReference.cache

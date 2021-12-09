@@ -91,7 +91,7 @@
                 success: function (result) {
                     //Acoount
                     $('#ReceiverName').val(result.account.FullName);
-                    $('#ReceiverPhone').val(result.account.Phone.trim());
+                    $('#ReceiverPhone').val($.trim(result.account.Phone));
                     $('#ReceiverAddress').val(result.account.Address);
                     $('#ReceiverEmail').val(result.account.Email);
 
