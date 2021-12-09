@@ -20,6 +20,36 @@ namespace ElectronicDeviceShop.Services.BillDetails
             this.unitOfWork = unitOfWork;
         }
 
+        public ResponseResult Create(CreateBillDetailViewModel request)
+        {
+            try
+            {
+                var billDetail = Mapper.Map<BillDetail>(request);
+                this.unitOfWork.BillDetailRepository.Add(billDetail);
+                this.unitOfWork.SaveChange();
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+
+        public ResponseResult Delete(DeleteBillDetailViewModel request)
+        {
+            try
+            {
+                var billDetail = Mapper.Map<BillDetail>(request);
+                this.unitOfWork.BillDetailRepository.Delete(billDetail);
+                this.unitOfWork.SaveChange();
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+
         public IEnumerable<BillDetailDetailViewModel> GetDetailBillDetailByBill(int bill)
         {
            var billDetails = unitOfWork.BillDetailRepository.GetAll().Where(b => b.ID_Bill == bill);

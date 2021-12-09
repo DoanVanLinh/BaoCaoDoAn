@@ -153,7 +153,7 @@
         });
         function LoadSupCate() {
             $.ajax({
-                url: "/Product/GetSupGetCate",
+                url: "/Admin/Product/GetSupGetCate",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -174,7 +174,7 @@
         }
         function LoadData(txtSearch, page) {
             $.ajax({
-                url: "/Product/GetAll",
+                url: "/Admin/Product/GetAll",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -283,7 +283,7 @@
         }
         function Detail(ID) {
             $.ajax({
-                url: "/Product/GetById/" + ID,
+                url: "/Admin/Product/GetById/" + ID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -336,7 +336,7 @@
             product["Status"] = 1;
 
             $.ajax({
-                url: "/Product/Create",
+                url: "/Admin/Product/Create",
                 data: JSON.stringify(product),
                 type: "POST",
                 processData: false,
@@ -366,7 +366,7 @@
             ClearValidation();
             LoadSupCate();
             $.ajax({
-                url: "/Product/GetById/" + ID,
+                url: "/Admin/Product/GetById/" + ID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -424,7 +424,7 @@
                 product["Image"] = $("#imgPreview").attr('src').split('/')[3];
 
             $.ajax({
-                url: "/Product/Edit",
+                url: "/Admin/Product/Edit",
                 data: JSON.stringify(product),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
@@ -446,7 +446,7 @@
         }
         function Delele(ID) {
             $.ajax({
-                url: "/Product/Delete/" + ID,
+                url: "/Admin/Product/Delete/" + ID,
                 type: "POST",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",

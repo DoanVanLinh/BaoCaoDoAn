@@ -55,5 +55,28 @@ namespace ElectronicDeviceShop.Services.Bills
             var bills = unitOfWork.BillRepository.GetAll().Where(b => b.Status == status);
             return Mapper.Map<IEnumerable<BillViewModel>>(bills);
         }
+
+        public ResponseResult Create(CreateBillViewModel request)
+        {
+            try
+            {
+                var bill = Mapper.Map<Bill>(request);
+                bill.BuyDate = DateTime.Today;
+                bill.Status = Status.NewOrders;
+                this.unitOfWork.BillRepository.Add(bill);
+                this.unitOfWork.SaveChange();
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+
+        public EditBillViewModel GetBillNewest()
+        {
+            var billDetail = this.unitOfWork.BillRepository.GetAll().Where(p => p.Status != Status.IsDeleted&&p.ID_Bill == GetAll().Max(bd=>bd.ID_Bill)).FirstOrDefault();
+            return Mapper.Map<EditBillViewModel>(billDetail);
+        }
     }
 }

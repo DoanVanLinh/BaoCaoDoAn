@@ -259,7 +259,7 @@
         }
         function LoadNewOrder(txtSearch, page) {
             $.ajax({
-                url: "/Bill/GetNewOrder",
+                url: "/Admin/Bill/GetNewOrder",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -328,7 +328,7 @@
         }
         function LoadConfirmOrder(txtSearch, page) {
             $.ajax({
-                url: "/Bill/GetConfirmOrder",
+                url: "/Admin/Bill/GetConfirmOrder",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -353,7 +353,7 @@
                         html += '<option value="6">Hủy</option>';
                         html += '</select>';
                         html += '</div>';
-                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
+                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center"  onclick="Detail(' + item.ID_Bill + ');" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
                         html += ' </td >';
                         html += '</tr>';
                     });
@@ -397,7 +397,7 @@
         }
         function LoadShippingOrder(txtSearch, page) {
             $.ajax({
-                url: "/Bill/GetShippingOrder",
+                url: "/Admin/Bill/GetShippingOrder",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -422,7 +422,7 @@
                         html += '<option value="6">Hủy</option>';
                         html += '</select>';
                         html += '</div>';
-                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
+                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center"  onclick="Detail(' + item.ID_Bill + ');" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
                         html += ' </td >';
                         html += '</tr>';
                     });
@@ -466,7 +466,7 @@
         }
         function LoadSuccessOrder(txtSearch, page) {
             $.ajax({
-                url: "/Bill/GetSuccessOrder",
+                url: "/Admin/Bill/GetSuccessOrder",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -484,7 +484,7 @@
                         html += '<td class="align-middle">' + item.PayType + '</td>';
                         html += '<td class="align-middle">' + convertToJavaScriptDate(item.BuyDate) + '</td>';
                         html += '<td class="align-middle d-flex justify-content-center">';
-                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
+                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center"  onclick="Detail(' + item.ID_Bill + ');" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
                         html += ' </td >';
                         html += '</tr>';
                     });
@@ -528,7 +528,7 @@
         }
         function LoadCancelOrder(txtSearch, page) {
             $.ajax({
-                url: "/Bill/GetCancelOrder",
+                url: "/Admin/Bill/GetCancelOrder",
                 type: "GET",
                 data: { txtSearch: txtSearch, page: page },
                 contentType: "application/json;charset=utf-8",
@@ -546,7 +546,7 @@
                         html += '<td class="align-middle">' + item.PayType + '</td>';
                         html += '<td class="align-middle">' + convertToJavaScriptDate(item.BuyDate) + '</td>';
                         html += '<td class="align-middle d-flex justify-content-center">';
-                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
+                        html += '<button type="button" class="col-2 btn btn-sm btn-info m-1 d-flex justify-content-center align-items-center"  onclick="Detail(' + item.ID_Bill + ');" data-bs-toggle="modal" data-bs-target="#modal-detail"><i class="fas fa-eye "></i></button>';
                         html += '</td>';
                         html += '</tr>';
                     });
@@ -590,7 +590,7 @@
         }
         function Detail(ID) {
             $.ajax({
-                url: "/Bill/GetById/" + ID,
+                url: "/Admin/Bill/GetById/" + ID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -661,7 +661,7 @@
                 }
             });
             $.ajax({
-                url: "/Bill/GetById/" + ID,
+                url: "/Admin/Bill/GetById/" + ID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -690,7 +690,7 @@
             bill["Status"] = status;
 
             $.ajax({
-                url: "/Bill/Edit",
+                url: "/Admin/Bill/Edit",
                 data: JSON.stringify(bill),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",

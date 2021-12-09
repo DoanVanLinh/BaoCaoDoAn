@@ -12,5 +12,7 @@ namespace ElectronicDeviceShop.Services.BillDetails
     public interface IBillDetailService
     {
         IEnumerable<BillDetailDetailViewModel> GetDetailBillDetailByBill(int bill);
+        ResponseResult Create(CreateBillDetailViewModel request);
+        ResponseResult Delete(DeleteBillDetailViewModel request);
     }
 }

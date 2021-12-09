@@ -5,6 +5,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Style{
+    <link href="~/wwwroot/css/Login/style.css" rel="stylesheet" />
+}
 <div class="img js-fullheight" style=" background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/wwwroot/img/bg.jpg);">
     <section class="ftco-section">
         <div class="container h-100 align-">
@@ -14,7 +17,7 @@
                         <h3 class="mb-4 text-center">ĐĂNG NHẬP</h3>
                         <form action="" class="signin-form">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Username" required name="UserName" id="UserName">
+                                <input type="text" class="form-control" id="UserName" placeholder="Username" required name="UserName" id="UserName">
                                 <div class="valid-feedback " id="error_userName"></div>
                             </div>
                             <div class="form-group">
@@ -23,7 +26,7 @@
                                 <div class="valid-feedback" id="error_password"></div>
                             </div>
                             <div class="form-group">
-                                <a class="form-control btn btn-primary submit px-3 align-middle" onclick="return Login();">Đăng nhập</a>
+                                <a class="form-control btn btn-primary submit px-3 align-middle col d-flex align-items-center justify-content-center" onclick="return Login();">Đăng nhập</a>
                                 @*<button type="submit" class="form-control btn btn-primary submit px-3" onclick="Login();">Đăng nhập</button>*@
                             </div>
                             <div class="form-group d-md-flex">
@@ -64,7 +67,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.response) {
-                        
+
                         var specail = ":";
                         window.location.href =/* 'https' + specail + '//localhost:44361/' +*/ result.newUrl;
                         return true;

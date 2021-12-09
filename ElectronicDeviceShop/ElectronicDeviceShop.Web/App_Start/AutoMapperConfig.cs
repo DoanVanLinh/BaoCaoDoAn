@@ -28,6 +28,7 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<BillViewModel, Bill>().ReverseMap();
             CreateMap<EditBillViewModel, Bill>().ReverseMap();
             CreateMap<BillDetailViewModel, Bill>().ReverseMap();
+            CreateMap<CreateBillViewModel, Bill>().ReverseMap();
 
             CreateMap<CreateCartViewModel, Cart>().ReverseMap();
             CreateMap<CartViewModel, Cart>().ReverseMap();
@@ -54,6 +55,9 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<SupplierDetailViewModel, Supplier>().ReverseMap();
 
             CreateMap<BillDetailDetailViewModel, BillDetail>().ReverseMap();
+            CreateMap<DeleteBillDetailViewModel, BillDetail>().ReverseMap();
+            CreateMap<CreateBillDetailViewModel, BillDetail>().ReverseMap();
+            CreateMap<EditBillViewModel, BillDetail>().ReverseMap();
         }
     }
 }

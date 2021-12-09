@@ -12,10 +12,12 @@ namespace ElectronicDeviceShop.Services.Bills
     public interface IBillService
     {
         ResponseResult Edit(EditBillViewModel request);
+        ResponseResult Create(CreateBillViewModel request);
 
         IEnumerable<BillViewModel> GetAll();
         IEnumerable<BillViewModel> GetDetailBillByStatus(Status status);
         EditBillViewModel GetEditBillById(int id);
         BillDetailViewModel GetDetailBillById(int id);
+        EditBillViewModel GetBillNewest();
     }
 }

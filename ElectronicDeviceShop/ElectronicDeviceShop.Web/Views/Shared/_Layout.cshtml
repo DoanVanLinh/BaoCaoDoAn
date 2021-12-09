@@ -19,10 +19,12 @@
     <link rel="stylesheet" href="~/wwwroot/vendors/animate-css/animate.css" />
     <link rel="stylesheet" href="~/wwwroot/vendors/jquery-ui/jquery-ui.css" />
     <!-- main css -->
+    @RenderSection("Style", required: false)
+
+    <link href="~/Areas/Admin/Assets/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/wwwroot/css/style.css" />
     <link rel="stylesheet" href="~/wwwroot/css/responsive.css" />
-    <link href="~/wwwroot/css/Login/style.css" rel="stylesheet" />
-    <link href="~/Areas/Admin/Assets/css/style.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -80,16 +82,13 @@
                             <div class="col-lg-7 pr-0">
                                 <ul class="nav navbar-nav center_nav pull-right">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="index.html">Home</a>
+                                        <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index","Product")" class="nav-link">Cửa hàng</a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                    </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">Liên hệ</a>
+                                        <a href="@Url.Action("Index","Product")" class="nav-link">Liên hệ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -97,26 +96,14 @@
                             <div class="col-lg-5 pr-0">
                                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
                                     <li class="nav-item">
-                                        <a href="#" class="icons">
-                                            <i class="ti-search" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#" class="icons">
+                                        <a href="@Url.Action("Index","Cart")" class="icons">
                                             <i class="ti-shopping-cart"></i>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="#" class="icons">
+                                        <a href="@Url.Action("Detail", "Account")" class="icons">
                                             <i class="ti-user" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#" class="icons">
-                                            <i class="ti-heart" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -208,6 +195,7 @@
     <!--================ End footer Area  =================-->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/wwwroot/js/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js "></script>

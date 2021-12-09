@@ -25,11 +25,16 @@ namespace ElectronicDeviceShop.Web.Controllers
         {
             if (Session["ID_Account"] != null)
             {
-                cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
-                return View();
+                if (int.Parse(Session["ID_Account"].ToString()) > 0)
+                {
+                    cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
+                    return View();
+                }
+                else
+                    return RedirectToAction("Index", "Account");
             }
             else
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Account");
         }
         public JsonResult GetAll()
         {
