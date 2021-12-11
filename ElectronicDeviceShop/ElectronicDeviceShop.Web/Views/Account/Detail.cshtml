@@ -85,7 +85,7 @@
                                     <div class="col-md-12">
                                         <label class="labels">Mật khẩu cũ</label>
                                         <input type="text" class="form-control" id="oldPass" placeholder="" value="">
-                                        <div class="valid-feedback " id="error_oldPass"></div>
+                                        <div class="valid-feedback" id="error_oldPass"></div>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="labels">Mật khẩu mới</label>
@@ -98,7 +98,7 @@
                                         <div class="valid-feedback " id="error_confirmPass"></div>
                                     </div>
                                 </div>
-                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Đổi mật khẩu</button></div>
+                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onclick="ChangePass();">Đổi mật khẩu</button></div>
                             </div>
 
                         </div>
@@ -292,6 +292,76 @@
                 }
             });
         }
+        function ChangePass() {
+            errorOldPass();
+            errorNewPass();
+            errorConfirmPass();
+
+            let account = {};
+            account["Password"] = $("#newPass").val();
+
+            $.ajax({
+                url: "/Account/ChangePass",
+                data: JSON.stringify(account),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        UploadImage();
+                        ClearTextBox();
+                        LoadAcount();
+                        toastr.success('Đổi mật khẩu thành công!');
+                    }
+                    else {
+                        toastr.error('Đổi mật khẩu không thành công!');
+                    }
+                },
+                error: function (errormessage) {
+                    toastr.error('Đổi mật khẩu không thành công!');
+                }
+            });
+        }
+        function CheckPassword() {
+            let account = {};
+            account["ID_Account"] = @Session["ID_Account"];
+            account["Password"] = $('#oldPass').val();
+            account["Role"] = 2;
+            account["Status"] = 1;
+
+            $.ajax({
+                url: "/Account/CheckPassword",
+                data: JSON.stringify(account),
+                type: "POST",
+                processData: false,
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        $('#error_oldPass').hide();
+                        $('#oldPass').addClass('is-valid');
+                        $('#oldPass').removeClass('is-invalid');
+                        checkError = false;
+                    }
+                    else {
+                        $('#error_oldPass').show();
+                        $('#error_oldPass').addClass('invalid-feedback');
+                        $('#error_oldPass').removeClass('valid-feedback');
+                        $('#oldPass').addClass('is-invalid');
+                        $('#error_oldPass').text("Mật khẩu cũ không đúng!");
+                        checkError = true;
+                    }
+                },
+                error: function (errormessage) {
+                    $('#error_oldPass').show();
+                    $('#error_oldPass').addClass('invalid-feedback');
+                    $('#error_oldPass').removeClass('valid-feedback');
+                    $('#oldPass').addClass('is-invalid');
+                    $('#error_oldPass').text("Mật khẩu cũ không đúng!");
+                    checkError = true;
+                }
+            });
+        }
         function ClearTextBox() {
 
             $('#oldPass').val('');
@@ -327,33 +397,87 @@
         let emailRegex = /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         let checkError = false;
-        const errorOldPass = () => {
-            if ($('#oldPass').val() == '') {
-                $('#error_password').show();
-                $('#error_password').addClass('invalid-feedback');
-                $('#error_password').removeClass('valid-feedback');
-                $('#oldPass').addClass('is-invalid');
-                $('#error_password').text("Mật khẩu không được để trống!");
-                checkError = true;
-            }
-            else if ($('#oldPass').val().length < 8) {
-                $('#error_password').show();
-                $('#error_password').addClass('invalid-feedback');
-                $('#error_password').removeClass('valid-feedback');
-                $('#oldPass').addClass('is-invalid');
-                $('#error_password').text("Mật khẩu dài hơn 8 kí tự!");
-                checkError = true;
-            }
-            else if (!passwordRegex.test($('#oldPass').val())) {
-                $('#error_password').show();
-                $('#error_password').addClass('invalid-feedback');
-                $('#error_password').removeClass('valid-feedback');
-                $('#oldPass').addClass('is-invalid');
-                $('#error_password').text("Mật khẩu có chữ, số và kí tự!");
+        const errorConfirmPass = () => {
+            if ($('#confirmPass').val() != $('#newPass').val()) {
+                $('#error_confirmPass').show();
+                $('#error_confirmPass').addClass('invalid-feedback');
+                $('#error_confirmPass').removeClass('valid-feedback');
+                $('#confirmPass').addClass('is-invalid');
+                $('#error_confirmPass').text("Mật khẩu không trùng khớp!");
                 checkError = true;
             }
             else {
-                $('#error_password').hide();
+                $('#error_confirmPass').hide();
+                $('#confirmPass').addClass('is-valid');
+                $('#confirmPass').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#confirmPass').keyup(() => {
+            errorConfirmPass();
+        });
+        $('#confirmPass').keydown(() => {
+            errorConfirmPass();
+        });
+        const errorNewPass = () => {
+            if ($('#newPass').val() == '') {
+                $('#error_newPass').show();
+                $('#error_newPass').addClass('invalid-feedback');
+                $('#error_newPass').removeClass('valid-feedback');
+                $('#newPass').addClass('is-invalid');
+                $('#error_newPass').text("Mật khẩu mới không được để trống!");
+                checkError = true;
+            }
+            else if ($('#newPass').val().length < 8) {
+                $('#error_newPass').show();
+                $('#error_newPass').addClass('invalid-feedback');
+                $('#error_newPass').removeClass('valid-feedback');
+                $('#newPass').addClass('is-invalid');
+                $('#error_newPass').text("Mật khẩu mới dài hơn 8 kí tự!");
+                checkError = true;
+            }
+            else if (!passwordRegex.test($('#newPass').val())) {
+                $('#error_newPass').show();
+                $('#error_newPass').addClass('invalid-feedback');
+                $('#error_newPass').removeClass('valid-feedback');
+                $('#newPass').addClass('is-invalid');
+                $('#error_newPass').text("Mật khẩu có chữ, số và kí tự!");
+                checkError = true;
+            }
+            else if ($('#newPass').val().length == $('#oldPass').val().length) {
+                $('#error_newPass').show();
+                $('#error_newPass').addClass('invalid-feedback');
+                $('#error_newPass').removeClass('valid-feedback');
+                $('#newPass').addClass('is-invalid');
+                $('#error_newPass').text("Mật khẩu mới trùng với mật khẩu cũ!");
+                checkError = true;
+            }
+            else {
+                $('#error_newPass').hide();
+                $('#newPass').addClass('is-valid');
+                $('#newPass').removeClass('is-invalid');
+                checkError = false;
+            }
+        }
+        $('#newPass').keyup(() => {
+            errorNewPass();
+            errorConfirmPass();
+        });
+        $('#newPass').keydown(() => {
+            errorNewPass();
+            errorConfirmPass();
+        });
+        const errorOldPass = () => {
+            if ($('#oldPass').val() == '') {
+                $('#error_oldPass').show();
+                $('#error_oldPass').addClass('invalid-feedback');
+                $('#error_oldPass').removeClass('valid-feedback');
+                $('#oldPass').addClass('is-invalid');
+                $('#error_oldPass').text("Mật khẩu cũ không được để trống!");
+                checkError = true;
+            }
+            else {
+                $('#error_oldPass').hide();
                 $('#oldPass').addClass('is-valid');
                 $('#oldPass').removeClass('is-invalid');
                 checkError = false;
@@ -361,6 +485,7 @@
         }
         $('#oldPass').keyup(() => {
             errorOldPass();
+            CheckPassword();
         });
         $('#oldPass').keydown(() => {
             errorOldPass();

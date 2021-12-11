@@ -15,6 +15,7 @@ namespace ElectronicDeviceShop.Services.Accounts
         ResponseResult Delete(DeleteAccountViewModel request);
         ResponseResult Login(LoginViewModel request);
         ResponseResult CheckUserName(CreateAccountViewModel request);
+        ResponseResult CheckPassword(EditAccountViewModel request);
 
 
         IEnumerable<AccountViewModel> GetAll();

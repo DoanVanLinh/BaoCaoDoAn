@@ -77,7 +77,7 @@ namespace ElectronicDeviceShop.Services.Accounts
 
         public EditAccountViewModel GetEditAccountById(int id)
         {
-            var account = unitOfWork.AccountRepository.GetById(id);
+            var account = this.unitOfWork.AccountRepository.GetAll().Where(p => p.Status != Status.IsDeleted&& p.ID_Account == id).FirstOrDefault();
             return Mapper.Map<EditAccountViewModel>(account);
         }
         public DeleteAccountViewModel GetDeleteAccountById(int id)
@@ -113,12 +113,25 @@ namespace ElectronicDeviceShop.Services.Accounts
 
         public ResponseResult CheckUserName(CreateAccountViewModel request)
         {
-           
             try
             {
                 var account = Mapper.Map<Account>(GetAll().Where(a=>a.UserName == request.UserName).FirstOrDefault());
                 if (account != null)
                     throw new Exception("Tài khoản đã tồn tại!");
+                return new ResponseResult();
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult(ex.Message);
+            }
+        }
+        public ResponseResult CheckPassword(EditAccountViewModel request)
+        {
+            try
+            {
+                var account = Mapper.Map<Account>(GetDetailAccountById(request.ID_Account));
+                if (account.Password != request.Password)
+                    throw new Exception("Mật khẩu không đúng!");
                 return new ResponseResult();
             }
             catch (Exception ex)

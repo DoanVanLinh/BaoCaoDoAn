@@ -52,6 +52,11 @@ namespace ElectronicDeviceShop.Web.Controllers
             var response = accountService.CheckUserName(account);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult CheckPassword(EditAccountViewModel account)
+        {
+            var response = accountService.CheckPassword(account);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult LoginUser(LoginViewModel account)
         {
             ResponseResult response = new ResponseResult();
@@ -77,6 +82,13 @@ namespace ElectronicDeviceShop.Web.Controllers
             account.Password = accountService.GetAccountByUserName(account.UserName).Password;
             account.Role = 2;
             var response = accountService.Edit(account);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ChangePass(EditAccountViewModel account)
+        {
+            var acc = accountService.GetEditAccountById(int.Parse(Session["ID_Account"].ToString()));
+            acc.Password = account.Password;
+            var response = accountService.Edit(acc);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -122,5 +134,6 @@ namespace ElectronicDeviceShop.Web.Controllers
                 return Json("No files selected.");
             }
         }
+
     }
 }
