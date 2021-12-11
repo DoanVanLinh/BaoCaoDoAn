@@ -27,6 +27,7 @@ namespace ElectronicDeviceShop.Services.Accounts
                 if (oldAccount != null)
                     throw new Exception("Tài khoản đã tồn tại!");
                 var account = Mapper.Map<Account>(request);
+                account.Status = Status.Active;
                 this.unitOfWork.AccountRepository.Add(account);
                 this.unitOfWork.SaveChange();
                 return new ResponseResult();
@@ -106,7 +107,7 @@ namespace ElectronicDeviceShop.Services.Accounts
 
         public LoginViewModel GetAccountByUserName(string userName)
         {
-            var account = unitOfWork.AccountRepository.GetAll().Where(a => a.UserName == userName).FirstOrDefault();
+            var account = unitOfWork.AccountRepository.GetAll().Where(a => a.UserName == userName && a.Status != Status.IsDeleted).FirstOrDefault();
             return Mapper.Map<LoginViewModel>(account);
         }
 

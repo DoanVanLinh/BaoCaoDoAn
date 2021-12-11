@@ -67,9 +67,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.response) {
-
-                        var specail = ":";
-                        window.location.href =/* 'https' + specail + '//localhost:44361/' +*/ result.newUrl;
+                        window.location.href = result.newUrl;
                         return true;
                     }
                     else {
@@ -81,7 +79,6 @@
                     return false;
                 }
             });
-            return;
         }
     </script>
 }

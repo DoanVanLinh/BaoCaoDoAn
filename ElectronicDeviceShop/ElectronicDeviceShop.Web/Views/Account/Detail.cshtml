@@ -5,81 +5,252 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="p-5 p-5" style="background-color:whitesmoke">
-    <div class="container rounded bg-white ">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="~/wwwroot/ImageProducts/@Model.Avatar">
-                    <span class="font-weight-bold" id="UserName">@Model.UserName</span>
-                    <span class="text-black-50"></span>
+<section class="banner_area shadow">
+    <div class="banner_inner d-flex align-items-center ">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Tài khoản</h2>
+                </div>
+                <div class="page_link">
+                    <a href="/Home/Index">Trang chủ</a>
+                    <a href="/Account/Detail">Tài khoản</a>
                 </div>
             </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Hồ sơ</h4>
+        </div>
+    </div>
+</section>
+<section class="product_description_area pt-5 pb-0">
+    <ul class="nav nav-tabs bg-white" id="myTab" role="tablist" >
+        <li class="nav-item shadow-sm active show">
+            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Hồ sơ</a>
+        </li>
+        <li class="nav-item shadow-sm">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Đơn mua</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="p-5 p-5" style="background-color:white">
+                <div class="container rounded bg-white shadow p-3 mb-5 bg-white rounded">
+                    <div class="row">
+                        <div class="col-md-3 border-right">
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                                <label for="Avatar" style="cursor: pointer;">
+                                    <img class="rounded-circle mt-5 shadow" id="imgPreview" height="120px" width="120px" src="/wwwroot/ImageProducts/@Model.Avatar">
+                                </label>
+                                <input type="file" id="Avatar" style="opacity: 0; position: absolute; z-index: -1;"/>
+                                <br />
+                                <span class="font-weight-bold" id="UserName">@Model.UserName</span>
+                                <span class="text-black-50"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 border-right">
+                            <div class="p-3 py-5">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right">Hồ sơ</h4>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label class="labels">Họ và tên</label>
+                                        <input type="text" class="form-control" id="FullName" placeholder="" value="@Model.FullName">
+                                        <div class="valid-feedback" id="error_fullName"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labels">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="Phone" placeholder="" value="@Model.Phone">
+                                        <div class="valid-feedback " id="error_phone"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labels">Địa chỉ</label>
+                                        <input type="text" class="form-control" id="Address" placeholder="" value="@Model.Address">
+                                        <div class="valid-feedback " id="error_address"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labels">Email</label>
+                                        <input type="text" class="form-control" id="Email" placeholder="" value="@Model.Email">
+                                        <div class="valid-feedback " id="error_email"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onclick="Edit();">Lưu</button></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 py-5">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right">Đổi mật khẩu</h4>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label class="labels">Mật khẩu cũ</label>
+                                        <input type="text" class="form-control" id="oldPass" placeholder="" value="">
+                                        <div class="valid-feedback " id="error_oldPass"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labels">Mật khẩu mới</label>
+                                        <input type="text" class="form-control" id="newPass" placeholder="" value="">
+                                        <div class="valid-feedback " id="error_newPass"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labels">Xác minh mật khẩu</label>
+                                        <input type="text" class="form-control" id="confirmPass" placeholder="" value="">
+                                        <div class="valid-feedback " id="error_confirmPass"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Đổi mật khẩu</button></div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" placeholder="" value="@Model.FullName">
-                            <div class="valid-feedback" id="error_fullName"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" placeholder="" value="@Model.Phone">
-                            <div class="valid-feedback " id="error_phone"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" placeholder="" value="@Model.Address">
-                            <div class="valid-feedback " id="error_address"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="" value="@Model.Email">
-                            <div class="valid-feedback " id="error_email"></div>
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu</button></div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Đổi mật khẩu</h4>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Mật khẩu cũ</label>
-                            <input type="text" class="form-control" id="oldPass" placeholder="" value="">
-                            <div class="valid-feedback " id="error_oldPass"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Mật khẩu mới</label>
-                            <input type="text" class="form-control" id="newPass" placeholder="" value="">
-                            <div class="valid-feedback " id="error_newPass"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Xác minh mật khẩu</label>
-                            <input type="text" class="form-control" id="confirmPass" placeholder="" value="">
-                            <div class="valid-feedback " id="error_confirmPass"></div>
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Đổi mật khẩu</button></div>
                 </div>
 
             </div>
         </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h5>Width</h5>
+                            </td>
+                            <td>
+                                <h5>128mm</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Height</h5>
+                            </td>
+                            <td>
+                                <h5>508mm</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Depth</h5>
+                            </td>
+                            <td>
+                                <h5>85mm</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Weight</h5>
+                            </td>
+                            <td>
+                                <h5>52gm</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Quality checking</h5>
+                            </td>
+                            <td>
+                                <h5>yes</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Freshness Duration</h5>
+                            </td>
+                            <td>
+                                <h5>03days</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>When packeting</h5>
+                            </td>
+                            <td>
+                                <h5>Without touch of hand</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Each Box contains</h5>
+                            </td>
+                            <td>
+                                <h5>60pcs</h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-</div>
+</section>
 
 @section Script{
     <script>
         $(document).ready(function () {
         });
+        function LoadAcount() {
+            id = @Session["ID_Account"];
+            ClearValidation();
+            $.ajax({
+                url: "/Account/GetById/" + id,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#FullName').val(result.FullName);
+                    $('#Phone').val(result.Phone);
+                    $('#Address').val(result.Address);
+                    $('#Email').val(result.Email);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+            });
+            return false;
+        }
+        function UploadImage() {
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#Avatar").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                $.ajax({
+                    url: '/Account/UploadFiles',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        return true;
+                    },
+                    error: function (err) {
+                        return false;
+                    }
+                });
+            } else {
+                return false;
+            }
+        }
+        function GetImage() {
+            var fileUpload = $("#Avatar").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(i, files[i].name);
+            }
+            return fileData;
+        }
         function Edit() {
             errorPhone();
             errorEmail();
@@ -88,7 +259,7 @@
 
             var fileData = GetImage();
             let account = {};
-            account["ID_Account"] = Session["ID_Account"];
+            account["ID_Account"] =@Session["ID_Account"];
             account["UserName"] = $('#UserName').text();
             account["FullName"] = $('#FullName').val();
             account["Phone"] = $('#Phone').val();
@@ -106,9 +277,15 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    UploadImage();
-                    ClearTextBox();
-                    toastr.success('Lưu thành công!');
+                    if (result) {
+                        UploadImage();
+                        ClearTextBox();
+                        LoadAcount();
+                        toastr.success('Lưu thành công!');
+                    }
+                    else {
+                        toastr.error('Lưu không thành công!');
+                    }
                 },
                 error: function (errormessage) {
                     toastr.error('Lưu không thành công!');
@@ -124,8 +301,6 @@
             ClearValidation();
         }
         function ClearValidation() {
-            $('#UserName').removeClass('is-invalid');
-            $('#UserName').removeClass('is-valid');
             $('#oldPass').removeClass('is-invalid');
             $('#oldPass').removeClass('is-valid');
             $('#newPass').removeClass('is-invalid');
@@ -134,11 +309,7 @@
             $('#confirmPass').removeClass('is-valid');
             $('#Avatar').removeClass('is-invalid');
             $('#Avatar').removeClass('is-valid');
-            $("#imgPreview").attr("src", '/wwwroot/ImageProducts/no-image-icon-0.jpg');
             $('#error_userName').hide();
-            $('#oldPass').hide();
-            $('#newPass').hide();
-            $('#confirmPass').hide();
             $('#error_avatar').hide();
         }
         $('#Avatar').change(function () {

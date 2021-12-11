@@ -33,6 +33,7 @@ namespace ElectronicDeviceShop.Web.Controllers
                 if (id > 0)
                 {
                     var account = accountService.GetDetailAccountById(id);
+                    account.Phone = account.Phone.Trim(' ');
                     return View(account);
                 }
                 else
@@ -65,9 +66,16 @@ namespace ElectronicDeviceShop.Web.Controllers
             }
             return Json(new { newUrl = Url.Action("Index", "Home"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetById(int id)
+        {
+            var account = accountService.GetEditAccountById(id);
+            return Json(account, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Edit(EditAccountViewModel account)
         {
+            account.Password = accountService.GetAccountByUserName(account.UserName).Password;
+            account.Role = 2;
             var response = accountService.Edit(account);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }

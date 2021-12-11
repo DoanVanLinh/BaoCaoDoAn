@@ -473,7 +473,7 @@
         $('#Avatar').change(function () {
             const [file] = $('#Avatar').get(0).files;
             if (file) {
-                imgPreview.src ='/wwwroot/ImageProducts/' + URL.createObjectURL(file);
+                imgPreview.src =URL.createObjectURL(file);
             } else {
                 imgPreview.src = '/wwwroot/ImageProducts/no-image-icon-0.jpg';
             }
