@@ -42,7 +42,7 @@ namespace ElectronicDeviceShop.Services.Bills
 
         public EditBillViewModel GetEditBillById(int id)
         {
-            var bill = unitOfWork.BillRepository.GetById(id);
+            var bill = unitOfWork.BillRepository.GetAll().Where(p => p.Status != Status.IsDeleted && p.ID_Bill == id).FirstOrDefault();
             return Mapper.Map<EditBillViewModel>(bill);
         }
         public BillDetailViewModel GetDetailBillById(int id)

@@ -1,5 +1,11 @@
-﻿using ElectronicDeviceShop.Services.Accounts;
+﻿using ElectronicDeviceShop.Models.Enums;
+using ElectronicDeviceShop.Services.Accounts;
+using ElectronicDeviceShop.Services.BillDetails;
+using ElectronicDeviceShop.Services.Bills;
+using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.ViewModels.Accounts;
+using ElectronicDeviceShop.ViewModels.Bills;
+using ElectronicDeviceShop.ViewModels.Products;
 using ElectronicDeviceShop.ViewModels.Results;
 using System;
 using System.Collections.Generic;
@@ -13,9 +19,17 @@ namespace ElectronicDeviceShop.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
-        public AccountController(IAccountService accountService)
+        private readonly IBillService billService;
+        private readonly IProductService productService;
+        private readonly IBillDetailService billDetailService;
+        private readonly int pageSize = 4;
+
+        public AccountController(IAccountService accountService, IBillService billService, IBillDetailService billDetailService, IProductService productService)
         {
             this.accountService = accountService;
+            this.billService = billService;
+            this.billDetailService = billDetailService;
+            this.productService = productService;
         }
         public ActionResult Index()
         {
@@ -33,7 +47,8 @@ namespace ElectronicDeviceShop.Web.Controllers
                 if (id > 0)
                 {
                     var account = accountService.GetDetailAccountById(id);
-                    account.Phone = account.Phone.Trim(' ');
+                    if (account.Phone != null)
+                        account.Phone = account.Phone.Trim(' ');
                     return View(account);
                 }
                 else
@@ -67,7 +82,7 @@ namespace ElectronicDeviceShop.Web.Controllers
                 response = accountService.Login(account);
             if (response.IsSuccessed)
             {
-                Session["ID_Account"] = accountService.GetAll().Where(a=>a.UserName == account.UserName).FirstOrDefault().ID_Account;
+                Session["ID_Account"] = accountService.GetAll().Where(a => a.UserName == account.UserName).FirstOrDefault().ID_Account;
             }
             return Json(new { newUrl = Url.Action("Index", "Home"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
         }
@@ -135,5 +150,162 @@ namespace ElectronicDeviceShop.Web.Controllers
             }
         }
 
+
+        public JsonResult GetNewOrder(string txtSearch, int? page)
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var bills = billService.GetDetailBillByStatus(Status.NewOrders).Where(b => b.ID_Account == id);
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+
+                bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
+            }
+
+            if (page <= 0)
+                page = 1;
+            int totalPage = bills.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.numSize = numSize;
+            ViewBag.all = bills;
+
+            int start = (int)(page - 1) * pageSize;
+            var dataBill = bills.Skip(start).Take(pageSize);
+            return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetConfirmOrder(string txtSearch, int? page)
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var bills = billService.GetDetailBillByStatus(Status.ConfirmOrders).Where(b => b.ID_Account == id);
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+                bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
+            }
+
+            if (page <= 0)
+                page = 1;
+            int totalPage = bills.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.numSize = numSize;
+            ViewBag.all = bills;
+
+            int start = (int)(page - 1) * pageSize;
+            var dataBill = bills.Skip(start).Take(pageSize);
+            return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetShippingOrder(string txtSearch, int? page)
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var bills = billService.GetDetailBillByStatus(Status.ShippingOrders).Where(b => b.ID_Account == id);
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+                bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
+            }
+
+            if (page <= 0)
+                page = 1;
+            int totalPage = bills.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.numSize = numSize;
+            ViewBag.all = bills;
+
+            int start = (int)(page - 1) * pageSize;
+            var dataBill = bills.Skip(start).Take(pageSize);
+            return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSuccessOrder(string txtSearch, int? page)
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var bills = billService.GetDetailBillByStatus(Status.SuccessOrders).Where(b => b.ID_Account == id);
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+                bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
+            }
+
+            if (page <= 0)
+                page = 1;
+            int totalPage = bills.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.numSize = numSize;
+            ViewBag.all = bills;
+
+            int start = (int)(page - 1) * pageSize;
+            var dataBill = bills.Skip(start).Take(pageSize);
+            return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetCancelOrder(string txtSearch, int? page)
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var bills = billService.GetDetailBillByStatus(Status.CancelOrders).Where(b => b.ID_Account == id);
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                ViewBag.txtSearch = txtSearch;
+                bills = bills.Where(s => s.ReceiverName.ToLower().Contains(txtSearch.ToLower()));
+            }
+
+            if (page <= 0)
+                page = 1;
+            int totalPage = bills.Count();
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+            if (page > numSize)
+                page = numSize;
+
+            ViewBag.pageCurrent = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.numSize = numSize;
+            ViewBag.all = bills;
+
+            int start = (int)(page - 1) * pageSize;
+            var dataBill = bills.Skip(start).Take(pageSize);
+            return Json(new { all = bills, data = dataBill, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetBillById(int id)
+        {
+            var bill = billService.GetEditBillById(id);
+            var billDetail = billDetailService.GetDetailBillDetailByBill(bill.ID_Bill);
+            var product = new List<ProductDetailViewModel>();
+            foreach (var item in billDetail)
+            {
+                product.Add(productService.GetDetailProductById(item.ID_Product));
+            }
+
+            return Json(new { bill = bill, billDetail = billDetail, product = product }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CancelBill(EditBillViewModel bill)
+        {
+            var oldBill = billService.GetEditBillById(bill.ID_Bill);
+            oldBill.Status = Status.CancelOrders;
+            var response = billService.Edit(oldBill);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
     }
 }

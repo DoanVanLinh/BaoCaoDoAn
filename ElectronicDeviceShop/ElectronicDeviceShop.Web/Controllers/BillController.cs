@@ -25,7 +25,7 @@ namespace ElectronicDeviceShop.Web.Controllers
         private readonly IBillDetailService billDetailService;
         private readonly IAccountService accountService;
         static IEnumerable<CartViewModel> cart;
-        static List<ProductViewModel> product = new List<ProductViewModel>();
+        static List<ProductViewModel> product = new List<ProductViewModel>(); 
 
         public BillController(IProductService productService, ICartService cartService, IBillService billService, IAccountService accountService, IBillDetailService billDetailService)
         {
@@ -35,7 +35,6 @@ namespace ElectronicDeviceShop.Web.Controllers
             this.accountService = accountService;
             this.billDetailService = billDetailService;
         }
-
         public ActionResult Index()
         {
             if (Session["ID_Account"] != null)
@@ -90,11 +89,11 @@ namespace ElectronicDeviceShop.Web.Controllers
             }
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult Edit(EditCartViewModel cart)
         {
             var response = cartService.Edit(cart);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
+
     }
 }
