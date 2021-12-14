@@ -74,70 +74,9 @@
         $('#ShowPass').change(function () {
             $('#ShowPass').is(":checked") == true ? $('#Password').attr('type', 'text') : $('#Password').attr('type', 'password');
         });
-        //function Login() {
-        //    let account = {};
-        //    account["UserName"] = $('#UserName').val();
-        //    account["Password"] = $('#Password').val();
-        //    $.ajax({
-        //        url: "/Account/Login",
-        //        data: JSON.stringify(account),
-        //        type: "POST",
-        //        contentType: "application/json;charset=utf-8",
-        //        dataType: "json",
-        //        success: function (result) {
-        //            if (!result)
-        //                toastr.error('Tài khoản hoặc mật khẩu không đúng!');
-        //        },
-        //        error: function (errormessage) {
-        //            toastr.error('Tài khoản hoặc mật khẩu không đúng!');
-        //        }
-        //    });
-        //}
-                                    //Validation
-                                    //const errorPassword = () => {
-                                    //    if ($('#Password').val() == '') {
-                                    //        $('#error_password').show();
-                                    //        $('#error_password').addClass('invalid-feedback');
-                                    //        $('#error_password').removeClass('valid-feedback');
-                                    //        $('#Password').addClass('is-invalid');
-                                    //        $('#error_password').text("Mật khẩu không được để trống!");
-                                    //        checkError = true;
-                                    //    }
-                                    //    else {
-                                    //        $('#error_password').hide();
-                                    //        $('#Password').addClass('is-valid');
-                                    //        $('#Password').removeClass('is-invalid');
-                                    //        checkError = false;
-                                    //    }
-                                    //}
-                                    //$('#Password').keyup(() => {
-                                    //    errorPassword();
-                                    //});
-                                    //$('#Password').keydown(() => {
-                                    //    errorPassword();
-                                    //});
-                                    //const errorUserName = () => {
-                                    //    if ($('#UserName').val() == '') {
-                                    //        $('#error_userName').show();
-                                    //        $('#error_userName').addClass('invalid-feedback');
-                                    //        $('#error_userName').removeClass('valid-feedback');
-                                    //        $('#UserName').addClass('is-invalid');
-                                    //        $('#error_userName').text("Mật khẩu không được để trống!");
-                                    //        checkError = true;
-                                    //    }
-                                    //    else {
-                                    //        $('#error_userName').hide();
-                                    //        $('#UserName').addClass('is-valid');
-                                    //        $('#UserName').removeClass('is-invalid');
-                                    //        checkError = false;
-                                    //    }
-                                    //}
-                                    //$('#UserName').keyup(() => {
-                                    //    errorUserName();
-                                    //});
-                                    //$('#UserName').keydown(() => {
-                                    //    errorUserName();
-                                    //});
+        function Check() {
+            //if(Seccion[""])
+        }
     </script>
 </body>
 </html>

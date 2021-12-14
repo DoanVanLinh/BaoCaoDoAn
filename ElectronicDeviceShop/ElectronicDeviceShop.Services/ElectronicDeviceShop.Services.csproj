@@ -80,6 +80,10 @@
     <Compile Include="Categories\ICategoryService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="PermissionDetails\IPermissionDetailService.cs" />
+    <Compile Include="PermissionDetails\PermissionDetailService.cs" />
+    <Compile Include="Permissions\PermissionService.cs" />
+    <Compile Include="Permissions\IPermissionService.cs" />
     <Compile Include="Products\IProductService.cs" />
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

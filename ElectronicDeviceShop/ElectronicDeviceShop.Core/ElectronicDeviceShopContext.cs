@@ -18,6 +18,8 @@ namespace ElectronicDeviceShop.Core
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<PermissionDetail> PermissionDetails { get; set; }
+        public virtual DbSet<Permission> Permission { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suplliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -51,6 +53,11 @@ namespace ElectronicDeviceShop.Core
                 .WithRequired(e => e.Account)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Account>()
+               .HasMany(e => e.PermissionDetails)
+               .WithRequired(e => e.Account)
+               .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<BillDetail>()
                 .Property(e => e.CurrentlyPrice)
                 .HasPrecision(19, 4);
@@ -72,6 +79,15 @@ namespace ElectronicDeviceShop.Core
             modelBuilder.Entity<Category>()
                 .HasMany(e => e.Products)
                 .WithRequired(e => e.Category)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Permission>()
+                .Property(e => e.Code)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Permission>()
+                .HasMany(e => e.PermissionDetails)
+                .WithRequired(e => e.Permission)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()

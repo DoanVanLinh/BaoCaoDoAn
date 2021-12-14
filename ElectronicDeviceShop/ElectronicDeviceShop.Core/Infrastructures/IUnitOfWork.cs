@@ -16,6 +16,8 @@ namespace ElectronicDeviceShop.Core.Infrastructures
         IProductRepository ProductRepository { get; }
         ISupplierRepository SupplierRepository { get; }
         IBillDetailRepository BillDetailRepository { get; }
+        IPermissionRepository PermissionRepository { get; }
+        IPermissionDetailRepository PermissionDetailRepository { get; }
 
         ElectronicDeviceShopContext ElectronicDeviceShopContext { get; }
         int SaveChange();

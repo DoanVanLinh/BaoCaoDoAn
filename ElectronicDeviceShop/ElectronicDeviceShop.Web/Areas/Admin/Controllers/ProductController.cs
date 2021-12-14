@@ -1,4 +1,7 @@
-﻿using ElectronicDeviceShop.Services.Categories;
+﻿using ElectronicDeviceShop.Common;
+using ElectronicDeviceShop.Services.Categories;
+using ElectronicDeviceShop.Services.PermissionDetails;
+using ElectronicDeviceShop.Services.Permissions;
 using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.Services.Suppliers;
 using ElectronicDeviceShop.ViewModels.Products;
@@ -13,25 +16,33 @@ using System.Web.Mvc;
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
     [CustomAuthorize(Roles = "Admin")]
-
     public class ProductController : Controller
     {
 
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
         private readonly ISupplierService supplierService;
+        private readonly IPermissionService permissionService;
+        private readonly IPermissionDetailService permissionDetailService;
+        private readonly PermissionHelper permissionHelper;
 
         private readonly int pageSize = 4;
-        public ProductController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
+        public ProductController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService, IPermissionService permissionService, IPermissionDetailService permissionDetailService)
         {
             this.productService = productService;
             this.categoryService = categoryService;
             this.supplierService = supplierService;
+            this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
 
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult CheckPermission()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            return permissionHelper.CheckPermission(id, "PRODUCTS");
         }
         public JsonResult GetAll(string txtSearch, int? page)
         {

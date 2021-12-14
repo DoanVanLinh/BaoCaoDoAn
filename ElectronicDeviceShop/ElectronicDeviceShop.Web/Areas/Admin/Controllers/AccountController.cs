@@ -12,7 +12,6 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;

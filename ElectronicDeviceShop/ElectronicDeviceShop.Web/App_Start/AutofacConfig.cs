@@ -10,6 +10,8 @@ using ElectronicDeviceShop.Services.Bills;
 using ElectronicDeviceShop.Services.Categories;
 using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.Services.Suppliers;
+using ElectronicDeviceShop.Services.Permissions;
+using ElectronicDeviceShop.Services.PermissionDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +96,27 @@ namespace ElectronicDeviceShop.Web.App_Start
                  .Where(t => t.Name.EndsWith("Service"))
                  .AsImplementedInterfaces()
                  .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(PermissionRepository).Assembly)
+                 .Where(t => t.Name.EndsWith("Repository"))
+                 .AsImplementedInterfaces()
+                 .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(PermissionService).Assembly)
+                 .Where(t => t.Name.EndsWith("Service"))
+                 .AsImplementedInterfaces()
+                 .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(PermissionDetailRepository).Assembly)
+                 .Where(t => t.Name.EndsWith("Repository"))
+                 .AsImplementedInterfaces()
+                 .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(PermissionDetailService).Assembly)
+                 .Where(t => t.Name.EndsWith("Service"))
+                 .AsImplementedInterfaces()
+                 .InstancePerLifetimeScope();
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

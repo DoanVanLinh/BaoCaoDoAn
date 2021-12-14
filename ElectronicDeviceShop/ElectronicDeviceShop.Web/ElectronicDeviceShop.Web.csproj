@@ -235,6 +235,7 @@
     <Content Include="Areas\Admin\Assets\js\jquery.dataTables.js" />
     <Content Include="Areas\Admin\Assets\js\jquery.validate.min.js" />
     <Content Include="Areas\Admin\Assets\js\Login\main.js" />
+    <Content Include="Areas\Admin\Assets\js\Permission.js" />
     <Content Include="Areas\Admin\Assets\js\UrlHelper.js" />
     <Content Include="wwwroot\css\bootstrap.css" />
     <Content Include="wwwroot\css\flaticon.css" />
@@ -665,6 +666,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ElectronicDeviceShop.Common\ElectronicDeviceShop.Common.csproj">
+      <Project>{9ba5f711-813b-42ad-8e67-4c398b2aac8a}</Project>
+      <Name>ElectronicDeviceShop.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ElectronicDeviceShop.Core\ElectronicDeviceShop.Core.csproj">
       <Project>{559c4f9e-97b0-4afd-aa8b-fc3686a77cdc}</Project>
       <Name>ElectronicDeviceShop.Core</Name>

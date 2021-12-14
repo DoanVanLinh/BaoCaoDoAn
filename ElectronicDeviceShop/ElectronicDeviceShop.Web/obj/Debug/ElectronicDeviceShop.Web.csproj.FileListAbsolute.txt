@@ -530,3 +530,5 @@ G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\Electr
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.csproj.CopyComplete
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.dll
 G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\obj\Debug\ElectronicDeviceShop.Web.pdb
+G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\ElectronicDeviceShop.Common.dll
+G:\Download\DO_AN\ElectronicDeviceShop\ElectronicDeviceShop.Web\bin\ElectronicDeviceShop.Common.pdb

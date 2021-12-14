@@ -5,6 +5,8 @@ using ElectronicDeviceShop.ViewModels.BillDetails;
 using ElectronicDeviceShop.ViewModels.Bills;
 using ElectronicDeviceShop.ViewModels.Carts;
 using ElectronicDeviceShop.ViewModels.Categories;
+using ElectronicDeviceShop.ViewModels.PermissionDetails;
+using ElectronicDeviceShop.ViewModels.Permissions;
 using ElectronicDeviceShop.ViewModels.Products;
 using ElectronicDeviceShop.ViewModels.Suppliers;
 using System;
@@ -57,6 +59,10 @@ namespace ElectronicDeviceShop.Web.App_Start
             CreateMap<BillDetailDetailViewModel, BillDetail>().ReverseMap();
             CreateMap<DeleteBillDetailViewModel, BillDetail>().ReverseMap();
             CreateMap<CreateBillDetailViewModel, BillDetail>().ReverseMap();
+
+            CreateMap<PermissionDetailViewModel, Permission>().ReverseMap();
+
+            CreateMap<PermissionDetailDetailViewModel, PermissionDetail>().ReverseMap();
         }
     }
 }

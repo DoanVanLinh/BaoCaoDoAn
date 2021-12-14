@@ -18,7 +18,9 @@ namespace ElectronicDeviceShop.Core.Infrastructures
         private ICategoryRepository categoryRepository;
         private IProductRepository productRepository;
         private ISupplierRepository supplierRepository;
-        IBillDetailRepository billDetailRepository;
+        private IPermissionRepository permissionRepository;
+        private IPermissionDetailRepository permissionDetailRepository;
+        private IBillDetailRepository billDetailRepository;
 
         public UnitOfWork(ElectronicDeviceShopContext context)
         {
@@ -105,6 +107,30 @@ namespace ElectronicDeviceShop.Core.Infrastructures
                     this.billDetailRepository = new BillDetailRepository(this.context);
                 }
                 return this.billDetailRepository;
+
+            }
+        }
+        public IPermissionRepository PermissionRepository
+        {
+            get
+            {
+                if (this.permissionRepository == null)
+                {
+                    this.permissionRepository = new PermissionRepository(this.context);
+                }
+                return this.permissionRepository;
+
+            }
+        }
+        public IPermissionDetailRepository PermissionDetailRepository
+        {
+            get
+            {
+                if (this.permissionDetailRepository == null)
+                {
+                    this.permissionDetailRepository = new PermissionDetailRepository(this.context);
+                }
+                return this.permissionDetailRepository;
 
             }
         }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
@@ -33,16 +34,15 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             if (response.IsSuccessed)
             {
                 var accountAd = accountService.GetAll().Where(a => a.UserName == account.UserName).FirstOrDefault();
-                //TempData["UserName"] = accountAd.UserName;
-                //TempData["Avatar"] = accountAd.Avatar;
                 HttpContext.Session.Add("USER", accountAd.UserName);
-                HttpContext.Session.Add("Role", "Admin");
+                HttpContext.Session.Add("Role", GetNameRole(accountAd.Role));
+                Session["ID_Account"] = accountAd.ID_Account;
                 return RedirectToAction("Index", "Product");
             }
             else
                 return View(account);
         }
-        string ChangeRole(int role)
+        string GetNameRole(int role)
         {
             switch (role)
             {
@@ -56,5 +56,6 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                     return "";
             }
         }
+
     }
 }

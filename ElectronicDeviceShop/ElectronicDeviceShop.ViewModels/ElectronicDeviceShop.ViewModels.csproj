@@ -74,6 +74,8 @@
     <Compile Include="Categories\DeleteCategoryViewModel.cs" />
     <Compile Include="Categories\CreateCategoryViewModel.cs" />
     <Compile Include="Categories\EditCategoryViewModel.cs" />
+    <Compile Include="PermissionDetails\PermissionDetailDetailViewModel.cs" />
+    <Compile Include="Permissions\PermissionDetailViewModel.cs" />
     <Compile Include="Products\ProductDetailViewModel.cs" />
     <Compile Include="Products\ProductViewModel.cs" />
     <Compile Include="Products\CreateProductViewModel.cs" />

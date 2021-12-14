@@ -15,7 +15,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Filters
             {
                 var role = HttpContext.Current.Session["ROLE"];
 
-                if (role != null)
+                if (role != null||role.ToString() == "User")
                 {
                     if (Roles != role.ToString())
                     {

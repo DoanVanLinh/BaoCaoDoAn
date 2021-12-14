@@ -273,3 +273,7 @@ section.cat_product_area.section_gap {
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+button[disabled=disabled], button:disabled {
+    background-color:gray !important;
+    border-color:gray !important;
+}

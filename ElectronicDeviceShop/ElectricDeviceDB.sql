@@ -111,6 +111,30 @@ CREATE TABLE BillDetails
 ) 
 GO
 
+CREATE TABLE [Permissions]
+(
+	ID_Permission INT IDENTITY PRIMARY KEY,
+	[Name] NVARCHAR(255) NOT NULL,
+	Code VARCHAR(255),
+	[Status] INT DEFAULT 1,
+) 
+GO
+
+CREATE TABLE PermissionDetails
+(
+	ID_PermissionDetail INT IDENTITY PRIMARY KEY,
+	ID_Permission INT NOT NULL,
+	ID_Account INT NOT NULL,
+	[View] BIT NULL,
+	[Create] BIT NULL,
+	Edit BIT NULL,
+	[Delete] BIT NULL,
+	[Status] INT DEFAULT 1,
+	CONSTRAINT FK_PermissionDetail_Account FOREIGN KEY (ID_Account) REFERENCES Accounts(ID_Account),
+	CONSTRAINT FK_PermissionDetail_Permission FOREIGN KEY (ID_Permission) REFERENCES [Permissions](ID_Permission),
+) 
+GO
+
 INSERT dbo.Categories ([Name], Icon, [Status]) VALUES
 (N'Bình tắm nóng lạnh', N'icon-binh-tam-nong-lanh.png', 1),
 (N'Điều hòa nhiệt độ', N'icon-dieu-hoa.png', 1),
@@ -514,6 +538,14 @@ INSERT INTO BillDetails(ID_Bill, ID_Product, Amount, CurrentlyPrice) VALUES
 (1, 23, 16, 570453)
 GO
 
+INSERT INTO [Permissions]([Name],Code) VALUES
+(N'Quản lý sản phẩm', 'PRODUCTS')
+GO
+
+INSERT INTO PermissionDetails(ID_Permission,ID_Account,[View],[Create],Edit,[Delete]) VALUES
+(1,1,1,1,1,0)
+GO
+
 SELECT * FROM Categories
 SELECT * FROM Suppliers
 SELECT * FROM Products
@@ -521,4 +553,6 @@ SELECT * FROM Accounts
 SELECT * FROM Carts
 SELECT * FROM Bills
 SELECT * FROM BillDetails
+SELECT * FROM [Permissions]
+SELECT * FROM PermissionDetails
 GO
