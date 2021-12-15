@@ -539,11 +539,19 @@ INSERT INTO BillDetails(ID_Bill, ID_Product, Amount, CurrentlyPrice) VALUES
 GO
 
 INSERT INTO [Permissions]([Name],Code) VALUES
-(N'Quản lý sản phẩm', 'PRODUCTS')
+(N'Quản lý tài khoản', 'ACCOUNTS'),
+(N'Quản lý hóa đơn', 'BILLS'),
+(N'Quản lý danh mục', 'CATEGORIES'),
+(N'Quản lý sản phẩm', 'PRODUCTS'),
+(N'Quản lý nhà cung cấp', 'SUPPLIERS')
 GO
 
 INSERT INTO PermissionDetails(ID_Permission,ID_Account,[View],[Create],Edit,[Delete]) VALUES
-(1,1,1,1,1,0)
+(1,1,1,1,1,0),
+(2,1,1,0,1,0),
+(3,1,1,1,1,1),
+(4,1,0,0,0,0),
+(5,1,1,0,0,0)
 GO
 
 SELECT * FROM Categories

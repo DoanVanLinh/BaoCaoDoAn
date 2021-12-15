@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
                     </div>
-                    <button type="button" class="col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="ClearTextBox();"><i class="fas fa-plus "></i></button>
+                    <button type="button" class="add-button col-sm-6 col-md-2 col-lg-1 mb-2 btn btn-lg btn-success mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="ClearTextBox();"><i class="fas fa-plus "></i></button>
                 </div>
 
                 <div class="card-body p-0 text-center align-middle table-responsive-lg">
@@ -97,7 +97,42 @@
                 var page = $(this).attr('data-page');
                 Search(page);
             });
-
+            CheckPermission();
+        });
+        //PHAN QUYEN
+        let add;
+        let edit;
+        let dele;
+        function CheckPermission() {
+            $.ajax({
+                url: "/Admin/Product/CheckPermission",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    add = result.Create;
+                    edit = result.Edit;
+                    dele = result.Delete;
+                }
+            });
+        }
+        $(".add-button").click(function (e) {
+            if (add == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-add-edit").modal('toggle');
+            }
+        });
+        $(document).on('click', '.edit-button', function (e) {
+            if (edit == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-add-edit").modal('toggle');
+            }
+        });
+        $(document).on('click', '.delete-button', function (e) {
+            if (dele == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-delete").modal('toggle');
+            }
         });
 
         function LoadData(txtSearch, page) {
@@ -120,8 +155,8 @@
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
                         html += '<td class="align-middle d-flex justify-content-center ">';
                         html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="Detail(' + item.ID_Category + ')"><i class="fas fa-eye"></i></button>';
-                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Category + ')"><i class="fas fa-pencil-alt"></i></button>';
-                        html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Category + ')"><i class="fas fa-trash-alt"></i></button>';
+                        html += '<button type="button" class="edit-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Category + ')"><i class="fas fa-pencil-alt"></i></button>';
+                        html += '<button type="button" class="delete-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Category + ')"><i class="fas fa-trash-alt"></i></button>';
                         html += '</td>';
                         html += '</tr>';
                     });

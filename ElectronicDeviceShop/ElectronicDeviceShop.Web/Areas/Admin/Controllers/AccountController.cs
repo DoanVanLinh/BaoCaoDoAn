@@ -1,5 +1,8 @@
-﻿using ElectronicDeviceShop.Services.Accounts;
+﻿using ElectronicDeviceShop.Common;
+using ElectronicDeviceShop.Services.Accounts;
 using ElectronicDeviceShop.Services.Categories;
+using ElectronicDeviceShop.Services.PermissionDetails;
+using ElectronicDeviceShop.Services.Permissions;
 using ElectronicDeviceShop.ViewModels.Accounts;
 using ElectronicDeviceShop.ViewModels.Categories;
 using ElectronicDeviceShop.Web.Areas.Admin.Filters;
@@ -12,18 +15,30 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
+        private readonly IPermissionService permissionService;
+        private readonly IPermissionDetailService permissionDetailService;
+        private readonly PermissionHelper permissionHelper;
         private readonly int pageSize = 4;
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IPermissionService permissionService, IPermissionDetailService permissionDetailService)
         {
             this.accountService = accountService;
+            this.permissionService = permissionService;
+            this.permissionDetailService = permissionDetailService;
+            this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult CheckPermission()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            return permissionHelper.CheckPermission(id, "ACCOUNTS");
         }
         public JsonResult GetAll(string txtSearch, int? page)
         {
@@ -59,6 +74,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Create(CreateAccountViewModel account)
         {
             var response = accountService.Create(account);
@@ -66,6 +82,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Edit(EditAccountViewModel account)
         {
             var response = accountService.Edit(account);
@@ -73,6 +90,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var account = accountService.GetDeleteAccountById(id);

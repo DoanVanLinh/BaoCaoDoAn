@@ -1,6 +1,9 @@
-﻿using ElectronicDeviceShop.Models.Enums;
+﻿using ElectronicDeviceShop.Common;
+using ElectronicDeviceShop.Models.Enums;
 using ElectronicDeviceShop.Services.BillDetails;
 using ElectronicDeviceShop.Services.Bills;
+using ElectronicDeviceShop.Services.PermissionDetails;
+using ElectronicDeviceShop.Services.Permissions;
 using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.ViewModels.Bills;
 using ElectronicDeviceShop.ViewModels.Products;
@@ -20,17 +23,29 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         private readonly IBillService billService;
         private readonly IProductService productService;
         private readonly IBillDetailService billDetailService;
+        private readonly IPermissionService permissionService;
+        private readonly IPermissionDetailService permissionDetailService;
+        private readonly PermissionHelper permissionHelper;
         private readonly int pageSize = 4;
-        public BillController(IBillService billService, IProductService productService, IBillDetailService billDetailService)
+        public BillController(IBillService billService, IProductService productService, IBillDetailService billDetailService, IPermissionService permissionService, IPermissionDetailService permissionDetailService)
         {
             this.billService = billService;
             this.billDetailService = billDetailService;
             this.productService = productService;
+            this.permissionService = permissionService;
+            this.permissionDetailService = permissionDetailService;
+            this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult CheckPermission()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            return permissionHelper.CheckPermission(id, "BILLS");
         }
         public JsonResult GetNewOrder(string txtSearch, int? page)
         {
@@ -173,10 +188,11 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                 product.Add(productService.GetDetailProductById(item.ID_Product));
             }
 
-            return Json(new { bill = bill, billDetail = billDetail,product = product }, JsonRequestBehavior.AllowGet);
+            return Json(new { bill = bill, billDetail = billDetail, product = product }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Edit(EditBillViewModel bill)
         {
             var response = billService.Edit(bill);

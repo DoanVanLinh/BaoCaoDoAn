@@ -1,4 +1,7 @@
-﻿using ElectronicDeviceShop.Services.Suppliers;
+﻿using ElectronicDeviceShop.Common;
+using ElectronicDeviceShop.Services.PermissionDetails;
+using ElectronicDeviceShop.Services.Permissions;
+using ElectronicDeviceShop.Services.Suppliers;
 using ElectronicDeviceShop.ViewModels.Suppliers;
 using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
@@ -14,15 +17,26 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
     public class SupplierController : Controller
     {
         private readonly ISupplierService supplierService;
+        private readonly IPermissionService permissionService;
+        private readonly IPermissionDetailService permissionDetailService;
+        private readonly PermissionHelper permissionHelper;
         private readonly int pageSize = 4;
-        public SupplierController(ISupplierService supplierService)
+        public SupplierController(ISupplierService supplierService, IPermissionService permissionService, IPermissionDetailService permissionDetailService)
         {
             this.supplierService = supplierService;
+            this.permissionService = permissionService;
+            this.permissionDetailService = permissionDetailService;
+            this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult CheckPermission()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            return permissionHelper.CheckPermission(id, "SUPPLIERS");
         }
         public JsonResult GetAll(string txtSearch, int? page)
         {
@@ -48,7 +62,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 
             int start = (int)(page - 1) * pageSize;
             var dataSupplier = suppliers.Skip(start).Take(pageSize);
-            return Json(new {all = suppliers,  data = dataSupplier, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+            return Json(new { all = suppliers, data = dataSupplier, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int id)
         {
@@ -57,6 +71,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Create(CreateSupplierViewModel supplier)
         {
             var response = supplierService.Create(supplier);
@@ -64,12 +79,14 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Edit(EditSupplierViewModel supplier)
         {
             var response = supplierService.Edit(supplier);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var supplier = supplierService.GetDeleteSupplierById(id);
