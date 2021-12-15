@@ -143,6 +143,7 @@
         let formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
         let money = new Intl.NumberFormat({ style: 'currency', currency: 'VND' });
 
+
         $(document).ready(function () {
             LoadData(null, 1);
             $("body").on("click", ".pagination li a", function (event) {
@@ -152,6 +153,11 @@
             });
             CheckPermission();
         });
+
+        //PHAN QUYEN
+        let add;
+        let edit;
+        let dele;
         function CheckPermission() {
             $.ajax({
                 url: "/Admin/Product/CheckPermission",
@@ -159,13 +165,31 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    $(".view-button").attr("disabled", !result.View);
-                    $(".edit-button").attr("disabled", !result.Edit);
-                    $(".delete-button").attr("disabled", !result.Delete);
-                    $(".add-button").attr("disabled", !result.Create);
+                    add = result.Create;
+                    edit = result.Edit;
+                    dele = result.Delete;
                 }
             });
         }
+        $(".add-button").click(function (e) {
+            if (add == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-add-edit").modal('toggle');
+            }
+        });
+        $(document).on('click', '.edit-button', function (e) {
+            if (edit == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-add-edit").modal('toggle');
+            }
+        });
+        $(document).on('click', '.delete-button', function (e) {
+            if (dele == false) {
+                toastr.error("Bạn không có quyền!");
+                $("#modal-delete").modal('toggle');
+            }
+        });
+        //MAIN
         function LoadSupCate() {
             $.ajax({
                 url: "/Admin/Product/GetSupGetCate",
