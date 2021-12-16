@@ -23,6 +23,6 @@ namespace ElectronicDeviceShop.Services.Accounts
         DeleteAccountViewModel GetDeleteAccountById(int id);
         AccountDetailViewModel GetDetailAccountById(int id);
         LoginViewModel GetAccountByUserName(string userName);
-
+        AccountDetailViewModel GetNewestAccount();
     }
 }

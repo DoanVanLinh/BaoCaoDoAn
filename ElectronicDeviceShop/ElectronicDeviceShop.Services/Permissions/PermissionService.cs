@@ -21,6 +21,13 @@ namespace ElectronicDeviceShop.Services.Permissions
         {
             this.unitOfWork = unitOfWork;
         }
+
+        public IEnumerable<PermissionDetailViewModel> GetAllPermission()
+        {
+            var permissions = unitOfWork.PermissionRepository.GetAll().Where(p => p.Status != Status.IsDeleted);
+            return Mapper.Map<IEnumerable<PermissionDetailViewModel>>(permissions);
+        }
+
         public PermissionDetailViewModel GetDetailPermissionByCode(string code)
         {
             var permission = unitOfWork.PermissionRepository.GetAll().Where(p=>p.Code == code).FirstOrDefault();

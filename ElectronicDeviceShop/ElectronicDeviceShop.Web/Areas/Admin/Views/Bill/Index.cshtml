@@ -231,7 +231,37 @@
                 var valueSelected = this.value;
 
             });
+            CheckPermission();
         });
+
+        let edit;
+        function CheckPermission() {
+            $.ajax({
+                url: "/Admin/Supplier/CheckPermission",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    edit = result.Edit;
+                }
+            });
+        }
+     
+        $(document).on('click', '.edit-button', function () {
+            if (edit == false) {
+                toastr.error("Bạn không có quyền!");
+                this.blur();
+            }
+        });
+        $(document).on('change', '.edit-button', function () {
+            if (edit == false) {
+                toastr.error("Bạn không có quyền!");
+                this.val(0);
+                this.blur();
+            }
+        });
+        
+
         function convertToJavaScriptDate(value) {
             var pattern = /Date\(([^)]+)\)/;
             var results = pattern.exec(value);
@@ -278,7 +308,7 @@
                         html += '<td class="align-middle">' + convertToJavaScriptDate(item.BuyDate) + '</td>';
                         html += '<td class="align-middle d-flex justify-content-center">';
                         html += '<div class="form-group col-8 m-1">';
-                        html += '<select class="inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
+                        html += '<select class="edit-button inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
                         html += '<option value="0" selected="">Chọn</option>';
                         html += '<option value="3">Tiếp nhận</option>';
                         html += '<option value="6">Từ chối</option>';
@@ -347,7 +377,7 @@
                         html += '<td class="align-middle">' + convertToJavaScriptDate(item.BuyDate) + '</td>';
                         html += '<td class="align-middle d-flex justify-content-center">';
                         html += '<div class="form-group col-8 m-1">';
-                        html += '<select class="inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
+                        html += '<select class="edit-button inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
                         html += '<option value="0" selected="">Chọn</option>';
                         html += '<option value="4">Vận chuyển</option>';
                         html += '<option value="6">Hủy</option>';
@@ -416,7 +446,7 @@
                         html += '<td class="align-middle">' + convertToJavaScriptDate(item.BuyDate) + '</td>';
                         html += '<td class="align-middle d-flex justify-content-center">';
                         html += '<div class="form-group col-8 m-1">';
-                        html += '<select class="inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
+                        html += '<select class="edit-button inputState form-control text-center" onchange ="Edit(' + item.ID_Bill + ');" id="' + item.ID_Bill + '">';
                         html += '<option value="0" selected="">Chọn</option>';
                         html += '<option value="5">Thành công</option>';
                         html += '<option value="6">Hủy</option>';
@@ -648,6 +678,8 @@
         var select;
 
         function Edit(ID) {
+            if (edit == false)
+                return;
             id = ID;
             var selector = $('select');
             $.each(selector, function (key, item) {

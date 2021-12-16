@@ -26,7 +26,6 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Login(LoginViewModel account)
         {
@@ -56,6 +55,5 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                     return "";
             }
         }
-
     }
 }

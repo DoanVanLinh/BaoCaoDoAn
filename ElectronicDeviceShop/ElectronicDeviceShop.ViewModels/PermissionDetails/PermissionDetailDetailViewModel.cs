@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicDeviceShop.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,6 @@ namespace ElectronicDeviceShop.ViewModels.PermissionDetails
         public bool? Edit { get; set; }
 
         public bool? Delete { get; set; }
+        public Status Status { get; set; }
     }
 }

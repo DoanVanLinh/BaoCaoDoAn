@@ -139,5 +139,11 @@ namespace ElectronicDeviceShop.Services.Accounts
                 return new ResponseResult(ex.Message);
             }
         }
+
+        public AccountDetailViewModel GetNewestAccount()
+        {
+            var account = this.unitOfWork.AccountRepository.GetAll().Where(p => p.Status != Status.IsDeleted && p.ID_Account == GetAll().Max(a => a.ID_Account)).FirstOrDefault();
+            return Mapper.Map<AccountDetailViewModel>(account);
+        }
     }
 }

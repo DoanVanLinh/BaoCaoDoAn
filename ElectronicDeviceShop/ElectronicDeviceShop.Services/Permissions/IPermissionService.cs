@@ -18,6 +18,7 @@ namespace ElectronicDeviceShop.Services.Permissions
         //IEnumerable<PermissionViewModel> GetPermissionByAccount(int id);
         //EditPermissionViewModel GetEditPermissionById(int id);
         PermissionDetailViewModel GetDetailPermissionByCode(string code);
+        IEnumerable<PermissionDetailViewModel> GetAllPermission();
         //DeletePermissionViewModel GetDeletePermissionById(int id);
     }
 }

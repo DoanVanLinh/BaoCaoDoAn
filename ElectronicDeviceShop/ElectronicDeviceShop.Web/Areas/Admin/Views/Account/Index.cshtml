@@ -73,21 +73,21 @@
                             </tr>
                         </thead>
                         <tbody class="tbody-dark">-->
-                            @*DATA*@
-                        <!--</tbody>
-                    </table>
-                </div>
-                <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
-                    <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-                        <ul class="pagination-dark">-->
-                            @*Pagination*@
-                        @*</ul>
+    @*DATA*@
+    <!--</tbody>
+        </table>
+    </div>
+    <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
+        <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+        <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
+            <ul class="pagination-dark">-->
+    @*Pagination*@
+    @*</ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>-->*@
+        </div>-->*@
     <!-- End Default Dark Table -->
 </div>
 <!-- Modal -->
@@ -146,6 +146,54 @@
 @section modal{
     @Html.Partial("Create")
     @Html.Partial("Delete")
+    <div class="modal" id="modal-permission" tabindex="-1 " role="dialog" aria-labelledby="mediumModalLabel " aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content ">
+                <div class="modal-header p-3">
+                    <div class="col-10 border-bottom-0 ">
+                        <h3 class="page-title">
+                            Phân quyền
+                        </h3>
+                    </div>
+                    <button type="button" class="close btn-lg" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body p-3 d-flex flex-column">
+                    <div class="card-body p-0">
+                        <div class="page-content container col-12 m-1 d-flex justify-content-center">
+                            <div class="container px-0">
+                                <div class="row">
+                                    <div class="col-12 col-lg-10 offset-lg-1">
+                                        <table class="table table-bordered">
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th scope="col" class="text-left">Tên</th>
+                                                    <th scope="col">Xem</th>
+                                                    <th scope="col">Thêm</th>
+                                                    <th scope="col">Sửa</th>
+                                                    <th scope="col">Xóa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-permission">
+                                                <tr>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-danger btn-lg me-md-2" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
 @section Script{
     <script>
@@ -186,7 +234,7 @@
         $(document).on('click', '.edit-button', function (e) {
             if (edit == false) {
                 toastr.error("Bạn không có quyền!");
-                $("#modal-add-edit").modal('toggle');
+                $("#modal-permission").modal('toggle');
             }
         });
         $(document).on('click', '.delete-button', function (e) {
@@ -231,13 +279,14 @@
                         html += '<td class="align-middle"><img src="' + imgPath + '" alt="" height="40"></td>';
                         html += '<td class="align-middle d-flex justify-content-center ">';
                         html += '<button type="button" class="btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="Detail(' + item.ID_Account + ')"><i class="fas fa-eye"></i></button>';
-                        html += '<button type="button" class="edit-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-add-edit" onclick="GetById(' + item.ID_Account + ')"><i class="fas fa-pencil-alt"></i></button>';
-                        html += '<button type="button" class="delete-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Account + ')"><i class="fas fa-trash-alt"></i></button>';
+                        if (item.Role != 2)
+                            html += '<button type="button" class="edit-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-permission" onclick = "GetPermissionById(' + item.ID_Account + ')"><i class="fas fa-user-check"></i></button>';
+                        html += '<button type="button" class="delete-button btn btn-lg btn-info mr-1" data-bs-toggle="modal" data-bs-target="#modal-delete" onclick="return DeleteConfirm(' + item.ID_Account + ')"><i class="fas fa-lock"></i></button>';
                         html += '</td>';
                         html += '</tr>';
                     });
                     $('.tbody-light').html(html);
-
+                    //onclick = "GetPermissionById(' + item.ID_Account + ')"
                     //create pagination
                     var pagination_string = "";
                     pageCurrent = result.pageCurrent;
@@ -361,7 +410,7 @@
             account["Status"] = 1;
 
             $.ajax({
-                url: "/Account/Create",
+                url: "/Admin/Account/Create",
                 data: JSON.stringify(account),
                 type: "POST",
                 processData: false,
@@ -387,27 +436,49 @@
             });
         }
         let id = 0;
-        function GetById(ID) {
+        function GetPermissionById(ID) {
             id = ID;
             ClearValidation();
 
             $.ajax({
-                url: "/Admin/Account/GetById/" + ID,
+                url: "/Admin/Account/GetPermissionById/",
                 typr: "GET",
+                data: { idAccount: ID},
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#UserName').val(result.UserName);
-                    $('#UserName').attr("disabled", "disabled");
-                    $('#FullName').val(result.FullName);
-                    $('#Password').val(result.Password);
-                    $('#Phone').val(result.Phone);
-                    $('#Address').val(result.Address);
-                    $('#Email').val(result.Email);
-                    $('#Role').val(result.Role);
-                    $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.Avatar);
-                    $('#Add').hide();
-                    $('#Edit').show();
+                    var count = 0;
+                    var html = '';
+                    $.each(result.permission, function (key, item) {
+
+                        html += '<tr>';
+                        html += '<td>';
+                        html += item.Name;
+                        html += '</td>';
+                        html += '<td>';
+                        html += '<div class="form-check text-center">';
+                        result.permissionDetail[count].View == true ? html += '<input type="checkbox" class="form-check-input" id="view-' + item.ID_Permission + '-' + ID + '" checked>' : html += '<input type="checkbox" class="form-check-input" id="view-' + item.ID_Permission + '-' + ID + '">';
+                        html += '</div >';
+                        html += '</td>';
+                        html += '<td>';
+                        html += '<div class="form-check text-center">';
+                        result.permissionDetail[count].Create == true ? html += '<input type="checkbox" class="form-check-input" id="add-' + item.ID_Permission + '-' + ID + '" checked>' : html += '<input type="checkbox" class="form-check-input"" id="add-' + item.ID_Permission + '-' + ID + '">';
+                        html += '</div >';
+                        html += '</td>';
+                        html += '<td>';
+                        html += '<div class="form-check text-center">';
+                        result.permissionDetail[count].Edit == true ? html += '<input type="checkbox" class="form-check-input" id="edit-' + item.ID_Permission + '-' + ID + '" checked>' : html += '<input type="checkbox" class="form-check-input" id="edit-' + item.ID_Permission + '-' + ID + '">';
+                        html += '</div >';
+                        html += '</td>';
+                        html += '<td>';
+                        html += '<div class="form-check text-center">';
+                        result.permissionDetail[count].Delete == true ? html += '<input type="checkbox" class="form-check-input" id="delete-' + item.ID_Permission + '-' + ID + '" checked>' : html += '<input type="checkbox" class="form-check-input" id="delete-' + item.ID_Permission + '-' + ID + '">';
+                        html += '</div >';
+                        html += '</td>';
+                        html += '</tr>';
+                        count++;
+                    });
+                    $('#data-permission').html(html);
                 },
                 error: function (errormessage) {
                     toastr.error(errormessage.responseText);
@@ -415,40 +486,45 @@
             });
             return false;
         }
-        function Edit() {
-            errorUserName();
-            errorPassword();
-            errorPhone();
-            errorEmail();
-            if (checkError)
-                return;
+        $(document).on('click', '.form-check-input', function (e) {
+            var idElement = this.id;
+            var listString = idElement.split('-');
+            var id = listString[1].toString();
+            var permissionName = listString[0].toString();
+            var idAccount = listString[2].toString();
 
-            var fileData = GetImage();
-            let account = {};
-            account["ID_Account"] = id;
-            account["UserName"] = $('#UserName').val();
-            account["Password"] = $('#Password').val();
-            account["FullName"] = $('#FullName').val();
-            account["Phone"] = $('#Phone').val();
-            account["Address"] = $('#Address').val();
-            account["Email"] = $('#Email').val();
-            account["Role"] = $('#Role').val();
-            if ($("#Avatar").get(0).files.length != 0)
-                account["Avatar"] = fileData.get(0);
-            else
-                account["Avatar"] = $("#imgPreview").attr('src').split('/')[3];
+            if (permissionName == "add" || permissionName == "edit" || permissionName == "delete") {
+                if (this.checked == true)
+                    $('#view-' + id + '-' + idAccount).prop('checked', true);
+            }
+            if (permissionName == "view") {
+                if (this.checked == false) {
+                    $('#add-' + id + '-' + idAccount).prop('checked', false);
+                    $('#edit-' + id + '-' + idAccount).prop('checked', false);
+                    $('#delete-' + id + '-' + idAccount).prop('checked', false);
+                }
+            }
+            Edit(id, idAccount);
+            CheckPermission();
+        });
+        function Edit(id, idAccount) {
+            let permissionDetail = {};
+
+            permissionDetail["ID_Permission"] = id;
+            permissionDetail["ID_Account"] = idAccount;
+            permissionDetail["View"] = $('#view-' + id + '-' + idAccount).is(":checked");
+            permissionDetail["Create"] = $('#add-' + id + '-' + idAccount).is(":checked");
+            permissionDetail["Edit"] = $('#edit-' + id + '-' + idAccount).is(":checked");
+            permissionDetail["Delete"] = $('#delete-' + id + '-' + idAccount).is(":checked");
+            permissionDetail["Status"] = 1;
 
             $.ajax({
-                url: "/Account/Edit",
-                data: JSON.stringify(account),
+                url: "/Admin/Account/EditPermission",
+                data: JSON.stringify(permissionDetail),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#modal-add-edit').modal('hide');
-                    UploadImage();
-                    Search(pageCurrent);
-                    ClearTextBox();
                     toastr.success('Sửa thành công!');
                 },
                 error: function (errormessage) {
@@ -509,7 +585,7 @@
         $('#Avatar').change(function () {
             const [file] = $('#Avatar').get(0).files;
             if (file) {
-                imgPreview.src =URL.createObjectURL(file);
+                imgPreview.src = URL.createObjectURL(file);
             } else {
                 imgPreview.src = '/wwwroot/ImageProducts/no-image-icon-0.jpg';
             }
@@ -555,7 +631,7 @@
                 $('#error_password').text("Mật khẩu không được để trống!");
                 checkError = true;
             }
-            else if ($('#Password').val().length < 8 ) {
+            else if ($('#Password').val().length < 8) {
                 $('#error_password').show();
                 $('#error_password').addClass('invalid-feedback');
                 $('#error_password').removeClass('valid-feedback');
@@ -593,7 +669,7 @@
                 $('#Email').addClass('is-invalid');
                 $('#error_email').text("Email không đúng định dạng!");
                 checkError = true;
-            } else if ($('#Email').val() != ''){
+            } else if ($('#Email').val() != '') {
                 $('#error_email').hide();
                 $('#Email').addClass('is-valid');
                 $('#Email').removeClass('is-invalid');
@@ -607,8 +683,7 @@
             errorEmail();
         });
         const errorPhone = () => {
-            if ($('#Phone').val() != '' && $('#Phone').val().length != 10)
-            {
+            if ($('#Phone').val() != '' && $('#Phone').val().length != 10) {
                 $('#error_phone').show();
                 $('#error_phone').addClass('invalid-feedback');
                 $('#error_phone').removeClass('valid-feedback');
@@ -623,7 +698,7 @@
                 $('#Phone').addClass('is-invalid');
                 $('#error_phone').text("SĐT không đúng định dạng!");
                 checkError = true;
-            } else if ($('#Phone').val() != ''){
+            } else if ($('#Phone').val() != '') {
                 $('#error_phone').hide();
                 $('#Phone').addClass('is-valid');
                 $('#Phone').removeClass('is-invalid');

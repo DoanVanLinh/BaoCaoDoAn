@@ -1,10 +1,13 @@
 ﻿using ElectronicDeviceShop.Common;
+using ElectronicDeviceShop.Models.Enums;
 using ElectronicDeviceShop.Services.Accounts;
 using ElectronicDeviceShop.Services.Categories;
 using ElectronicDeviceShop.Services.PermissionDetails;
 using ElectronicDeviceShop.Services.Permissions;
 using ElectronicDeviceShop.ViewModels.Accounts;
 using ElectronicDeviceShop.ViewModels.Categories;
+using ElectronicDeviceShop.ViewModels.PermissionDetails;
+using ElectronicDeviceShop.ViewModels.Results;
 using ElectronicDeviceShop.Web.Areas.Admin.Filters;
 using System;
 using System.Collections.Generic;
@@ -39,6 +42,17 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         {
             int id = int.Parse(Session["ID_Account"].ToString());
             return permissionHelper.CheckPermission(id, "ACCOUNTS");
+        }
+        public JsonResult GetPermissionById(int idAccount)
+        {
+            var permission = permissionService.GetAllPermission();
+            List<PermissionDetailDetailViewModel> permissionDetails = new List<PermissionDetailDetailViewModel>();
+            foreach (var item in permission)
+            {
+                var permissionDetail = permissionDetailService.GetDetailPermissionDetailByIdAccountIdPermission(idAccount, item.ID_Permission);
+                permissionDetails.Add(permissionDetail);
+            }
+            return Json(new { permission = permission, permissionDetail = permissionDetails }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAll(string txtSearch, int? page)
         {
@@ -78,15 +92,36 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         public ActionResult Create(CreateAccountViewModel account)
         {
             var response = accountService.Create(account);
-            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+            var accountNewest = accountService.GetNewestAccount();
+
+            if (response.IsSuccessed&&accountNewest.Role !=2)
+            {
+                var allPermission = permissionService.GetAllPermission();
+                foreach (var item in allPermission)
+                {
+                    PermissionDetailDetailViewModel permissionDetail = new PermissionDetailDetailViewModel();
+                    permissionDetail.ID_Permission = item.ID_Permission;
+                    permissionDetail.ID_Account = accountNewest.ID_Account;
+                    var response2 = permissionDetailService.Create(permissionDetail);
+                    if (!response2.IsSuccessed)
+                    {
+                        response = new ResponseResult("Lỗi");
+                        break;
+                    }
+                }
+                return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [CustomAuthorize(Roles = "Admin")]
-        public ActionResult Edit(EditAccountViewModel account)
+        public ActionResult EditPermission(PermissionDetailDetailViewModel permissionDetail)
         {
-            var response = accountService.Edit(account);
-
+            var perDetail = permissionDetailService.GetDetailPermissionDetailByIdAccountIdPermission(permissionDetail.ID_Account, permissionDetail.ID_Permission);
+            permissionDetail.ID_PermissionDetail = perDetail.ID_PermissionDetail;
+            var response = permissionDetailService.Edit(permissionDetail);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]

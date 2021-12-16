@@ -12,8 +12,8 @@ namespace ElectronicDeviceShop.Services.PermissionDetails
 {
     public interface IPermissionDetailService
     {
-        //ResponseResult Edit(EditPermissionViewModel request);
-        //ResponseResult Create(CreatePermissionViewModel request);
+        ResponseResult Edit(PermissionDetailDetailViewModel request);
+        ResponseResult Create(PermissionDetailDetailViewModel request);
         //ResponseResult Delete(DeletePermissionViewModel request);
 
         //IEnumerable<PermissionViewModel> GetPermissionByAccount(int id);
