@@ -373,7 +373,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Statistic\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
@@ -576,6 +575,7 @@
     <Content Include="wwwroot\vendors\owl-carousel\assets\owl.carousel.css" />
     <Content Include="wwwroot\vendors\owl-carousel\owl.carousel.min.css" />
     <Content Include="wwwroot\vendors\owl-carousel\owl.carousel.min.js" />
+    <Content Include="Areas\Admin\Views\Statistic\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

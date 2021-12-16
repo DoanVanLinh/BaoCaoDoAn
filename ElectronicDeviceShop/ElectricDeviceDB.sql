@@ -509,7 +509,7 @@ INSERT INTO Carts(ID_Product, ID_Account, Amount) VALUES
 GO
 
 INSERT INTO Bills(ID_Account, ReceiverName, ReceiverAddress, ReceiverEmail, ReceiverPhone, Note, PayType, BuyDate,[Status]) VALUES
-(2, N'Nguyễn Văn Mua Test', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',2),
+(2, N'Nguyễn Văn Mua Test', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',5),
 (2, N'Nguyễn Văn Mua 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021',2),
 (2, N'Nguyễn Văn Mua 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',2),
 (2, N'Nguyễn Văn', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',2),
@@ -564,3 +564,4 @@ SELECT * FROM BillDetails
 SELECT * FROM [Permissions]
 SELECT * FROM PermissionDetails
 GO
+

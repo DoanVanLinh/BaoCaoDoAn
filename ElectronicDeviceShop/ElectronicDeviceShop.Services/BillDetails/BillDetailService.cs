@@ -50,6 +50,18 @@ namespace ElectronicDeviceShop.Services.BillDetails
             }
         }
 
+        public IEnumerable<BillDetailDetailViewModel> GetAllSuccessBillDetail()
+        {
+            var bill = unitOfWork.BillRepository.GetAll().Where(b => b.Status == Status.SuccessOrders);
+            List<int> idBill = new List<int>();
+            foreach (var item in bill)
+            {
+                idBill.Add(item.ID_Bill);
+            }
+            var billDetails = unitOfWork.BillDetailRepository.GetAll().Where(b => idBill.Contains(b.ID_Bill));
+            return Mapper.Map<IEnumerable<BillDetailDetailViewModel>>(billDetails);
+        }
+
         public IEnumerable<BillDetailDetailViewModel> GetDetailBillDetailByBill(int bill)
         {
            var billDetails = unitOfWork.BillDetailRepository.GetAll().Where(b => b.ID_Bill == bill);
