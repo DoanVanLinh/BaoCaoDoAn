@@ -509,33 +509,58 @@ INSERT INTO Carts(ID_Product, ID_Account, Amount) VALUES
 GO
 
 INSERT INTO Bills(ID_Account, ReceiverName, ReceiverAddress, ReceiverEmail, ReceiverPhone, Note, PayType, BuyDate,[Status]) VALUES
-(2, N'Nguyễn Văn Mua Test', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',5),
-(2, N'Nguyễn Văn Mua 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021',2),
-(2, N'Nguyễn Văn Mua 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',2),
-(2, N'Nguyễn Văn', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',2),
-(2, N'Nguyễn Văn 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '11/11/2021',2),
-(2, N'Nguyễn Văn 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',2),
-(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',3),
-(2, N'Nguyễn Văn Mua 6', N'Hải Dương 6', 'Mua6@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',4),
-(2, N'Nguyễn Văn Mua 7', N'Hải Dương 7', 'Mua7@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',4),
-(2, N'Nguyễn Văn Mua 8', N'Hải Dương 8', 'Mua8@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',5),
-(2, N'Nguyễn Văn Mua 9', N'Hải Dương 9', 'Mua9@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',5),
-(2, N'Nguyễn Văn Mua 8', N'Hải Dương 8', 'Mua8@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',6),
-(2, N'Nguyễn Văn Mua 9', N'Hải Dương 9', 'Mua9@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',6)
+(2, N'Nguyễn Văn Mua Test', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '1/11/2021',5),
+(2, N'Nguyễn Văn Mua 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '2/11/2021',5),
+(2, N'Nguyễn Văn Mua 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '3/11/2021',5),
+(2, N'Nguyễn Văn', N'Hải Dương', 'Mua@gmail.com', '1235578', N'Không ghi chú', N'Thẻ', '10/11/2021',5),
+(2, N'Nguyễn Văn 2', N'Hải Dương 2', 'Mua2@gmail.com', '26565452', N'Không ghi chú 2', N'Thẻ 2', '4/11/2021',5),
+(2, N'Nguyễn Văn 3', N'Hải Dương 3', 'Mua3@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '5/11/2021',5),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '6/11/2021',5),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '7/11/2021',5),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '8/11/2021',5),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '9/11/2021',5),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '10/11/2021',5),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '11/11/2021',5),
+(2, N'Nguyễn Văn Mua 6', N'Hải Dương 6', 'Mua6@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '12/11/2021',5),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '6/11/2021',2),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '7/11/2021',3),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '8/11/2021',4),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '9/11/2021',6),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '6/11/2021',2),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '7/11/2021',3),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '8/11/2021',4),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '9/11/2021',6),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '6/11/2021',2),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '7/11/2021',3),
+(2, N'Nguyễn Văn Mua 4', N'Hải Dương 4', 'Mua4@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '8/11/2021',4),
+(2, N'Nguyễn Văn Mua 5', N'Hải Dương 5', 'Mua5@gmail.com', '47685678', N'Không ghi chú 3', N'Thẻ 3', '9/11/2021',6)
 GO
 
 INSERT INTO BillDetails(ID_Bill, ID_Product, Amount, CurrentlyPrice) VALUES
-(1, 16, 16, 1234567),
-(1, 6, 6, 78532),
-(1, 20, 2, 7865),
-(1, 32, 16, 13105),
-(1, 11, 16, 3150450),
-(1, 23, 16, 570453)
+(1, 1, 16, 1234567),
+(2, 45, 6, 78532),
+(3, 22, 2, 7865),
+(4, 10, 16, 13105),
+(5, 20, 16, 3150450),
+(6, 40, 16, 570453),
+(7, 16, 16, 1234567),
+(8, 7, 6, 78532),
+(9, 35, 2, 7865),
+(10, 15, 16, 13105),
+(11, 11, 16, 3150450),
+(12, 23, 16, 570453),
+(13, 1, 16, 1234567),
+(14, 45, 6, 78532),
+(15, 22, 2, 7865),
+(16, 10, 16, 13105),
+(17, 20, 16, 3150450),
+(18, 40, 16, 570453),
+(19, 16, 16, 1234567),
+(20, 7, 6, 78532),
+(21, 35, 2, 7865),
+(22, 15, 16, 13105),
+(23, 11, 16, 3150450),
+(24, 23, 16, 570453)
 GO
 
 INSERT INTO [Permissions]([Name],Code) VALUES
@@ -543,7 +568,8 @@ INSERT INTO [Permissions]([Name],Code) VALUES
 (N'Quản lý hóa đơn', 'BILLS'),
 (N'Quản lý danh mục', 'CATEGORIES'),
 (N'Quản lý sản phẩm', 'PRODUCTS'),
-(N'Quản lý nhà cung cấp', 'SUPPLIERS')
+(N'Quản lý nhà cung cấp', 'SUPPLIERS'),
+(N'Quản lý thống kê', 'Statistic')
 GO
 
 INSERT INTO PermissionDetails(ID_Permission,ID_Account,[View],[Create],Edit,[Delete]) VALUES
@@ -551,7 +577,14 @@ INSERT INTO PermissionDetails(ID_Permission,ID_Account,[View],[Create],Edit,[Del
 (2,1,1,0,1,0),
 (3,1,1,1,1,1),
 (4,1,0,0,0,0),
-(5,1,1,0,0,0)
+(5,1,1,0,0,0),
+(6,1,1,0,0,0),
+(1,2,0,0,0,0),
+(2,2,0,0,1,0),
+(3,2,0,0,0,0),
+(4,2,0,0,0,0),
+(5,2,0,0,0,0),
+(6,2,1,0,0,0)
 GO
 
 SELECT * FROM Categories

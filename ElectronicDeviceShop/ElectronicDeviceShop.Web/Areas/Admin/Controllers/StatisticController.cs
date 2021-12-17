@@ -53,13 +53,40 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                     }    
                 }
             }
-
-            return Json(cateAmount, JsonRequestBehavior.AllowGet);
+            var allShare = 0;
+            foreach (var item in detailBill)
+            {
+                allShare += item.CurrentlyPrice;
+            }
+            return Json(new { cateAmount = cateAmount,allShare = allShare }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAllProDuctByCategory()
         {
             var allProduct = productService.GetAllDetail().GroupBy(db => db.ID_Category).Select(group => new { amount = group.Sum(item => item.Amount), category =categoryService.GetAll().Where(c=>c.ID_Category == group.Key).FirstOrDefault().Name });
             return Json(allProduct, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllShareOfYear()
+        {
+            int thisYear = DateTime.Today.Year;
+            var allBill = billService.GetAllDetailBill().Where(b=>b.BuyDate.Year == thisYear);
+            Dictionary<string,int> data = new Dictionary<string, int>();
+            for (int i = 1; i < 13; i++)
+            {
+                data.Add(i.ToString(),0);
+            }
+
+            foreach (var item in allBill)
+            {
+                var billDetail = billDetailService.GetDetailBillDetailByBill(item.ID_Bill);
+                foreach (var item2 in billDetail)
+                {
+                    var month = item.BuyDate.Month;
+                    if (data.ContainsKey(month.ToString()))
+                        data[month.ToString()] += item2.CurrentlyPrice;
+                }
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

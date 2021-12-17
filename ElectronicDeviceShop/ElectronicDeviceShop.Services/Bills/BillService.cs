@@ -78,5 +78,11 @@ namespace ElectronicDeviceShop.Services.Bills
             var billDetail = this.unitOfWork.BillRepository.GetAll().Where(p => p.Status != Status.IsDeleted&&p.ID_Bill == GetAll().Max(bd=>bd.ID_Bill)).FirstOrDefault();
             return Mapper.Map<EditBillViewModel>(billDetail);
         }
+
+        public IEnumerable<BillDetailViewModel> GetAllDetailBill()
+        {
+            var bills = unitOfWork.BillRepository.GetAll().Where(b => b.Status == Status.SuccessOrders);
+            return Mapper.Map<IEnumerable<BillDetailViewModel>>(bills);
+        }
     }
 }

@@ -47,9 +47,14 @@ namespace ElectronicDeviceShop.Web.Controllers
                 if (id > 0)
                 {
                     var account = accountService.GetDetailAccountById(id);
-                    if (account.Phone != null)
-                        account.Phone = account.Phone.Trim(' ');
-                    return View(account);
+                    if (account.Role == 2)
+                    {
+                        if (account.Phone != null)
+                            account.Phone = account.Phone.Trim(' ');
+                        return View(account);
+                    }
+                    else
+                        return RedirectToAction("Index", "Account");
                 }
                 else
                     return RedirectToAction("Index", "Account");

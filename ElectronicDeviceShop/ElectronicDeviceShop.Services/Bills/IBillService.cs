@@ -15,6 +15,7 @@ namespace ElectronicDeviceShop.Services.Bills
         ResponseResult Create(CreateBillViewModel request);
 
         IEnumerable<BillViewModel> GetAll();
+        IEnumerable<BillDetailViewModel> GetAllDetailBill();
         IEnumerable<BillViewModel> GetDetailBillByStatus(Status status);
         EditBillViewModel GetEditBillById(int id);
         BillDetailViewModel GetDetailBillById(int id);

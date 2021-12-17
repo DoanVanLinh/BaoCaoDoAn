@@ -1,4 +1,5 @@
-﻿using ElectronicDeviceShop.Services.Carts;
+﻿using ElectronicDeviceShop.Services.Accounts;
+using ElectronicDeviceShop.Services.Carts;
 using ElectronicDeviceShop.Services.Products;
 using ElectronicDeviceShop.ViewModels.Carts;
 using ElectronicDeviceShop.ViewModels.Products;
@@ -14,21 +15,30 @@ namespace ElectronicDeviceShop.Web.Controllers
     {
         private readonly IProductService productService;
         private readonly ICartService cartService;
+        private readonly IAccountService accountService;
         static IEnumerable<CartViewModel> cart;
-        public CartController(IProductService productService, ICartService cartService)
+        public CartController(IProductService productService, ICartService cartService, IAccountService accountService)
         {
             this.productService = productService;
             this.cartService = cartService;
+            this.accountService = accountService;
         }
 
         public ActionResult Index()
         {
             if (Session["ID_Account"] != null)
             {
-                if (int.Parse(Session["ID_Account"].ToString()) > 0)
+                int id = int.Parse(Session["ID_Account"].ToString());
+                if (id > 0)
                 {
-                    cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
-                    return View();
+                    var account = accountService.GetDetailAccountById(id);
+                    if (account.Role == 2)
+                    {
+                        cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
+                        return View();
+                    }
+                    else
+                        return RedirectToAction("Index", "Account");
                 }
                 else
                     return RedirectToAction("Index", "Account");
