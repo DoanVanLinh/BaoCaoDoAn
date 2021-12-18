@@ -1,5 +1,6 @@
 ﻿using ElectronicDeviceShop.Services.Accounts;
 using ElectronicDeviceShop.ViewModels.Accounts;
+using ElectronicDeviceShop.ViewModels.Results;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,24 +23,23 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Login()
+        public JsonResult Login(LoginViewModel account)
         {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Login(LoginViewModel account)
-        {
-            var response = accountService.Login(account);
+            ResponseResult response = new ResponseResult();
+            var oldAccount = accountService.GetAccountByUserName(account.UserName);
+            if (oldAccount == null || oldAccount.Role == 2)
+                response = new ResponseResult("Lỗi!");
+            else
+                response = accountService.Login(account);
             if (response.IsSuccessed)
             {
                 var accountAd = accountService.GetAll().Where(a => a.UserName == account.UserName).FirstOrDefault();
                 HttpContext.Session.Add("USER", accountAd.UserName);
                 HttpContext.Session.Add("Role", GetNameRole(accountAd.Role));
                 Session["ID_Account"] = accountAd.ID_Account;
-                return RedirectToAction("Index", "Statistic");
             }
-            else
-                return View(account);
+            return Json(new { newUrl = Url.Action("Index", "Statistic"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
+
         }
         string GetNameRole(int role)
         {
@@ -63,5 +63,12 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             var account = accountService.GetDetailAccountById(id);
             return PartialView(account);
         }
+        [ChildActionOnly]
+        public ActionResult _SideBar()
+        {
+            return PartialView();
+        }
+
+
     }
 }

@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
     public class SupplierController : Controller
     {
         private readonly ISupplierService supplierService;
@@ -28,7 +28,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             this.permissionDetailService = permissionDetailService;
             this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View();
@@ -71,7 +71,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Create(CreateSupplierViewModel supplier)
         {
             var response = supplierService.Create(supplier);
@@ -79,14 +79,14 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Edit(EditSupplierViewModel supplier)
         {
             var response = supplierService.Edit(supplier);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int id)
         {
             var supplier = supplierService.GetDeleteSupplierById(id);

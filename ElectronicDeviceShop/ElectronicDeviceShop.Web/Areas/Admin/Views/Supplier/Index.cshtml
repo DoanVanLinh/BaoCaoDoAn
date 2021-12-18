@@ -89,15 +89,18 @@
         var lastPage = 1;
         var pageCurrent = 1;
         $(document).ready(function () {
-            LoadData(null, 1);
+            CheckPermission();
+
             $("body").on("click", ".pagination li a", function (event) {
                 event.preventDefault();
                 var page = $(this).attr('data-page');
                 Search(page);
             });
-            CheckPermission();
+            $(".nav-link").removeClass("active");
+            $("#Supplier").addClass("active");
         });
         //PHAN QUYEN
+        let view;
         let add;
         let edit;
         let dele;
@@ -111,6 +114,12 @@
                     add = result.Create;
                     edit = result.Edit;
                     dele = result.Delete;
+                    view = result.View;
+                    if (view == true)
+                        LoadData(null, 1);
+                    else
+                        $(".main-content-container").html('<div class="error"> <div class= "error__content" ><h2>500</h2><h3>Bạn không có quyền truy cập!</h3> <p>Liên hệ với Admin để biết thêm thông tin.</p><button type="button" class="btn btn-accent btn-pill"><a class="text-black" href="/Admin/Statistic/Index">Trang chủ</a></button></div></div>');
+
                 }
             });
         }

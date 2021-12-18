@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
 
     public class StatisticController : Controller
     {

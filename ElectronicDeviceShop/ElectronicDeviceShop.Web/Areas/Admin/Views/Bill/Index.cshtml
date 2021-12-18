@@ -220,7 +220,7 @@
         let money = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
 
         $(document).ready(function () {
-            LoadNewOrder(null, 1);
+            CheckPermission();
             $("body").on("click", ".pagination li a", function (event) {
                 event.preventDefault();
                 var page = $(this).attr('data-page');
@@ -231,18 +231,25 @@
                 var valueSelected = this.value;
 
             });
-            CheckPermission();
+            $(".nav-link").removeClass("active");
+            $("#Bill").addClass("active");
         });
 
         let edit;
+        let view;
         function CheckPermission() {
             $.ajax({
-                url: "/Admin/Supplier/CheckPermission",
+                url: "/Admin/Bill/CheckPermission",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
                     edit = result.Edit;
+                    view = result.View;
+                    if (view == true)
+                        LoadNewOrder(null, 1);
+                    else
+                        $(".main-content-container").html('<div class="error"> <div class= "error__content" ><h2>500</h2><h3>Bạn không có quyền truy cập!</h3> <p>Liên hệ với Admin để biết thêm thông tin.</p><button type="button" class="btn btn-accent btn-pill"><a class="text-black" href="/Admin/Statistic/Index">Trang chủ</a></button></div></div>');
                 }
             });
         }

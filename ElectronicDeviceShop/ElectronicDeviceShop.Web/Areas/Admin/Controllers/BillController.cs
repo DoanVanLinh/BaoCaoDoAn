@@ -17,7 +17,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
     public class BillController : Controller
     {
         private readonly IBillService billService;
@@ -37,7 +37,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
 
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View();
@@ -192,7 +192,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Edit(EditBillViewModel bill)
         {
             var response = billService.Edit(bill);

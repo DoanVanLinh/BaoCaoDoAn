@@ -18,7 +18,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
@@ -33,7 +33,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             this.permissionDetailService = permissionDetailService;
             this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View();
@@ -88,7 +88,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Create(CreateAccountViewModel account)
         {
             var response = accountService.Create(account);
@@ -116,7 +116,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult EditPermission(PermissionDetailDetailViewModel permissionDetail)
         {
             var perDetail = permissionDetailService.GetDetailPermissionDetailByIdAccountIdPermission(permissionDetail.ID_Account, permissionDetail.ID_Permission);
@@ -125,7 +125,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int id)
         {
             var account = accountService.GetDeleteAccountById(id);

@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
@@ -28,7 +28,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             this.permissionDetailService = permissionDetailService;
             this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View();

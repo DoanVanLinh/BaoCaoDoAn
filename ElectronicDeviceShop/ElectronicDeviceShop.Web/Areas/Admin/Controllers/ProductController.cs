@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin,Staff")]
     public class ProductController : Controller
     {
 
@@ -34,7 +34,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             this.supplierService = supplierService;
             this.permissionHelper = new PermissionHelper(permissionService, permissionDetailService);
         }
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View();
@@ -98,7 +98,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Create(CreateProductViewModel product)
         {
             var response = productService.Create(product);
@@ -106,14 +106,14 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Edit(EditProductViewModel product)
         {
             var response = productService.Edit(product);
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int id)
         {
             var product = productService.GetDeleteProductById(id);

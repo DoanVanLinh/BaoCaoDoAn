@@ -485,6 +485,8 @@
             GetAllCategory();
             GetAllProDuctByCategory();
             GetAllShareOfYear();
+            $(".nav-link").removeClass("active");
+            $("#Statistic").addClass("active");
         });
         function GetAllCategory() {
             $.ajax({

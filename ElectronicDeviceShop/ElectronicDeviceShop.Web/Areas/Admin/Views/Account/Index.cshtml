@@ -52,43 +52,6 @@
         </div>
     </div>
     <!-- End Default Light Table -->
-    <!--<!-- Default Dark Table -->
-    <!--<div class="row ">
-        <div class="col ">
-            <div class="card card-small overflow-hidden mb-4 ">
-                <div class="card-header bg-dark row no-gutters py-4 d-flex justify-content-between fw-bold col-12">
-                    <h3 class="m-0 text-white col-sm-6 col-md-9 col-lg-9 text-center text-sm-left">Tài khoản ẩn</h3>
-                    <div class="col-sm-6 col-md-2 col-lg-1 mb-2 mr-1"></div>
-                </div>
-                <div class="card-body p-0 pb-3 bg-dark text-center ">
-                    <table class="table table-dark mb-0 ">
-                        <thead class="thead-dark ">
-                            <tr>
-                                <th class="border-0">#</th>
-                                <th class="border-0"></th>
-                                <th class="border-0"></th>
-                                <th class="border-0"></th>
-                                <th class="border-0"></th>
-                                <th class="border-0">Chức năng</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody-dark">-->
-    @*DATA*@
-    <!--</tbody>
-        </table>
-    </div>
-    <div class="card-footer col no-gutters py-4 d-flex flex-column text-center fw-bold col-12 border-top bg-dark">
-        <div class="dataTables_info text-white" id="dt-material-checkbox_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-        <div class="dataTables_paginate paging_simple_numbers d-flex justify-content-center" id="dt-material-checkbox_paginate">
-            <ul class="pagination-dark">-->
-    @*Pagination*@
-    @*</ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->*@
-    <!-- End Default Dark Table -->
 </div>
 <!-- Modal -->
 <!-- modal detail -->
@@ -140,9 +103,6 @@
         </div>
     </div>
 </div>
-
-
-
 @section modal{
     @Html.Partial("Create")
     @Html.Partial("Delete")
@@ -200,15 +160,17 @@
         var lastPage = 1;
         var pageCurrent = 1;
         $(document).ready(function () {
-            LoadData(null, 1);
+            CheckPermission();
             $("body").on("click", ".pagination li a", function (event) {
                 event.preventDefault();
                 var page = $(this).attr('data-page');
                 Search(page);
             });
-            CheckPermission();
+            $(".nav-link").removeClass("active");
+            $("#Account").addClass("active");
         });
         //PHAN QUYEN
+        let view;
         let add;
         let edit;
         let dele;
@@ -222,6 +184,11 @@
                     add = result.Create;
                     edit = result.Edit;
                     dele = result.Delete;
+                    view = result.View;
+                    if (view == true)
+                        LoadData(null, 1);
+                    else
+                        $(".main-content-container").html('<div class="error"> <div class= "error__content" ><h2>500</h2><h3>Bạn không có quyền truy cập!</h3> <p>Liên hệ với Admin để biết thêm thông tin.</p><button type="button" class="btn btn-accent btn-pill"><a class="text-black" href="/Admin/Statistic/Index">Trang chủ</a></button></div></div>');
                 }
             });
         }
@@ -443,7 +410,7 @@
             $.ajax({
                 url: "/Admin/Account/GetPermissionById/",
                 typr: "GET",
-                data: { idAccount: ID},
+                data: { idAccount: ID },
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {

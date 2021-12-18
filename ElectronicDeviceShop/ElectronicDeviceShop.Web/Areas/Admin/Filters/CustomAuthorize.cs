@@ -14,13 +14,13 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Filters
             if (user != null)
             {
                 var role = HttpContext.Current.Session["ROLE"];
-
-                if (role != null||role.ToString() == "User")
+                if (role != null || role.ToString() != "User")
                 {
-                    if (Roles != role.ToString())
+                    if (!Roles.Split(',').Contains(role.ToString()))
                     {
                         filterContext.Result = new RedirectResult("/Admin/");
                     }
+
                 }
             }
             else
