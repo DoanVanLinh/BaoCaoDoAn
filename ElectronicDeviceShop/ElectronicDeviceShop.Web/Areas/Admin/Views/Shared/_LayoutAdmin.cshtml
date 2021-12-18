@@ -42,51 +42,44 @@
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
-                        <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
                     </div>
                 </form>
                 <div class="nav-wrapper">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Index", "Product")">
-                                <i class="material-icons">edit</i>
-                                <span>Blog Dashboard</span>
+                            <a class="nav-link active" href="@Url.Action("Index", "Statistic")">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Thống kê</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Product")">
                                 <i class="fas fa-box-open"></i>
-                                <span>Product</span>
+                                <span>Sản phẩm</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Category")">
                                 <i class="fas fa-th"></i>
-                                <span>Category</span>
+                                <span>Danh mục</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Supplier")">
                                 <i class="fas fa-truck-loading"></i>
-                                <span>Supplier</span>
+                                <span>Nhà cung cấp</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href=" @Url.Action("Index", "Account")">
                                 <i class="fas fa-user"></i>
-                                <span>Account</span>
+                                <span>Tài khoản</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Bill")">
                                 <i class="fas fa-file-invoice"></i>
-                                <span>Bill</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Statistic")">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Statistic</span>
+                                <span>Hóa đơn</span>
                             </a>
                         </li>
 
@@ -102,32 +95,13 @@
                             <div class="input-group input-group-seamless ml-3">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <i class="fas fa-search"></i>
                                     </div>
                                 </div>
-                                <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
                             </div>
                         </form>
-                        <ul class="navbar-nav border-left flex-row ">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <img class="user-avatar rounded-circle mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpXJguQqwWDXD_ht4gPmj_QooHnroh5pH2Ng&usqp=CAU" alt="User Avatar">
-                                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-small">
-                                    <a class="dropdown-itenav-item border-right dropdown notificationsm" href="user-profile-lite.html">
-                                        <i class="material-icons">&#xE7FD;</i> Profile
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="#">
-                                        <i class="material-icons text-danger">&#xE879;</i> Logout
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                        @{Html.RenderAction("_PartialAccount", "Home");}
                         <nav class="nav">
                             <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
-                                <i class="material-icons">&#xE5D2;</i>
                             </a>
                         </nav>
                     </nav>
@@ -153,6 +127,11 @@
     <script src="~/Areas/Admin/Assets/js/jquery.validate.min.js"></script>
     <script src="~/Areas/Admin/Assets/js/date.js"></script>
     <script src="~/Areas/Admin/Assets/js/UrlHelper.js"></script>
+    <script>
+        $("#Profile").click(function (e) {
+            window.location.href = "/Admin/Account/Profile";
+        });
+    </script>
     <script src="~/Areas/Admin/Assets/js/script.js"></script>
     @RenderSection("modal", required: false)
     @RenderSection("Script", required: false)

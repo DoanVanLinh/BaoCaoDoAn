@@ -134,6 +134,32 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Profile()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var account = accountService.GetDetailAccountById(id);
+            return View(account);
+        }
+        public JsonResult CheckPassword(EditAccountViewModel account)
+        {
+            var response = accountService.CheckPassword(account);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Edit(EditAccountViewModel account)
+        {
+            account.Password = accountService.GetAccountByUserName(account.UserName).Password;
+            var response = accountService.Edit(account);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ChangePassword(EditAccountViewModel account)
+        {
+            var acc = accountService.GetEditAccountById(int.Parse(Session["ID_Account"].ToString()));
+            acc.Password = account.Password;
+            var response = accountService.Edit(acc);
+            return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public ActionResult UploadFiles()
         {

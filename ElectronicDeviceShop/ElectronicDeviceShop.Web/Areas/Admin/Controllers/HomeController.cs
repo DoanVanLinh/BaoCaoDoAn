@@ -36,7 +36,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                 HttpContext.Session.Add("USER", accountAd.UserName);
                 HttpContext.Session.Add("Role", GetNameRole(accountAd.Role));
                 Session["ID_Account"] = accountAd.ID_Account;
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Statistic");
             }
             else
                 return View(account);
@@ -54,6 +54,14 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                 default:
                     return "";
             }
+        }
+
+        [ChildActionOnly]
+        public ActionResult _PartialAccount()
+        {
+            int id = int.Parse(Session["ID_Account"].ToString());
+            var account = accountService.GetDetailAccountById(id);
+            return PartialView(account);
         }
     }
 }
