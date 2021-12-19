@@ -60,6 +60,7 @@
     <Compile Include="BillDetails\BillDetailDetailViewModel.cs" />
     <Compile Include="BillDetails\CreateBillDetailViewModel.cs" />
     <Compile Include="BillDetails\DeleteBillDetailViewModel.cs" />
+    <Compile Include="BillDetails\DetailProductByCategory.cs" />
     <Compile Include="Bills\BillDetailViewModel.cs" />
     <Compile Include="Bills\BillViewModel.cs" />
     <Compile Include="Bills\CreateBillViewModel.cs" />

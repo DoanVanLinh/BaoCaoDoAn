@@ -43,6 +43,11 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
             int id = int.Parse(Session["ID_Account"].ToString());
             return permissionHelper.CheckPermission(id, "ACCOUNTS");
         }
+        public JsonResult Logout()
+        {
+            Session["ID_Account"] = -1;
+            return Json(new ResponseResult().IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetPermissionById(int idAccount)
         {
             var permission = permissionService.GetAllPermission();

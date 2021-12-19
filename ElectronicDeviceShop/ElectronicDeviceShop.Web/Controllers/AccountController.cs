@@ -88,6 +88,7 @@ namespace ElectronicDeviceShop.Web.Controllers
             if (response.IsSuccessed)
             {
                 Session["ID_Account"] = accountService.GetAll().Where(a => a.UserName == account.UserName).FirstOrDefault().ID_Account;
+                Session["RoleAcc"] = 2;
             }
             return Json(new { newUrl = Url.Action("Index", "Home"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
         }

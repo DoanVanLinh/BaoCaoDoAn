@@ -37,6 +37,7 @@ namespace ElectronicDeviceShop.Web.Areas.Admin.Controllers
                 HttpContext.Session.Add("USER", accountAd.UserName);
                 HttpContext.Session.Add("Role", GetNameRole(accountAd.Role));
                 Session["ID_Account"] = accountAd.ID_Account;
+                Session["RoleAcc"] = accountAd.Role;
             }
             return Json(new { newUrl = Url.Action("Index", "Statistic"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
 

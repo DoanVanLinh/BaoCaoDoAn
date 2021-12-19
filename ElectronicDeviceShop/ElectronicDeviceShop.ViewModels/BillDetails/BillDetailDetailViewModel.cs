@@ -17,5 +17,6 @@ namespace ElectronicDeviceShop.ViewModels.BillDetails
         public int Amount { get; set; }
 
         public int CurrentlyPrice { get; set; }
+
     }
 }

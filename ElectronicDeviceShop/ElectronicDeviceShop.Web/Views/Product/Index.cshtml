@@ -265,8 +265,7 @@
             });
         }
         function Check() {
-            if (@Session["ID_Account"]== -1) {
-
+            if (@Session["RoleAcc"] != 2) {
                 toastr.error('Bạn cần đăng nhập!');
                 return false;
             }
