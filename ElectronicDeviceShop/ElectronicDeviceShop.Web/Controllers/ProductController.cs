@@ -25,14 +25,25 @@ namespace ElectronicDeviceShop.Web.Controllers
 
         public ActionResult Index()
         {
-            
+
             if (Session["ID_Account"] == null)
+            {
                 Session["ID_Account"] = -1;
+                Session["RoleAcc"] = -1;
+            }
             return View();
         }
-        public JsonResult GetAll(string txtSearch, int? page)
+        public JsonResult GetAll(string txtSearch, int? page, List<int> categoryFilter, List<int> supplierFilter)
         {
             var products = productService.GetAllDetail();
+            if (categoryFilter!=null && supplierFilter!=null)
+                products = productService.GetAllDetail().Where(p=> categoryFilter.Contains(p.ID_Category)&&supplierFilter.Contains(p.ID_Supplier));
+            else if(categoryFilter != null)
+                products = productService.GetAllDetail().Where(p => categoryFilter.Contains(p.ID_Category));
+            else if(supplierFilter != null)
+                products = productService.GetAllDetail().Where(p => supplierFilter.Contains(p.ID_Supplier));
+
+            //products = products.Where()
             if (!String.IsNullOrEmpty(txtSearch))
             {
                 ViewBag.txtSearch = txtSearch;

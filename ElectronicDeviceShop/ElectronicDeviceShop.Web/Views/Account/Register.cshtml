@@ -26,10 +26,14 @@
                                 <input id="confirmPassword-field" type="password" class="form-control" name="ConfirmPassword" placeholder="Xác nhận Password" required>
                                 <div class="valid-feedback" id="error_confirmPassword"></div>
                             </div>
-                            <div class="w-100">
-                                <label style="font-size:14px">
-                                    <input type="checkbox" class="ShowPass"> Hiển thị mật khẩu
-                                </label>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">
+                                        Hiển thị mật khẩu
+                                        <input type="checkbox" class="ShowPass">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3" onclick="Add();">Đăng ký</button>

@@ -92,6 +92,12 @@ namespace ElectronicDeviceShop.Web.Controllers
             }
             return Json(new { newUrl = Url.Action("Index", "Home"), response = response.IsSuccessed }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Logout()
+        {
+            Session["ID_Account"] = -1;
+            return Json(new ResponseResult().IsSuccessed, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetById(int id)
         {
             var account = accountService.GetEditAccountById(id);

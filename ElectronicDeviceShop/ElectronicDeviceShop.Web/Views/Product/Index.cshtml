@@ -26,21 +26,7 @@
         <div class="row flex-row-reverse">
             <div class="col-lg-9">
                 <div class="bg-light p-2">
-                    <div class="d-flex justify-content-center">
-                        <div class="col-lg-4 col-md-6">
-                            <select>
-                                <option value="1">Default sorting</option>
-                                <option value="2">Default sorting 01</option>
-                                <option value="4">Default sorting 02</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <select class="col-12">
-                                <option value="1">Show 12</option>
-                                <option value="2">Show 14</option>
-                                <option value="4">Show 16</option>
-                            </select>
-                        </div>
+                    <div class="d-flex justify-content-end">
                         <div class="col-lg-4 col-md-6">
                             <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
@@ -67,85 +53,51 @@
                 <div class="left_sidebar_area">
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
-                            <h3>Browse Categories</h3>
+                            <h3>Danh Mục</h3>
                         </div>
-                        <div class="widgets_inner">
-                            <ul class="list">
-                                <li>
-                                    <a href="#">Frozen Fish</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dried Fish</a>
-                                </li>
-                                <li>
-                                    <a href="#">Fresh Fish</a>
-                                </li>
-                                <li>
-                                    <a href="#">Meat Alternatives</a>
-                                </li>
-                                <li>
-                                    <a href="#">Fresh Fish</a>
-                                </li>
-                                <li>
-                                    <a href="#">Meat Alternatives</a>
-                                </li>
-                                <li>
-                                    <a href="#">Meat</a>
-                                </li>
-                            </ul>
+                        <div class="widgets_inner" id="CategoryFilter">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
                         </div>
                     </aside>
 
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
-                            <h3>Product Brand</h3>
+                            <h3>Nhà cung cấp</h3>
                         </div>
-                        <div class="widgets_inner">
-                            <ul class="list">
-                                <li>
-                                    <a href="#">Apple</a>
-                                </li>
-                                <li>
-                                    <a href="#">Asus</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Gionee</a>
-                                </li>
-                                <li>
-                                    <a href="#">Micromax</a>
-                                </li>
-                                <li>
-                                    <a href="#">Samsung</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
+                        <div class="widgets_inner" id="SupplierFilter">
 
-                    <aside class="left_widgets p_filter_widgets">
-                        <div class="l_w_title">
-                            <h3>Color Filter</h3>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
                         </div>
-                        <div class="widgets_inner">
-                            <ul class="list">
-                                <li>
-                                    <a href="#">Black</a>
-                                </li>
-                                <li>
-                                    <a href="#">Black Leather</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Black with red</a>
-                                </li>
-                                <li>
-                                    <a href="#">Gold</a>
-                                </li>
-                                <li>
-                                    <a href="#">Spacegrey</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
 
+                    </aside>
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
                             <h3>Price Filter</h3>
@@ -172,7 +124,8 @@
         var pageCurrent = 1;
         let formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
         let money = new Intl.NumberFormat({ style: 'currency', currency: 'VND' });
-
+        let categoryFilter = new Array();
+        let supplierFilter = new Array();
         $(document).ready(function () {
             LoadData(null, 1);
             $("body").on("click", ".pagination li a", function (event) {
@@ -180,12 +133,76 @@
                 var page = $(this).attr('data-page');
                 Search(page);
             });
+            LoadCategoryFilter();
         });
-        function LoadData(txtSearch,page) {
+        $(document).on('change', '.form-check-input', function (e) {
+            var idBox = this.id;
+            var checkedBox = this.checked;
+            var stringList = idBox.split('-');
+            var ID = parseInt(stringList[1]);
+            if (checkedBox == true) {
+                if (stringList[0] == "Category")
+                    categoryFilter.push(ID);
+                else
+                    supplierFilter.push(ID);
+            }
+            else {
+                if (stringList[0] == "Category") {
+                    const index = categoryFilter.indexOf(ID);
+                    if (index > -1) {
+                        categoryFilter.splice(index, 1);
+                    }
+                }
+                else {
+                    const index = supplierFilter.indexOf(ID);
+                    if (index > -1) {
+                        supplierFilter.splice(index, 1);
+                    }
+                }
+            }
+            Search(pageCurrent);
+        });
+
+        function LoadCategoryFilter() {
+            $.ajax({
+                url: "/Product/GetSupGetCate",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    html = '';
+                    $.each(result.category, function (key, item) {
+                        html += '<div class="form-check">';
+                        html += '<input class="form-check-input" type="checkbox" value="" id="Category-' + item.ID + '">';
+                        html += '<label class="form-check-label" for="Category-' + item.ID + '">';
+                        html += item.Name;
+                        html += '</label>';
+                        html += '</div>';
+                    });
+                    $("#CategoryFilter").html(html);
+
+                    html = '';
+
+                    $.each(result.supplier, function (key, item) {
+                        html += '<div class="form-check">';
+                        html += '<input class="form-check-input" type="checkbox" value="" id="Supplier-' + item.ID + '">';
+                        html += '<label class="form-check-label" for="Supplier-' + item.ID + '">';
+                        html += item.Name;
+                        html += '</label>';
+                        html += '</div>';
+                    });
+                    $("#SupplierFilter").html(html);
+                },
+                error: function (errormessage) {
+                    toastr.error(errormessage.responseText);
+                }
+        });
+        }
+        function LoadData(txtSearch, page) {
             $.ajax({
                 url: "/Product/GetAll",
                 type: "GET",
-                data: { txtSearch: txtSearch, page: page },
+                data: $.param({ txtSearch: txtSearch, page: page, 'categoryFilter': categoryFilter, 'supplierFilter': supplierFilter }, true),
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
