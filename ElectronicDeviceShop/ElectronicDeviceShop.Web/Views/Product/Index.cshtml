@@ -103,13 +103,8 @@
                             <h3>Price Filter</h3>
                         </div>
                         <div class="widgets_inner">
-                            <div class="range_item">
-                                <div id="slider-range"></div>
-                                <div class="">
-                                    <label for="amount">Price : </label>
-                                    <input type="text" id="amount" readonly />
-                                </div>
-                            </div>
+                            <input type="range" class="form-range" id="customRange1" value="" step="10000">
+                            <label for="customRange1" class="form-label" id="PriceFilter">Example range</label>
                         </div>
                     </aside>
                 </div>
@@ -120,12 +115,16 @@
 <!--================End Category Product Area =================-->
 @section Script{
     <script>
-    var lastPage = 1;
+        var lastPage = 1;
         var pageCurrent = 1;
         let formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
         let money = new Intl.NumberFormat({ style: 'currency', currency: 'VND' });
         let categoryFilter = new Array();
         let supplierFilter = new Array();
+        let maxPrice = 0;
+        let first = 0;
+
+
         $(document).ready(function () {
             LoadData(null, 1);
             $("body").on("click", ".pagination li a", function (event) {
@@ -134,6 +133,12 @@
                 Search(page);
             });
             LoadCategoryFilter();
+        });
+
+        $(document).on('input', '#customRange1', function (e) {
+            maxPrice = parseInt($("#customRange1").val().toString());
+            $("#PriceFilter").text("0 ₫ - " + formatter.format(maxPrice));
+            Search(pageCurrent);
         });
         $(document).on('change', '.form-check-input', function (e) {
             var idBox = this.id;
@@ -202,48 +207,55 @@
             $.ajax({
                 url: "/Product/GetAll",
                 type: "GET",
-                data: $.param({ txtSearch: txtSearch, page: page, 'categoryFilter': categoryFilter, 'supplierFilter': supplierFilter }, true),
+                data: $.param({ txtSearch: txtSearch, page: page, 'categoryFilter': categoryFilter, 'supplierFilter': supplierFilter, 'maxPrice' : maxPrice }, true),
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
+                    if (first == 0) {
+                        maxPrice = result.max;
+                        $('#customRange1').attr('min', 0);
+                        $('#customRange1').attr('max', maxPrice);
+                        first++;
+                        $("#PriceFilter").text("0 ₫ - " + formatter.format(maxPrice));
+                        $("#customRange1").val(maxPrice);
+                    }
                     var html = '';
                     $.each(result.data, function (key, item) {
-                        var discount = '';
-                        if (item.Discount != 0) {
-                            discount = '<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>' + item.Discount + '%</span></div>';
-                            money = '<span class="mr-4">' + formatter.format(item.Price * (100 - item.Discount) / 100) + '</span><del>' + formatter.format(item.Price) + '</del>';
-                        }
-                        else {
-                            discount = '';
-                            money = '<span class="mr-4">' + formatter.format(item.Price) + '</span>';
-                        }
+                        if (item.Price <= maxPrice) {
+                            if (item.Discount != 0) {
+                                money = '<span class="mr-4" style="color:red">' + formatter.format(item.Price * (100 - item.Discount) / 100) + '</span><span class="bg-warning fs-6 align-middle">-' + item.Discount + '%</span></br><del>' + formatter.format(item.Price) + '</del>';
+                            }
+                            else {
+                                discount = '';
+                                money = '<span class="mr-4" style="color:red">' + formatter.format(item.Price) + '</span>';
+                            }
 
-                        html += '<div class="col-lg-4 col-md-6 py-2">';
-                        html += '<div class="single-product d-flex flex-column m-2 card h-100">';
-                        html += '<div class="product-img" style="height:60% !important">';
-                        html += '<img class="card-img-top m-2"';
-                        html += 'src="/wwwroot/ImageProducts/' + item.Image + '"';
-                        html += ' alt="" style="height:80%;width:80%" href="/Product/Detail/' + item.ID_Product + '"/>';
-                        html += '<div class="p_icon">';
-                        html += '<a href="/Product/Detail/' + item.ID_Product + '">';
-                        html += '<i class="ti-eye"></i>';
-                        html += '</a>';
-                        html += ' <a onclick="AddCart(' + item.ID_Product + ');">';
-                        html += '<i class="ti-shopping-cart"></i>';
-                        html += '</a>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div class="product-btm" style="height:40% !important">';
-                        html += '<a href="/Product/Detail/' + item.ID_Product + '" class="d-block">';
-                        html += '<h4>' + item.Name + '</h4>';
-                        html += '</a>';
-                        html += '<div class="mt-3">';
-                        html += money;
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-
+                            html += '<div class="col-lg-4 col-md-6 py-2">';
+                            html += '<div class="single-product d-flex flex-column m-2 card h-100">';
+                            html += '<div class="product-img" style="height:60% !important">';
+                            html += '<img class="card-img-top m-2"';
+                            html += 'src="/wwwroot/ImageProducts/' + item.Image + '"';
+                            html += ' alt="" style="height:80%;width:80%" href="/Product/Detail/' + item.ID_Product + '"/>';
+                            html += '<div class="p_icon">';
+                            html += '<a href="/Product/Detail/' + item.ID_Product + '">';
+                            html += '<i class="ti-eye"></i>';
+                            html += '</a>';
+                            html += ' <a onclick="AddCart(' + item.ID_Product + ');">';
+                            html += '<i class="ti-shopping-cart"></i>';
+                            html += '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="product-btm" style="height:40% !important">';
+                            html += '<a href="/Product/Detail/' + item.ID_Product + '" class="d-block">';
+                            html += '<h4>' + item.Name + '</h4>';
+                            html += '</a>';
+                            html += '<div class="mt-3">';
+                            html += money;
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
                     });
                     $('#data').html(html);
                     //create pagination

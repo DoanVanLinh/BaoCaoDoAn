@@ -25,7 +25,7 @@ namespace ElectronicDeviceShop.Web.Controllers
         private readonly IBillDetailService billDetailService;
         private readonly IAccountService accountService;
         static IEnumerable<CartViewModel> cart;
-        static List<ProductViewModel> product = new List<ProductViewModel>(); 
+        static List<ProductDetailViewModel> product = new List<ProductDetailViewModel>(); 
 
         public BillController(IProductService productService, ICartService cartService, IBillService billService, IAccountService accountService, IBillDetailService billDetailService)
         {
@@ -57,7 +57,7 @@ namespace ElectronicDeviceShop.Web.Controllers
             cart = cartService.GetCartByAccount(id);
             foreach (var item in cart)
             {
-                product.Add(productService.GetAll().Where(p => p.ID_Product == item.ID_Product).FirstOrDefault());
+                product.Add(productService.GetAllDetail().Where(p => p.ID_Product == item.ID_Product).FirstOrDefault());
             }
             var account = accountService.GetDetailAccountById(id);
             return Json(new { cart = cart, product = product, account = account }, JsonRequestBehavior.AllowGet);
@@ -72,7 +72,8 @@ namespace ElectronicDeviceShop.Web.Controllers
                 billDetail.ID_Bill = billNewest.ID_Bill;
                 billDetail.ID_Product = item.ID_Product;
                 billDetail.Amount = item.Amount;
-                billDetail.CurrentlyPrice = item.Amount * productService.GetDetailProductById(item.ID_Product).Price;
+                var product = productService.GetDetailProductById(item.ID_Product);
+                billDetail.CurrentlyPrice = item.Amount * product.Price*(100- product.Discount)/100;
                 billDetail.Status = Status.Active;
                 if (!billDetailService.Create(billDetail).IsSuccessed)
                 {
@@ -84,9 +85,11 @@ namespace ElectronicDeviceShop.Web.Controllers
             }
             foreach (var item in cart)
             {
-                var oldCart = cartService.GetDeleteCartById(item.ID_Cart);
-                cartService.Delete(oldCart);
+                var oldCart = cartService.GetEditCartById(item.ID_Cart);
+                oldCart.Amount = 0;
+                cartService.Edit(oldCart);
             }
+
             return Json(response.IsSuccessed, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Edit(EditCartViewModel cart)

@@ -31,7 +31,6 @@
                          class="carousel slide"
                          data-ride="carousel">
                         <ol class="carousel-indicators">
-
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -50,8 +49,10 @@
             <div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
                     <h3>@Model.Name</h3>
-                    <h1 id="Money" style="color:red"></h1>
-                    <h2><del id="MoneyDis" style="color:red">9000</del></h2>
+                    <h1 id="Money" style="color:red">
+                        <span class="bg-warning" id="Discount">- %</span>
+                    </h1>
+                    <h2><del id="MoneyDis">9000</del></h2>
                     <ul class="list">
                         <li>
                             <span>Model:</span><b> @Model.Model</b>
@@ -83,7 +84,7 @@
 
                     <div class="card_area">
                         <a class="main_btn" onclick="AddCart();">Thêm vào rỏ</a>
-                        <a class="main_btn" onclick="return BuyNow();" href="/Cart/Index" >Mua Ngay</a>
+                        <a class="main_btn" onclick="return BuyNow();" href="/Cart/Index">Mua Ngay</a>
                     </div>
                 </div>
             </div>
@@ -113,8 +114,14 @@
             return formatter.format(number);
         }
         $(document).ready(function () {
-            $('#Money').text(ToMoney(@Model.Price * (100 -@Model.Discount)/100));
-            $('#MoneyDis').text(ToMoney(@Model.Price));
+            if (@Model.Discount!= 0) {
+                $('#Money').html(ToMoney(@Model.Price * (100 -@Model.Discount) / 100) + '<span class="ml-3 fs-6 bg-warning align-middle" id="Discount">-' +@Model.Discount+'%</span>');
+                $('#MoneyDis').text(ToMoney(@Model.Price));
+            }
+            else {
+                $('#Money').html(ToMoney(@Model.Price * (100 -@Model.Discount) / 100));
+
+            }
         });
         function Check() {
             if (@Model.Amount== 0) {

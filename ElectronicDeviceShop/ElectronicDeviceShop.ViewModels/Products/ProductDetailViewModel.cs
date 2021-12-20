@@ -40,7 +40,7 @@ namespace ElectronicDeviceShop.ViewModels.Products
         public string Origin { get; set; }
 
         [Display(Name = "Khuyến mãi")]
-        public short? Discount { get; set; }
+        public int Discount { get; set; }
 
         [Display(Name = "Mô tả ngắn")]
         public string ShortDescription { get; set; }

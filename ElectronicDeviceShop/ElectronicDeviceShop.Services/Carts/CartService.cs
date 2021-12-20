@@ -37,7 +37,7 @@ namespace ElectronicDeviceShop.Services.Carts
 
         public EditCartViewModel GetEditCartById(int id)
         {
-            var cart = unitOfWork.CartRepository.GetById(id);
+            var cart = unitOfWork.CartRepository.GetAll().Where(c=>c.ID_Cart == id).FirstOrDefault();
             return Mapper.Map<EditCartViewModel>(cart);
         }
         public CartDetailViewModel GetDetailCartById(int id)

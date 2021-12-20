@@ -49,10 +49,10 @@ namespace ElectronicDeviceShop.Web.Controllers
         public JsonResult GetAll()
         {
             cart = cartService.GetCartByAccount(int.Parse(Session["ID_Account"].ToString()));
-            var product =new List<ProductViewModel>();
+            var product =new List<ProductDetailViewModel>();
             foreach (var item in cart)
             {
-                product.Add(productService.GetAll().Where(p => p.ID_Product == item.ID_Product).FirstOrDefault());
+                product.Add(productService.GetAllDetail().Where(p => p.ID_Product == item.ID_Product).FirstOrDefault());
             }
             return Json(new { cart = cart, product = product }, JsonRequestBehavior.AllowGet);
 

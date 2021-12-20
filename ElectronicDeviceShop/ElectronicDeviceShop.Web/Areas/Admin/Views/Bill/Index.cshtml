@@ -669,11 +669,11 @@
                         html += '<div class="d-none d-sm-block col-1">' + count + '</div>';
                         html += '<div class="col-9 col-sm-5">' + item.Name + '</div>';
                         html += '<div class="d-none d-sm-block col-2">' + result.billDetail[count - 1].Amount + '</div>';
-                        html += '<div class="d-none d-sm-block col-2 text-95">' + money.format(item.Price) + '</div>';
-                        html += '<div class="col-2 text-secondary-d2">' + money.format(result.billDetail[count - 1].Amount * item.Price) + '</div>';
+                        html += '<div class="d-none d-sm-block col-2 text-95">' + money.format(result.billDetail[count - 1].CurrentlyPrice / result.billDetail[count - 1].Amount) + '</div>';
+                        html += '<div class="col-2 text-secondary-d2">' + money.format(result.billDetail[count - 1].CurrentlyPrice) + '</div>';
                         html += '</div>';
                         html += '<hr />';
-                        totalMoney += result.billDetail[count - 1].Amount * item.Price;
+                        totalMoney += result.billDetail[count - 1].CurrentlyPrice;
                     });
                     $('#product-detail').html(html);
                     $('#totalMoney').text(money.format(totalMoney));

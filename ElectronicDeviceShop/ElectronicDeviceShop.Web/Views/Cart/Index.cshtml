@@ -75,7 +75,7 @@
                             html += '</div>';
                             html += '</td>';
                             html += '<td>';
-                            html += '<h5 class="price" id="Price' + item.ID_Product + '">' + formatter.format(item.Price) + '<span>đ</span></h5>';
+                            html += '<h5 class="price" id="Price' + item.ID_Product + '">' + formatter.format(item.Price * (100 - item.Discount)/100) + '<span>đ</span></h5>';
                             html += '</td>';
                             html += '<td>';
                             html += '<div class="product_count">';
@@ -89,7 +89,7 @@
                             html += '</div>';
                             html += '</td>';
                             html += '<td>';
-                            html += '<h5 class="money" id="Money' + item.ID_Product + '">' + formatter.format(result.cart[count].Amount * item.Price) + 'đ</h5>';
+                            html += '<h5 class="money" id="Money' + item.ID_Product + '">' + formatter.format(result.cart[count].Amount * item.Price * (100 - item.Discount) / 100) + 'đ</h5>';
                             html += '</td>';
                             html += '</tr>';
                         });

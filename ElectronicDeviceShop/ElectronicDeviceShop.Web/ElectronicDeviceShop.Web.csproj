@@ -242,6 +242,7 @@
     <Content Include="wwwroot\css\font-awesome.min.css" />
     <Content Include="wwwroot\css\Login\style.css" />
     <Content Include="wwwroot\css\responsive.css" />
+    <Content Include="wwwroot\css\slider.css" />
     <Content Include="wwwroot\css\style.css" />
     <Content Include="wwwroot\css\themify-icons.css" />
     <Content Include="wwwroot\fonts\Flaticon.svg" />
@@ -537,6 +538,7 @@
     <Content Include="wwwroot\img\product\single-product\s-product-s-2.jpg" />
     <Content Include="wwwroot\img\product\single-product\s-product-s-3.jpg" />
     <Content Include="wwwroot\img\product\single-product\s-product-s-4.jpg" />
+    <Content Include="wwwroot\js\bootstrap-slider.js" />
     <Content Include="wwwroot\js\bootstrap.min.js" />
     <Content Include="wwwroot\js\contact.js" />
     <Content Include="wwwroot\js\custom.js" />

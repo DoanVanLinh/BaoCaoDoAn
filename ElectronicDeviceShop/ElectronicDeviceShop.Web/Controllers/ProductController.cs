@@ -36,6 +36,7 @@ namespace ElectronicDeviceShop.Web.Controllers
         public JsonResult GetAll(string txtSearch, int? page, List<int> categoryFilter, List<int> supplierFilter)
         {
             var products = productService.GetAllDetail();
+            var max = products.Max(p => p.Price);
             if (categoryFilter!=null && supplierFilter!=null)
                 products = productService.GetAllDetail().Where(p=> categoryFilter.Contains(p.ID_Category)&&supplierFilter.Contains(p.ID_Supplier));
             else if(categoryFilter != null)
@@ -43,7 +44,6 @@ namespace ElectronicDeviceShop.Web.Controllers
             else if(supplierFilter != null)
                 products = productService.GetAllDetail().Where(p => supplierFilter.Contains(p.ID_Supplier));
 
-            //products = products.Where()
             if (!String.IsNullOrEmpty(txtSearch))
             {
                 ViewBag.txtSearch = txtSearch;
@@ -66,7 +66,7 @@ namespace ElectronicDeviceShop.Web.Controllers
 
             int start = (int)(page - 1) * pageSize;
             var dataProduct = products.Skip(start).Take(pageSize);
-            return Json(new { all = products, data = dataProduct, pageCurrent = page, numSize = numSize, pageSize = pageSize }, JsonRequestBehavior.AllowGet);
+            return Json(new { all = products, data = dataProduct, pageCurrent = page, numSize = numSize, pageSize = pageSize, max = max }, JsonRequestBehavior.AllowGet);
 
         }
         public JsonResult GetById(int id)
