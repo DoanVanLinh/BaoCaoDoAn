@@ -143,7 +143,6 @@
         let formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' });
         let money = new Intl.NumberFormat({ style: 'currency', currency: 'VND' });
 
-
         $(document).ready(function () {
             CheckPermission();
 
@@ -154,6 +153,8 @@
             });
             $(".nav-link").removeClass("active");
             $("#Product").addClass("active");
+            CKEDITOR.replace('editor1');
+
         });
 
         //PHAN QUYEN
@@ -377,7 +378,8 @@
             product["Origin"] = $('#Origin').val();
             product["Discount"] = parseInt($('#Discount').val());
             product["ShortDescription"] = $('#ShortDescription').val();
-            product["Detail"] = $('#Detail').val();
+            //product["Detail"] = $('#Detail').val();
+            product["Detail"] = CKEDITOR.instances['editor1'].getData();
             product["ID_Category"] = parseInt($('#Categories').val());
             product["ID_Supplier"] = parseInt($('#Suppliers').val());
             product["Image"] = fileData.get(0);
@@ -429,6 +431,7 @@
                     $('#Discount').val(result.product.Discount);
                     $('#ShortDescription').val(result.product.ShortDescription);
                     $('#Detail').val(result.product.Detail);
+                    CKEDITOR.instances['editor1'].setData(result.product.Detail);
                     $('#Categories').val(result.product.ID_Category);
                     $('#Suppliers').val(result.product.ID_Supplier);
                     $("#imgPreview").attr("src", '/wwwroot/ImageProducts/' + result.product.Image);
@@ -463,7 +466,7 @@
             product["Origin"] = $('#Origin').val();
             product["Discount"] = parseInt($('#Discount').val());
             product["ShortDescription"] = $('#ShortDescription').val();
-            product["Detail"] = $('#Detail').val();
+            product["Detail"] = CKEDITOR.instances['editor1'].getData();
             product["ID_Category"] = parseInt($('#Categories').val());
             product["ID_Supplier"] = parseInt($('#Suppliers').val());
             if ($("#Image").get(0).files.length != 0)

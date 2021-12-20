@@ -15,6 +15,7 @@
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="~/Areas/Admin/Assets/css/shards-dashboards.1.1.0.min.css">
     <link href="~/Areas/Admin/Assets/css/extras.1.1.0.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Areas/Admin/Assets/css/style.css">
+    <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
 </head>
 
 <body class="h-100">
@@ -94,8 +95,9 @@
         $("#Profile").click(function (e) {
             window.location.href = "/Admin/Account/Profile";
         });
-        
+
     </script>
+    <script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
     <script src="~/Areas/Admin/Assets/js/script.js"></script>
     @RenderSection("modal", required: false)
     @RenderSection("Script", required: false)
