@@ -66,7 +66,7 @@
     <script src="~/Areas/Admin/Assets/js/Login/main.js"></script>
     <script>
         $('#ShowPass').change(function () {
-            $('#ShowPass').is(":checked") == true ? $('#Password').attr('type', 'text') : $('#Password').attr('type', 'password');
+            $('#ShowPass').is(":checked") == true ? $('#password-field').attr('type', 'text') : $('#password-field').attr('type', 'password');
         });
         function Login() {
             let account = {};
